@@ -12,9 +12,11 @@ class App extends React.Component {
     super(props);
     this.state = { 
       events: dummyData.events,
-      favorites: []
+      favorites: [],
+      showFaves: false,
     }
-    this.postEvents = this.postEvents.bind(this)
+    this.postEvents = this.postEvents.bind(this);
+    this.showFavorites = this.showFavorites.bind(this);
   }
 
   // //uses getEvents helper method on did mount to load all events
@@ -36,15 +38,18 @@ class App extends React.Component {
       .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
   }
 
+  showFavorites() {
+    this.setState({ showFaves: !this.state.showFaves });
+  }
 
   //renders navbar, even & likes
   render () {
+    const showFavesOrEvents = this.state.showFaves ? <FavoritesList favorites={this.state.favorites}/>: <Events events={this.state.events}/>;
     return (
     <div>
-      {/* <Nav/> */}
       <NavBar/>
-      <Events events={this.state.events}/>
-      <FavoritesList favorites={this.state.favorites}/>
+      <button onClick={this.showFavorites}>{this.state.showFaves ? 'Search Events' : 'Show Favorites'}</button>
+      {showFavesOrEvents}
     </div>
     )
   }
