@@ -30,6 +30,11 @@ class Likes extends React.Component {
   //renders a new endpoint with the calendar and list
   render () {
     return (<div>
+      //click
+
+      //toggle state 
+
+      <button>Home</button>
       <h1>Likes</h1>
       <LikesCalendar events={this.state.events}/>
       <LikesList events={this.state.events}/>
