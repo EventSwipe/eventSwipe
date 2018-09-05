@@ -5,6 +5,7 @@ import NavBar from './components/NavBar.jsx';
 import Event from './components/Event.jsx';
 import axios from 'axios';
 import dummyData from './dummyData.js';
+import Nav from './components/Nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class App extends React.Component {
     <div>
       <button>Likes</button>
       <h1>Going</h1>
+      {/* <Nav/> */}
       <NavBar/>
       {/* <Event events={this.state.events}/> */}
       {/* <Likes/> */} */}
