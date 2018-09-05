@@ -1,13 +1,14 @@
 import React from 'react';
+import Favorites from './Favorites.jsx';
 
 // map likes passed down from props to a calendar
 // find a calendar component to put in here
-const LikesCalendar = (props) => (
+const FavoritesCalendar = ({ likes }) => (
   <div>
     <h4> Calendar </h4>
-    {props.likes.map(like => <Likes like={like}/>)}
+    {likes.map(like => <Favorites like={like}/>)}
   </div>
 )
 
 
-export default LikesCalendar;
+export default FavoritesCalendar;
