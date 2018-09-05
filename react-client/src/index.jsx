@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      events: [],
+      events: [dummyData],
       likes: []
     }
     this.postEvents = this.postEvents.bind(this)

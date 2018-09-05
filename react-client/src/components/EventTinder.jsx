@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 //component for each event in the event tinder 
 const EventTinder = props => (
