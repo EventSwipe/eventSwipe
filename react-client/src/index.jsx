@@ -1,35 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import List from './components/List.jsx';
+import Likes from './components/Likes.jsx';
+import NavBar from './components/NavBar.jsx';
+import Event from './components/Event.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      events: [dummyData],
+      likes: []
     }
+    this.postEvents = this.postEvents.bind(this)
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  // //uses getEvents helper method on did mount to load all events
+  // componentDidMount() {
+  //  this.getEvents();
+  // }
+
+  //sends get request to server to get the events from api
+  postEvents() {
+    console.log("hitting the getMOVIES in client");
+    axios
+      .post("/events")
+      .then(res => {
+        // console.log('RES.DATA in axios.postEvents', res.data)  
+        this.setState({ events: res.data })
+        // console.log('this is the STATE', this.state.events)
+      })
+      .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
   }
 
+
+  //renders navbar, even & likes
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    return (
+    <div>
+      <button>User Profiel</button>
+      <h1 style='fontStyle:italic'>Going</h1>
+      <NavBar/>
+      <Event/>
+      <Likes/>
+    </div>
+    )
   }
 }
 
