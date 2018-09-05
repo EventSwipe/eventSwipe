@@ -2,7 +2,7 @@ import React from 'react';
 import EventTinder from './EventTinder.jsx';
 
 //maps all events to each eventTinder item
-const Event = ({ events }) => (
+const Events = ({ events }) => (
   <div>
     <h4> Event </h4>
     <div>
@@ -13,4 +13,4 @@ const Event = ({ events }) => (
   </div>
 )
 
-export default Event;
+export default Events;
