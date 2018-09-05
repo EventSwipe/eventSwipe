@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from "axios";
-import LikesList from './components/LikesList.jsx';
-import LikesCalendar from './components/LikesCalendar.jsx';
+import axios from 'axios';
+import LikesList from './LikesList.jsx';
+import LikesCalendar from './LikesCalendar.jsx';
 
-class App extends React.Component {
+class Likes extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -14,12 +14,17 @@ class App extends React.Component {
 
   //fill out 
   componentDidMount() {
- 
+    this.loadMyLikes()
   }
 
   //make a load my likes method
   loadMyLikes(){
-
+    axios.get('/favorite')
+         .then(res => {
+           //console.log('RES.DATA  in axios.post loadMyLikes', res.data)
+           this.setState({ likes: res.data })
+         })
+         .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
   }
 
   //renders a new endpoint with the calendar and list
