@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Likes from './components/Likes.jsx';
-import NavBar from './components/NavBar.jsx';
-import Event from './components/Event.jsx';
 import axios from 'axios';
+import FavoritesList from './components/FavoritesList.jsx';
+import NavBar from './components/NavBar.jsx';
+import Events from './components/Events.jsx';
 import dummyData from './dummyData.js';
 import Nav from './components/Nav.jsx';
 
@@ -11,8 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      events: [dummyData],
-      likes: []
+      events: dummyData.events,
+      favorites: []
     }
     this.postEvents = this.postEvents.bind(this)
   }
@@ -20,7 +20,7 @@ class App extends React.Component {
   // //uses getEvents helper method on did mount to load all events
   componentDidMount() {
   //  this.getEvents();
-  console.log(`dummyData: ${JSON.stringify(dummyData)}`)
+  console.log(`dummyData: ${JSON.stringify(this.state.favorites)}`)
   }
 
   //sends get request to server to get the events from api
@@ -45,8 +45,8 @@ class App extends React.Component {
       <h1>Going</h1>
       {/* <Nav/> */}
       <NavBar/>
-      {/* <Event events={this.state.events}/> */}
-      {/* <Likes/> */} */}
+      <Events events={this.state.events}/>
+      <FavoritesList favorites={this.state.favorites}/>
     </div>
     )
   }

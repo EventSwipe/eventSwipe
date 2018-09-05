@@ -1,20 +1,20 @@
 import React from 'react';
 import axios from 'axios';
-import LikesList from './LikesList.jsx';
-import LikesCalendar from './LikesCalendar.jsx';
+import FavoritesList from './FavoritesList.jsx';
+import FavoritesCalendar from './FavoritesCalendar.jsx';
 
-class Likes extends React.Component {
+class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      likes: []
+      favorites: [], events: []
     }
     this.loadMyLikes = this.loadMyLikes.bind(this)
   }
 
   //fill out 
   componentDidMount() {
-    this.loadMyLikes()
+    // this.loadMyLikes()
   }
 
   //make a load my likes method
@@ -36,10 +36,10 @@ class Likes extends React.Component {
 
       <button>Home</button>
       <h1>Likes</h1>
-      <LikesCalendar events={this.state.events}/>
-      <LikesList events={this.state.events}/>
+      <FavoritesList favorites={this.props.favorites}/>
+      {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
     </div>)
   }
 }
 
-export default Likes;
+export default Favorites;
