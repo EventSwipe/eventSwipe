@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import Likes from './components/Likes.jsx';
 import NavBar from './components/NavBar.jsx';
 import EventTinder from './components/EventTinder.jsx';
-import axios from "axios";
+import axios from 'axios';
+import dummyData from './dummyData';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      events: [],
+      events: [dummyData],
       likes: []
     }
     this.getEvents = this.getEvents.bind(this)
@@ -17,7 +18,8 @@ class App extends React.Component {
 
   //uses getEvents helper method on did mount to load all events
   componentDidMount() {
-   this.getEvents();
+  //  this.getEvents();
+   console.log(`eeeee: ${this.state.events}`)
   }
 
   //sends get request to server to get the events from api

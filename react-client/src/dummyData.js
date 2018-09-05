@@ -886,5 +886,5 @@ module.exports = {
                 "edge_color_set": true
             }
         }
-      ]
+    ]
 }
