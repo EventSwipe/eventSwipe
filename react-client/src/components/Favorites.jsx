@@ -7,7 +7,7 @@ class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      likes: [], events: []
+      favorites: [], events: []
     }
     this.loadMyLikes = this.loadMyLikes.bind(this)
   }
