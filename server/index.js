@@ -1,10 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database-mongo');
+// var items = require('../database-mongo');
 
 var app = express();
-
-app.use(express.static(__dirname + '/react-client/dist'));
+console.log(__dirname);
+app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
 

@@ -4,6 +4,7 @@ import Likes from './components/Likes.jsx';
 import NavBar from './components/NavBar.jsx';
 import Event from './components/Event.jsx';
 import axios from 'axios';
+import dummyData from './dummyData.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,9 +17,10 @@ class App extends React.Component {
   }
 
   // //uses getEvents helper method on did mount to load all events
-  // componentDidMount() {
+  componentDidMount() {
   //  this.getEvents();
-  // }
+  console.log(`dummyData: ${dummyData}`)
+  }
 
   //sends get request to server to get the events from api
   postEvents() {
@@ -38,10 +40,10 @@ class App extends React.Component {
   render () {
     return (
     <div>
-      <h1 style='fontStyle:italic'>Going</h1>
-      <NavBar/>
+      <h1>Going</h1>
+      {/* <NavBar/>
       <Event/>
-      <Likes/>
+      <Likes/> */}
     </div>
     )
   }
