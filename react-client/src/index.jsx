@@ -37,12 +37,14 @@ class App extends React.Component {
 
   //renders navbar, even & likes
   render () {
-    return (<div>
+    return (
+    <div>
       <h1 style='fontStyle:italic'>Going</h1>
       <NavBar/>
       <Event/>
-      <Likes>
-    </div>)
+      <Likes/>
+    </div>
+    )
   }
 }
 
