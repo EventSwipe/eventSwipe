@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import Likes from './components/Likes.jsx';
 import NavBar from './components/NavBar.jsx';
 import EventTinder from './components/EventTinder.jsx';
