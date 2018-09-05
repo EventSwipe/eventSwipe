@@ -1,4 +1,4 @@
-# Project Name #
+# eventSwipe #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Tinder-like application that presents nearby events based on user-input criteria. (Name the product in a way the reader (i.e. your target customers) will understand.)
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > Local event goers who care to learn about localized activity. (Describe who the market for the product is and what benefit they get. One sentence only underneath the title.)
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Users will be presented with criteria-defined events one at a time.  The user may decide to add the current event to their likes for later viewing or move on to the next presented event.  (Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.)
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Local events are lacking exposure to local users. (Describe the problem your product solves.)
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Based on the user criteria and our algorithm, local events are presented to users alongside relevant information.  (Describe how your product elegantly solves the problem.)
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > 'Find nearby events you never knew existed.'  (A quote from a spokesperson in your company.)
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Just type in your criteria and choose which events you like.  (Describe how easy it is to get started.)
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > 'I met my life partner at one of the events' (Provide a quote from a hypothetical customer that describes how they experienced the benefit.)
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > After we add more APIs, you will never run out of events.  (Wrap it up and give pointers where the reader should go next.)

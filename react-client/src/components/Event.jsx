@@ -1,5 +1,5 @@
 import React from 'react';
-import EventTinder from './EventTinder';
+import EventTinder from './EventTinder.jsx';
 
 //maps all events to each eventTinder item
 const Event = (props) => (
