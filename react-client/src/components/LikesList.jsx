@@ -4,7 +4,9 @@ import React from 'react';
 const LikesList = (props) => (
   <div>
     <h4> Likes </h4>
-    {props.likes.map(like => <Likes like={like}/>)}
+    <ul>
+    {props.likes.map(like => <li>{like={like}}</li>)}
+    </ul>
   </div>
 )
 

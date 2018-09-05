@@ -5,6 +5,7 @@ import NavBar from './components/NavBar.jsx';
 import Event from './components/Event.jsx';
 import axios from 'axios';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);

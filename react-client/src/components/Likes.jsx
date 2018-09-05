@@ -36,8 +36,8 @@ class Likes extends React.Component {
 
       <button>Home</button>
       <h1 style='fontStyle:italic'>Likes</h1>
-      <LikesCalendar events={this.state.events}/>
-      <LikesList events={this.state.events}/>
+      <LikesCalendar events={this.state.likes}/>
+      <LikesList events={this.state.likes}/>
     </div>)
   }
 }
