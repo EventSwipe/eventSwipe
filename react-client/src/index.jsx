@@ -40,16 +40,11 @@ class App extends React.Component {
   render () {
     return (
     <div>
-<<<<<<< HEAD
-      <h1>Going</h1>
-      {/* <NavBar/>
-=======
-      <button>User Profiel</button>
+      <button>Likes</button>
       <h1 style='fontStyle:italic'>Going</h1>
       <NavBar/>
->>>>>>> dev
-      <Event/>
-      <Likes/> */}
+      <Event events={this.state.events}/>
+      {/* <Likes/> */} */}
     </div>
     )
   }

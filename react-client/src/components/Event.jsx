@@ -2,12 +2,12 @@ import React from 'react';
 import EventTinder from './EventTinder.jsx';
 
 //maps all events to each eventTinder item
-const Event = (props) => (
+const Event = ({ events }) => (
   <div>
     <h4> Event </h4>
     <div>
       <button>X Img</button>
-        {props.events.map(event => <EventTinder event={event}/>)}
+        {events.map(event => <EventTinder event={event} key={event.id}/>)}
       <button>Heart Img</button>
     </div>
   </div>
