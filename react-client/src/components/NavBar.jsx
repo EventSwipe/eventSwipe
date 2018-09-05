@@ -26,18 +26,18 @@ import React from 'react';
         <input
             onChange={this.handleChange}
             value={this.state.zipCode}
-            placeholderText="Zip Code"
+            placeholder="Zip Code"
         />
         <input
             onChange={this.handleChange}
             value={this.state.topic}
-            placeholderText="Topic"
+            placeholder="Topic"
         />
         {/* right now just have customer enter a date and next week enter a range  */}
         <input
             onChange={this.handleChange}
             value={this.state.date}
-            placeholderText="Date Range"
+            placeholder="Date Range"
         />
         <button onClick={this.handleSubmit}>Submit</button>
       </form>

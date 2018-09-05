@@ -19,7 +19,7 @@ class App extends React.Component {
   // //uses getEvents helper method on did mount to load all events
   componentDidMount() {
   //  this.getEvents();
-  console.log(`dummyData: ${dummyData}`)
+  console.log(`dummyData: ${JSON.stringify(dummyData)}`)
   }
 
   //sends get request to server to get the events from api
@@ -41,9 +41,9 @@ class App extends React.Component {
     return (
     <div>
       <button>Likes</button>
-      <h1 style='fontStyle:italic'>Going</h1>
+      <h1>Going</h1>
       <NavBar/>
-      <Event events={this.state.events}/>
+      {/* <Event events={this.state.events}/> */}
       {/* <Likes/> */} */}
     </div>
     )
