@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import FavoritesList from './components/FavoritesList.jsx';
-import NavBar from './components/NavBar.jsx';
-import Events from './components/Events.jsx';
-import dummyData from './dummyData.js';
-import Nav from './components/Nav.jsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import FavoritesList from "./components/FavoritesList.jsx";
+import NavBar from "./components/NavBar.jsx";
+import Events from "./components/Events.jsx";
+import dummyData from "./dummyData.js";
+import Nav from "./components/Nav.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,8 +19,6 @@ class App extends React.Component {
     this.showFavorites = this.showFavorites.bind(this);
     // this.getIt = this.getIt.bind(this);
   }
-
-  // //uses getEvents helper method on did mount to load all events
 
   //sends get request to server to get the events from api
   postEvents() {
@@ -39,13 +37,15 @@ class App extends React.Component {
   render () {
     const showFavesOrEvents = this.state.showFaves ? <FavoritesList favorites={this.state.favorites}/>: <Events />;
     return (
-    <div>
-      <NavBar/>
-      <button onClick={this.showFavorites}>{this.state.showFaves ? 'Search Events' : 'Show Favorites'}</button>
-      {showFavesOrEvents}
-    </div>
-    )
+      <div>
+        <NavBar />
+        <button onClick={this.showFavorites}>
+          {this.state.showFaves ? "Search Events" : "Show Favorites"}
+        </button>
+        {showFavesOrEvents}
+      </div>
+    );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));
