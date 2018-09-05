@@ -4,8 +4,8 @@ var db = require('../database-mongo/index.js');
 var apiHelper = require('./apihelper.js');
 
 var app = express();
-
-app.use(express.static(__dirname + '/react-client/dist'));
+console.log(__dirname);
+app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
 
