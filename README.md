@@ -38,6 +38,13 @@ From within the root directory:
 npm install
 ```
 
+### Tasks
+
+```sh
+npm run server-dev
+npm run react-dev (separate terminal)
+```
+
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
