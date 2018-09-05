@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import axios from "axios";
-=======
 import axios from 'axios';
->>>>>>> 456a6e9a10f10b4572625e9d829b5afdf74e2c54
 import LikesList from './LikesList.jsx';
 import LikesCalendar from './LikesCalendar.jsx';
 
