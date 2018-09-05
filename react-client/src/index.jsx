@@ -5,6 +5,7 @@ import FavoritesList from './components/FavoritesList.jsx';
 import NavBar from './components/NavBar.jsx';
 import Events from './components/Events.jsx';
 import dummyData from './dummyData.js';
+import Nav from './components/Nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends React.Component {
   render () {
     return (
     <div>
+      {/* <Nav/> */}
       <NavBar/>
       <Events events={this.state.events}/>
       <FavoritesList favorites={this.state.favorites}/>
