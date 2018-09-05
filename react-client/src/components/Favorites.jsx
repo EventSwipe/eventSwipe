@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import FavoritesList from './FavoritesList.jsx';
 import FavoritesCalendar from './FavoritesCalendar.jsx';
-import dummyData from '../dummyData.jsx'
+import dummyData from '../dummyData.js'
 
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      favorites: [dummyData.events], events: []
     }
     this.loadMyLikes = this.loadMyLikes.bind(this)
   }

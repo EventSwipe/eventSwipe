@@ -38,7 +38,7 @@ class Events extends React.Component {
   render() {
     return (
       <div>
-        {console.log(`22222: ${JSON.stringify(this.state.events)}`)}  
+        {/* {console.log(`22222: ${JSON.stringify(this.state.events)}`)}   */}
         <Event event={this.state.events[this.state.count]} like={this.addEventToFaves} dislike={this.dislikeEvent}/> 
 
       </div>
