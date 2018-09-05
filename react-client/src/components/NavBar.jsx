@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+
  class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInput: "",
-      zipCode: "",
-      topic: "",
-      date: ""
+      userInput: '',
+      zipCode: '',
+      topic: '',
+      date: ''
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)

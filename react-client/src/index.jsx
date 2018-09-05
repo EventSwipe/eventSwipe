@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      events: [],
+      events: [dummyData],
       likes: []
     }
     this.postEvents = this.postEvents.bind(this)
@@ -38,6 +38,7 @@ class App extends React.Component {
   render () {
     return (
     <div>
+      <button>User Profiel</button>
       <h1 style='fontStyle:italic'>Going</h1>
       <NavBar/>
       <Event/>

@@ -5,7 +5,7 @@ var apiHelper = require('./apihelper.js');
 
 var app = express();
 
-app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
 
