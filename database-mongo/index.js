@@ -12,6 +12,7 @@ db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
+//event data for each user
 const eventSchema = mongoose.Schema({
   id: { type: Number, unique: true },
   name: { type: String, required: true },
@@ -19,20 +20,67 @@ const eventSchema = mongoose.Schema({
   url: { type: String },
   location: { type: String },
   date: { type: Date },
-  free: { type: Boolean }
+  free: { type: Boolean },
+  username: {type: String, required: true }
 });
 
+//user data for login
+const userSchema = mongoose.Schema({
+  username: { type: String, unique: true },
+  password: { type: String }
+})
+
+const User = mongoose.model('User', userSchema);
 const Event = mongoose.model('Event', eventSchema);
-const selectAll = (cb) => {
-  Event.find({}, (err, events) => {
+
+//return events by username
+const selectEventByUsername = (username, cb) => {
+  Event.find({username : `${username}`}, (err, events) => {
     if(err) {
-      console.error(`err in selectAll db/index.js: ${err}`);
+      console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
     } else {
-      console.log(`events in selectAll db/index.js: ${events}`);
+      console.log(`events in selectEventByUsername db/index.js: ${events}`);
       cb(null, events);
     }
   });
 };
 
-module.exports = { selectAll };
+//adding favorite events to database with username
+const addFavoriteEvent = (query) => {
+  var newEvent = new Event({
+    id: query.id,
+    name: query.name,
+    descpription: query.description,
+    url: query.url,
+    location: query.location,
+    date: query.date,
+    free: query.free,
+    username: query.username
+  })
+
+  newEvent.save((err) => {
+    if (error) console.error(err)
+    else {
+      console.log('The new event has been saved into the database')
+    }
+  })
+}
+
+//adding a new user to database
+const addUser = (username, password, cb) => {
+  var newUser = new User({
+    username: username,
+    password: password
+  })
+  
+  newUser.save((err) => {
+    if (error) console.error(err)
+    else {
+      console.log('The new user has been saved into the database')
+    }
+  })
+}
+
+
+module.exports = { selectEventByUsername, addFavoriteEvent, addUser };
