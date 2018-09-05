@@ -38,6 +38,7 @@ class App extends React.Component {
   render () {
     return (
     <div>
+      <button>User Profiel</button>
       <h1 style='fontStyle:italic'>Going</h1>
       <NavBar/>
       <Event/>
