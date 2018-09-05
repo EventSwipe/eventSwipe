@@ -30,10 +30,9 @@ class Favorites extends React.Component {
   //renders a new endpoint with the calendar and list
   render () {
     return (<div>
-      //click
+      {/* click */}
 
-      //toggle state 
-
+      {/* toggle state  */}
       <button>Home</button>
       <h1>Likes</h1>
       <FavoritesList favorites={this.props.favorites}/>
