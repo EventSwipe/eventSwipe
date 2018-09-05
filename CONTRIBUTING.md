@@ -28,6 +28,36 @@
 
 ## Detailed Workflow
 
+<!-- Git workflow (teamFleming) -->
+Team Fleming's Git Workflow
+1) 'git branch'
+[make sure you show the correct branches]
+2) 'git checkout dev'
+[go to the dev branch]
+3) 'git pull origin dev'
+[update the dev branch to the most up to date]
+4) 'git checkout -b newFeature'
+[create a new branch for the feature you are working on]
+	5) write the code, add the data, and commit code
+	[DON'T FORGET to use prefixes from CONTRIBUTING.md to flag your commits]
+6) 'git checkout dev'
+[go back to dev branch]
+	7) 'git pull origin dev'
+	[update the dev branch to the most up to date again]
+8) 'git checkout newFeature'
+[go back to your newFeature work]
+	9) 'git merge dev'
+	[merge the dev and the newFeature to not have merge conflicts]
+	10) [fix any conflicts]
+11) 'git push origin newFeature'
+12) [DO NOT PUSH TO DEV]
+13) [ON GITHUB REPO]
+14) [Change branch to newFeature and create a pull request]
+15) [make base: dev and compare: newFeature]
+16) [submit pull request (again with CONTRIBUTING.md flags]
+17) [have someone other than yourself code review and accept the pull request]
+18) [Eventually as a group, we will pull the dev to the master branch periodically]
+
 ### Fork the repo
 
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
@@ -179,3 +209,4 @@ no problem getting your changes merged in.
 [Git Flow]: http://nvie.com/posts/a-successful-git-branching-model/
 [GitHub Flow]: http://scottchacon.com/2011/08/31/github-flow.html
 [Squash]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
+
