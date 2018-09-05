@@ -40,8 +40,6 @@ class App extends React.Component {
   render () {
     return (
     <div>
-      <button>Likes</button>
-      <h1>Going</h1>
       <NavBar/>
       <Events events={this.state.events}/>
       <FavoritesList favorites={this.state.favorites}/>
