@@ -13,19 +13,19 @@ class App extends React.Component {
       events: [],
       likes: []
     }
-    this.getEvents = this.getEvents.bind(this)
+    this.postEvents = this.postEvents.bind(this)
   }
 
-  //uses getEvents helper method on did mount to load all events
-  componentDidMount() {
-   this.getEvents();
-  }
+  // //uses getEvents helper method on did mount to load all events
+  // componentDidMount() {
+  //  this.getEvents();
+  // }
 
   //sends get request to server to get the events from api
-  getEvents() {
+  postEvents() {
     console.log("hitting the getMOVIES in client");
     axios
-      .get("/events")
+      .post("/events")
       .then(res => {
         // console.log('RES.DATA in axios.getEvents', res.data)  
         this.setState({ events: res.data })
