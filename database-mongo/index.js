@@ -21,7 +21,8 @@ const eventSchema = mongoose.Schema({
   location: { type: String },
   date: { type: Date },
   free: { type: Boolean },
-  username: { type: String }
+  username: { type: String },
+  logo: { type: String }
 });
 
 //user data for login
@@ -57,6 +58,7 @@ const addFavorite = (favorite, cb) => {
     // location: favorite.location,
     date: favorite.start.local,
     free: favorite.is_free,
+    logo: favorite.logo.url,
     // username: favorite.username
   });
   newEvent.save(err => {
