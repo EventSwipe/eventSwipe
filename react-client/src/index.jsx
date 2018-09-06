@@ -10,19 +10,14 @@ import Nav from "./components/Nav.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      events: dummyData.events,
-      favorites: dummyData.events,
-      showFaves: false
-    };
+    this.state = { 
+      events: [],
+      favorites: [],
+      showFaves: false,
+    }
     this.postEvents = this.postEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
-  }
-
-  // //uses getEvents helper method on did mount to load all events
-  componentDidMount() {
-    //  this.getEvents();
-    console.log("dummyData: ", this.state.favorites);
+    // this.getIt = this.getIt.bind(this);
   }
 
   //sends get request to server to get the events from api
@@ -30,12 +25,8 @@ class App extends React.Component {
     console.log("hitting the getMOVIES in client");
     axios
       .post("/events")
-      .then(res => {
-        // console.log('RES.DATA in axios.postEvents', res.data)
-        this.setState({ events: res.data });
-        // console.log('this is the STATE', this.state.events)
-      })
-      .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
+      .then(res => this.setState({ events: res.data }))
+      .catch(err => console.error(`err in postEvents in index.jsx: ${err}`));
   }
 
   showFavorites() {
@@ -43,12 +34,8 @@ class App extends React.Component {
   }
 
   //renders navbar, even & likes
-  render() {
-    const showFavesOrEvents = this.state.showFaves ? (
-      <FavoritesList favorites={this.state.favorites} />
-    ) : (
-      <Events events={this.state.events} />
-    );
+  render () {
+    const showFavesOrEvents = this.state.showFaves ? <FavoritesList favorites={this.state.favorites}/>: <Events />;
     return (
       <div>
         <NavBar />
