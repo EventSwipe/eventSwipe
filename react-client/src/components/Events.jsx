@@ -11,6 +11,7 @@ class Events extends React.Component {
     this.like = this.like.bind(this);
   }
   componentDidMount() {
+    console.log(this.props.events)
     
   }
 
@@ -24,13 +25,13 @@ class Events extends React.Component {
     //set the query to the shifted item
     let query = this.props.events.shift();
     //axios post the item to the database
-    axios.post('/favorites',{params: {favoriteEvent: query}})
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+    // axios.post('/favorites',{params: {favoriteEvent: query}})
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((err) => {
+    //   console.error(err);
+    // })
     //reset the state
     this.setState({ count: 0 });
 
@@ -38,6 +39,7 @@ class Events extends React.Component {
   dislike() {
     //check if there are any even items
     if (this.props.events.length ===0) {
+      //TODO:do something when you run out of items
       console.log('ran out of items');
       return;
     }
