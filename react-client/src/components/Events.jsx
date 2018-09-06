@@ -17,7 +17,7 @@ class Events extends React.Component {
 
   like() {
     //check if out of items
-    if (this.props.events.length ===0) {
+    if (this.props.events.length === 0) {
       //TODO:do something when you run out of items
       console.log('ran out of items');
       return;
@@ -26,15 +26,9 @@ class Events extends React.Component {
     let query = this.props.events.shift();
     //axios post the item to the database
     axios.post('/favorites',{params: {favoriteEvent: query}})
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+      .then((response) => this.setState({ count: 0 }))
+      .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
     //reset the state
-    this.setState({ count: 0 });
-
   }
   dislike() {
     //check if there are any even items
