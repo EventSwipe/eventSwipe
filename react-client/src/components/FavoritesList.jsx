@@ -8,8 +8,7 @@ const FavoritesList = ({ favorites, removeFave}) => (
       {console.log("these are the favorites", favorites)}
       {favorites.map(favorite => (
         <li key={favorite.id}>
-          {favorite.name},{favorite.date},
-          <a href={favorite.url}>Get Tickets!!!</a>,
+          <a href={favorite.url}>{favorite.name}</a>, {favorite.date.substring(0,10)}, {favorite.date.substring(11,16)} &nbsp;
           <button onClick={() => {
             removeFave(favorite)
           }}>Delete</button>

@@ -24,8 +24,6 @@ const Event = ({ event, like, dislike }) => {
                 <span>{event.start.local.substr(0, 10)}</span></p>
               <p className="card-text"><span className="link">Link: </span>
                 <a href={event.url}>{event.url}</a></p>
-              <a href="#" className="card-link float-right">Card link</a>
-              <a href="#" className="card-link">Another link</a>
             </div>
           </div>
         </div>
