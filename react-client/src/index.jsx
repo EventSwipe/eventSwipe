@@ -10,10 +10,9 @@ import Nav from "./components/Nav.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this is the dummy data', dummyData.events)
     this.state = { 
       events: [],
-      favorites: dummyData.events,
+      favorites: [],
       showFaves: false,
     }
     this.postEvents = this.postEvents.bind(this);
@@ -39,10 +38,9 @@ class App extends React.Component {
     const showFavesOrEvents = this.state.showFaves ? <FavoritesList favorites={this.state.favorites}/>: <Events />;
     return (
       <div>
-        <Nav/>
         <NavBar />
         <button onClick={this.showFavorites}>
-          {this.state.showFaves ? 'Search Events' : 'Show Favorites'}
+          {this.state.showFaves ? "Search Events" : "Show Favorites"}
         </button>
         {showFavesOrEvents}
       </div>

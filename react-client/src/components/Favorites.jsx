@@ -7,8 +7,11 @@ import dummyData from '../dummyData.js';
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      favorites: []
+    };
     this.loadMyLikes = this.loadMyLikes.bind(this);
+    this.removeFave = this.removeFave.bind(this)
   }
 
   //fill out
@@ -25,6 +28,13 @@ class Favorites extends React.Component {
         this.setState({ likes: res.data });
       })
       .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
+  }
+
+  removeFave(favoriteListItem) {
+    axios.delete('/favorites', {
+            params: {_id: favoriteListItem.props.events.id}})
+         .then(res => this.setState({ favorites: res.data}))
+         .catch(err => console.error('err in removeFave in favorites.jsx', err))
   }
 
   //renders a new endpoint with the calendar and list
