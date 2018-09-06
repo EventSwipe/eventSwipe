@@ -10,22 +10,22 @@ class Favorites extends React.Component {
     this.state = {
       favorites: []
     };
-    this.loadMyLikes = this.loadMyLikes.bind(this);
+    this.loadMyFaves = this.loadMyFaves.bind(this);
     this.removeFave = this.removeFave.bind(this)
   }
 
   //fill out
   componentDidMount() {
-    // this.loadMyLikes()
+    this.loadMyFaves()
   }
 
   //make a load my likes method
-  loadMyLikes() {
+  loadMyFaves() {
     axios
-      .get('/favorite')
+      .get('/favorites')
       .then(res => {
         //console.log('RES.DATA  in axios.post loadMyLikes', res.data)
-        this.setState({ likes: res.data });
+        this.setState({ favorites: res.data });
       })
       .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
   }
@@ -46,8 +46,9 @@ class Favorites extends React.Component {
         {/* toggle state  */}
         <button>Home</button>
         <h1>Likes</h1>
-        <FavoritesList favorites={this.props.favorites} />
         {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
+         <br/>
+        <FavoritesList favorites={this.state.favorites} />
       </div>
     );
   }
