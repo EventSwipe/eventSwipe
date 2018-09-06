@@ -49,14 +49,15 @@ const getAllEvents = cb => {
 
 //adding favorite events to database with username
 const addFavorite = (favorite, cb) => {
+  console.log(favorite, 'sdfsdfsdfdsf');
   var newEvent = new Event({
     id: favorite.id,
-    name: favorite.name,
-    descpription: favorite.description,
+    name: favorite.name.text,
+    description: favorite.description.text,
     url: favorite.url,
     // location: favorite.location,
-    date: favorite.date,
-    free: favorite.free,
+    date: favorite.start.local,
+    free: favorite.is_free,
     // username: favorite.username
   });
   // console.log('34')
