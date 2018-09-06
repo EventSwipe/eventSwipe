@@ -10,9 +10,10 @@ import Nav from "./components/Nav.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log('this is the dummy data', dummyData.events)
     this.state = { 
       events: [],
-      favorites: [],
+      favorites: dummyData.events,
       showFaves: false,
     }
     this.postEvents = this.postEvents.bind(this);
