@@ -39,9 +39,10 @@ class App extends React.Component {
     const showFavesOrEvents = this.state.showFaves ? <FavoritesList favorites={this.state.favorites}/>: <Events />;
     return (
       <div>
+        <Nav/>
         <NavBar />
         <button onClick={this.showFavorites}>
-          {this.state.showFaves ? "Search Events" : "Show Favorites"}
+          {this.state.showFaves ? 'Search Events' : 'Show Favorites'}
         </button>
         {showFavesOrEvents}
       </div>
