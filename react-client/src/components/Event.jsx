@@ -8,7 +8,7 @@ const Event = ({ event, like, dislike }) => {
       <div>
         <div className="column">
           <button className="float-right" onClick={dislike}>
-            <span><img className="like-button float-right" style={{height: 100, width: 100}} onClick={dislike} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
+            <span><img className="like-button float-right" style={{height: 100, width: 100}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
           </button>
         </div>
         <div className="column-center">
