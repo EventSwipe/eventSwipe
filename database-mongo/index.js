@@ -59,7 +59,6 @@ const addFavorite = (favorite, cb) => {
     free: favorite.is_free,
     // username: favorite.username
   });
-  // console.log('34')
   newEvent.save(err => {
     if (err) {
       console.error(`err in newEvent.save: ${err}`);
@@ -71,24 +70,24 @@ const addFavorite = (favorite, cb) => {
   });
 };
 
-//deleting favorite event
+// deleting favorite event
 // add username into argument when auth is setup
-const deleteFavorite = (eventId, cb) => {
+const deleteFavorite = (mongoId, cb) => {
   // add username in remove as a property
-  Event.findOneAndRemove({ _id: eventId }, err => {
+  Event.findOneAndRemove({ _id: mongoId }, err => {
     if (err) {
       console.error(`err in deleteEvent: ${err}`);
       cb(err);
     } else {
       console.log('Deleted from DB');
-      cb()
+      cb();
     }
   });
 };
 
 //adding a new user to database
-const addUser = (username, password, cb) => {
-  var newUser = new User({
+const addUser = (username, password) => {
+  const newUser = new User({
     username: username,
     password: password
   });

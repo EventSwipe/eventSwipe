@@ -11,22 +11,22 @@ class App extends React.Component {
     this.state = { 
       events: [],
       showFaves: false
-    }
-    this.showFavorites = this.showFavorites.bind(this);
+    };
     this.searchEvents = this.searchEvents.bind(this);
+    this.checkEventList = this.checkEventList.bind(this);
   }
 
-  showFavorites() {
-    this.setState({ showFaves: !this.state.showFaves });
+  checkEventList() {
+    console.log('e', this.state.events);
+    this.setState({ events: this.state.events.slice() });
+    console.log('t', this.state.events);
   }
 
   searchEvents(query) {
     //axios get request from API and then populates the events state with the data
     axios.get('https://www.eventbriteapi.com/v3/events/search/', query)
-    .then(({data}) => {
-      this.setState({ events: data.events });
-    })
-    .catch((err) => console.log('front end error', err))
+      .then(({data}) => this.setState({ events: data.events }))
+      .catch((err) => console.log('front end error', err))
   }
 
   //renders navbar, searchbar, even & likes
