@@ -11,6 +11,9 @@ const FavoritesList = ({ favorites }) => (
           {favorite.name.text},{favorite.start.local.substr(0, 10)}
           {favorite.start.local.substr(11)},
           <a href={favorite.url}>Get Tickets!!!</a>,
+          <button onClick={favorite => {
+            this.props.removeFaves(this, favorite)
+          }}>Delete</button>
         </li>
       ))}
     </ul>
