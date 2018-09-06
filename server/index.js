@@ -1,19 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { selectEventByUsername, getEventsByQuery, addFavoriteEvent } = require('../database-mongo/index.js');
+var { selectEventByUsername, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var apiHelper = require('./apihelper.js');
 
 var app = express();
-console.log(__dirname);
 app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
 
-app.get('/favorite', (req, res) => {
+app.get('/favorites', (req, res) => {
   //manipuate req.body to fit query parameters
-  var query = req.query;
   //make db call to get data
-  selectEventByUsername(query, (err, data) => {
+  selectEventByUsername((err, data) => {
     //in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
@@ -25,8 +23,35 @@ app.get('/favorite', (req, res) => {
   })
 });
 
+app.post('/favorites', (req, res) => {
+  let { favoriteEvent } = req.body;
+  addFavorite(favoriteEvent, (err) => {
+    if (err) {
+      console.error(`err in app.post /favorites: ${err}`);
+      res.status(400).send(err);
+    } else {
+      res.status(201).send();
+    }
+  });
+});
+
+app.delete('/favorites', (err, data) => {
+  // add username to this once auth is setup
+  let { eventId } = req.query;
+  deleteFavorite(eventId, (err, data) => {
+    if (err) {
+      console.error(`err in app.delete /favorites: ${err}`);
+      res.status(400).send(err);
+    } else {
+      console.log(`data in app.delete /favorites: ${data}`);
+      res.status(202).send(data);
+    }
+  });
+
+});
+
 app.post('/login', (req, res) => {
-  //not yet until authentication
+  //not yet until auth
 
 });
 
@@ -52,7 +77,7 @@ app.post('/insertEventToDb', (req, res) => {
   //manipulate req.body to fit query parameters
   var { query } = req.body;
   //make db call to change data
-  addFavoriteEvent(query, (err, data) => {
+  addFavorite(query, (err, data) => {
     if (err) {
       console.error(`err in app.post /insertEventToDb: ${err}`);
       res.status(400).send(err);

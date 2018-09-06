@@ -34,9 +34,10 @@ const User = mongoose.model('User', userSchema);
 const Event = mongoose.model('Event', eventSchema);
 
 //return events by username
-const selectEventByUsername = (username, cb) => {
-  Event.find({username : username}, (err, events) => {
-    if(err) {
+// add user here when authentication is setup 
+const selectEventByUsername = (cb) => {
+  Event.find({}, (err, events) => {
+    if (err) {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
     } else {
@@ -47,7 +48,7 @@ const selectEventByUsername = (username, cb) => {
 };
 
 //adding favorite events to database with username
-const addFavoriteEvent = (query) => {
+const addFavorite = (query, cb) => {
   var newEvent = new Event({
     id: query.id,
     name: query.name,
@@ -61,9 +62,11 @@ const addFavoriteEvent = (query) => {
 
   newEvent.save((err) => {
     if (err) {
-      console.error(`err in newEvent.save: ${err}`)
+      console.error(`err in newEvent.save: ${err}`);
+      cb(err, null);
     } else {
       console.log('The new event has been saved into the database!');
+      cb();
     }
   });
 };
@@ -85,11 +88,16 @@ const addUser = (username, password, cb) => {
 };
 
 //deleting favorite event
-const deleteEvent = (eventId, username) => {
-  Event.remove({id:eventId, username:username}, (err) => {
-    console.error(err)
-  })
-}
+// add username into argument when auth is setup
+const deleteFavorite = (eventId, cb) => {
+  // add username in remove as a property
+  Event.remove({ id: eventId }, (err) => {
+    if (err) {
+      console.error(`err in deleteEvent: ${err}`);
+      cb(err);
+    }
+  });
+};
 
 
-module.exports = { selectEventByUsername, addFavoriteEvent, addUser, deleteEvent };
+module.exports = { selectEventByUsername, addFavorite, addUser, deleteFavorite };
