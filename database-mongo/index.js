@@ -75,12 +75,13 @@ const addFavorite = (favorite, cb) => {
 // add username into argument when auth is setup
 const deleteFavorite = (eventId, cb) => {
   // add username in remove as a property
-  Event.findOneAndRemove({ id: eventId }, err => {
+  Event.findOneAndRemove({ _id: eventId }, err => {
     if (err) {
       console.error(`err in deleteEvent: ${err}`);
       cb(err);
     } else {
       console.log('Deleted from DB');
+      cb()
     }
   });
 };

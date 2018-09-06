@@ -24,14 +24,14 @@ class Events extends React.Component {
     }
     //set the query to the shifted item
     let query = this.props.events.shift();
-    //axios post the item to the database
-    // axios.post('/favorites',{params: {favoriteEvent: query}})
-    // .then((response) => {
-    //   console.log(response);
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    // })
+    // axios post the item to the database
+    axios.post('/favorites',{params: {favoriteEvent: query}})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
     //reset the state
     this.setState({ count: 0 });
 
