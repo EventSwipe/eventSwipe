@@ -38,7 +38,6 @@ app.post('/favorites', (req, res) => {
 
 app.delete('/favorites', (req, res) => {
   // add username to this once auth is setup
-  console.log('666666666666666666666', req.body);
   let { eventId } = req.body;
   deleteFavorite(eventId, (err, data) => {
     
