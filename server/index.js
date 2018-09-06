@@ -20,7 +20,7 @@ app.get('/favorites', (req, res) => {
       console.log(`data in app.get /favorites: ${data}`);
       res.status(200).send(data);
     }
-  })
+  });
 });
 
 app.post('/favorites', (req, res) => {
@@ -47,7 +47,6 @@ app.delete('/favorites', (err, data) => {
       res.status(202).send(data);
     }
   });
-
 });
 
 app.post('/login', (req, res) => {

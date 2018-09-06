@@ -22,7 +22,7 @@ class App extends React.Component {
 
   //renders navbar, searchbar, even & likes
   render () {
-    const showFavesOrEvents = this.state.showFaves ? <FavoritesList />: <SearchBar />;
+    const showFavesOrEvents = this.state.showFaves ? <FavoritesList /> : <SearchBar />;
     return (
       <div>
         <Nav/>
