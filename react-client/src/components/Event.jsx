@@ -34,7 +34,7 @@ const Event = ({ event, like, dislike }) => {
         </div>
       </div>
       ) : (
-        'Loading...'
+       <img src="https://media1.tenor.com/images/38153b27905ce716003dfdecc4989bb0/tenor.gif?itemid=9255733"></img>
       )}
     </div>
   );
