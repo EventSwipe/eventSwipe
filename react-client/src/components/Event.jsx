@@ -7,7 +7,9 @@ const Event = ({ event, like, dislike }) => {
       {event ? (
       <div>
         <div className="column">
-          <button className="float-right" onClick={dislike}>Dislike</button>
+          <button className="float-right" onClick={dislike}>
+            <span><img className="like-button float-right" style={{height: 100, width: 100}} onClick={dislike} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
+          </button>
         </div>
         <div className="column-center">
           <img className="event-img" src={event.logo.url} alt="Card image cap"/>
@@ -28,7 +30,9 @@ const Event = ({ event, like, dislike }) => {
           </div>
         </div>
         <div className="column">
-          <button onClick={like}>Like</button>
+          <button onClick={like}>
+            <span><img className="like-button" style={{height: 100, width: 100}} onClick={like} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
+          </button>
         </div>
       </div>
       ) : (
