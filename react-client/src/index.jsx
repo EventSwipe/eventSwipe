@@ -1,36 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import List from './components/List.jsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import FavoritesList from "./components/FavoritesList.jsx";
+import SearchBar from "./components/SearchBar.jsx";
+import Events from "./components/Events.jsx";
+import dummyData from "./dummyData.js";
+import Nav from "./components/Nav.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      showFaves: false,
     }
+    this.showFavorites = this.showFavorites.bind(this);
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  showFavorites() {
+    this.setState({ showFaves: !this.state.showFaves });
   }
 
+  //renders navbar, searchbar, even & likes
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    const showFavesOrEvents = this.state.showFaves ? <FavoritesList />: <SearchBar />;
+    return (
+      <div>
+        <Nav/>
+        <button onClick={this.showFavorites}>
+          {this.state.showFaves ? "Search Events" : "Show Favorites"}
+        </button>
+        {showFavesOrEvents}
+      </div>
+    );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));
