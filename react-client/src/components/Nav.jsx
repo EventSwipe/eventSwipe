@@ -1,14 +1,14 @@
 import React from 'react';
 
 const Nav = () => (
-    <div style={{"borderStyle": "dotted"}}>
-        <nav className="navbar navbar-light bg-light">
-            <a className="navbar-brand" href="#">
-                <img src="https://image.flaticon.com/icons/svg/1051/1051124.svg" width="30" height="30" className="d-inline-block align-top" alt=""/>
-            </a>
-            <a className="navbar-brand" href="#">GOING</a>
-            <a className="navbar-brand" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-            <a className="navbar-brand" href="#" data-toggle="modal" data-target="#signup-modal">Sign Up</a>
+  <div style={{ 'borderStyle': 'dotted' }}>
+    <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="#">
+        <img src="https://image.flaticon.com/icons/svg/1051/1051124.svg" width="30" height="30" className="d-inline-block align-top" alt=""/>
+      </a>
+      <a className="navbar-brand" href="#">GOING</a>
+      <a className="navbar-brand" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+      <a className="navbar-brand" href="#" data-toggle="modal" data-target="#signup-modal">Sign Up</a>
 
       <div
         className="modal fade"

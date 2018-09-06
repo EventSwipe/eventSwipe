@@ -45,6 +45,7 @@ class Favorites extends React.Component {
 
   //renders a new endpoint with the calendar and list
   render() {
+    const { favorites } = this.state;
     return (
       <div>
         {/* click */}
@@ -54,7 +55,7 @@ class Favorites extends React.Component {
         {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
         <br />
         <FavoritesList
-          favorites={this.state.favorites}
+          favorites={favorites}
           removeFave={this.removeFave}
         />
       </div>

@@ -6,17 +6,17 @@ class FavoritesList extends React.Component {
   constructor(props) {
     super(props);
   }
-
   // just make a list of all the likes passed down by props
   // const FavoritesList = ({ favorites, removeFave }) =>
 
   render() {
+    const { favorites } = this.props;
     return (
       <div>
         <h4> Faves </h4>
 
         <ul>
-          {this.props.favorites.map(favorite => (
+          {favorites.map(favorite => (
             <li key={favorite.id}>
               <FavoritesListItem favorite={favorite} />
             </li>
