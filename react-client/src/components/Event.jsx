@@ -31,7 +31,7 @@ const Event = ({ event, like, dislike }) => {
         </div>
         <div className="column">
           <button onClick={like}>
-            <span><img className="like-button" style={{height: 100, width: 100}} onClick={like} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
+            <span><img className="like-button" style={{height: 100, width: 100}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
           </button>
         </div>
       </div>
