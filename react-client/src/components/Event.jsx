@@ -1,11 +1,10 @@
 import React from 'react';
 
-//component for each event in the event tinder 
+//component for each event in the event tinder
 const Event = ({ event, like, dislike }) => {
   return (
     <div>
-      {event 
-        ? 
+      {event ? (
         <div>
           <h1>{event.name.text}</h1>
           <img src={event.logo.url} />
@@ -31,15 +30,13 @@ const Event = ({ event, like, dislike }) => {
             </section>
           </div>
         </div>
-        :
+      ) : (
         'Loading...'
-      }
-    <button onClick={like}>Like</button> 
-    <button onClick={dislike}>Dislike</button>
-  </div>
-
+      )}
+      <button onClick={like}>Like</button>
+      <button onClick={dislike}>Dislike</button>
+    </div>
   );
-}
- 
+};
 
 export default Event;
