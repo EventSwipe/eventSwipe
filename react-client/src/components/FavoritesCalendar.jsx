@@ -10,5 +10,4 @@ const FavoritesCalendar = ({ favorites }) => (
   </div>
 );
 
-
 export default FavoritesCalendar;
