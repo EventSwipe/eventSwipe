@@ -82,6 +82,7 @@ const deleteFavorite = (eventId, cb) => {
       cb(err);
     } else {
       console.log('Deleted from DB');
+      cb()
     }
   });
 };

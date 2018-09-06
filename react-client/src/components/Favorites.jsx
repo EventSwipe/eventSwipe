@@ -14,26 +14,27 @@ class Favorites extends React.Component {
     this.removeFave = this.removeFave.bind(this)
   }
 
-  //fill out
   componentDidMount() {
     this.loadMyFaves()
   }
 
-  //make a load my likes method
+  //loads all the favorites saved in database
   loadMyFaves() {
     axios
       .get('/favorites')
       .then(res => {
-        console.log('RES.DATA  in axios.get loadMyLikes', res.data)
         this.setState({ favorites: res.data });
       })
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 
+  //removes a favorite from the favorite list
   removeFave(favoriteListItem) {
+  console.log('this is the list item ', favoriteListItem )
     axios.delete('/favorites', {
-            params: {_id: favoriteListItem.props.events.id}})
-         .then(res => this.setState({ favorites: res.data}))
+            data: {eventId: favoriteListItem._id}
+         })
+         .then(() => {this.loadMyFaves()})
          .catch(err => console.error('err in removeFave in favorites.jsx', err))
   }
 
@@ -47,7 +48,7 @@ class Favorites extends React.Component {
         <h1>Likes</h1>
         {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
          <br/>
-        <FavoritesList favorites={this.state.favorites} />
+        <FavoritesList favorites={this.state.favorites} removeFave={this.removeFave}/>
       </div>
     );
   }
