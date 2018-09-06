@@ -5,36 +5,35 @@ const Event = ({ event, like, dislike }) => {
   return (
     <div>
       {event ? (
-        <div>
-          <h1>{event.name.text}</h1>
-          <img src={event.logo.url} />
-          <div className="event_description">
-            <h6>Description: {event.description.text.substr(0, 125)}</h6>
-            <section className="event_details">
-              <div className="event_loc">
-                <span className="Loc">Venue Address: </span>
-                <span>{event.address}</span>
-              </div>
-              <div className="event_link">
-                <span className="link">Link: </span>
-                <a href={event.url}>{event.url}</a>
-              </div>
-              <div className="event_date">
-                <span className="date">Date: </span>
-                <span>{event.start.local.substr(0, 10)}</span>
-              </div>
-              <div className="time">
-                <span className="time">Time: </span>
-                <span>{event.start.local.substr(11)}</span>
-              </div>
-            </section>
+      <div>
+        <div className="column">
+          <button className="float-right" onClick={dislike}>Dislike</button>
+        </div>
+        <div className="column-center">
+          <img className="event-img" src={event.logo.url} alt="Card image cap"/>
+          <div className="card" >
+            <div className="card-body">
+              <h5 className="card-title">{event.name.text}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p className=" event-description card-text">{event.description.text}</p>
+              <p className="card-text"><span className="Loc">Venue Address: </span>
+                <span>{event.address || 'TBD'}</span></p>
+              <p className="card-text"><span className="date">Date: </span>
+                <span>{event.start.local.substr(0, 10)}</span></p>
+              <p className="card-text"><span className="link">Link: </span>
+                <a href={event.url}>{event.url}</a></p>
+              <a href="#" className="card-link float-right">Card link</a>
+              <a href="#" className="card-link">Another link</a>
+            </div>
           </div>
         </div>
+        <div className="column">
+          <button onClick={like}>Like</button>
+        </div>
+      </div>
       ) : (
         'Loading...'
       )}
-      <button onClick={like}>Like</button>
-      <button onClick={dislike}>Dislike</button>
     </div>
   );
 };
