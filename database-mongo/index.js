@@ -49,7 +49,6 @@ const getAllEvents = cb => {
 
 //adding favorite events to database with username
 const addFavorite = (favorite, cb) => {
-  console.log(favorite, 'sdfsdfsdfdsf');
   var newEvent = new Event({
     id: favorite.id,
     name: favorite.name.text,
@@ -81,6 +80,7 @@ const deleteFavorite = (mongoId, cb) => {
       cb(err);
     } else {
       console.log('Deleted from DB');
+      cb()
     }
   });
 };
