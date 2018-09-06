@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { selectEventByUsername, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var apiHelper = require('./apihelper.js');
 
 var app = express();
@@ -9,10 +9,10 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
 app.get('/favorites', (req, res) => {
-  //manipuate req.body to fit query parameters
-  //make db call to get data
-  selectEventByUsername((err, data) => {
-    //in callback send status 200 and send data
+  // manipuate req.body to fit query parameters
+  // make db call to get data
+  getAllEvents((err, data) => {
+    // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
@@ -20,7 +20,7 @@ app.get('/favorites', (req, res) => {
       console.log(`data in app.get /favorites: ${data}`);
       res.status(200).send(data);
     }
-  })
+  });
 });
 
 app.post('/favorites', (req, res) => {
@@ -48,12 +48,6 @@ app.delete('/favorites', (err, data) => {
       res.status(202).send(data);
     }
   });
-
-});
-
-app.post('/login', (req, res) => {
-  //not yet until auth
-
 });
 
 //NOT BEING USED RIGHT NOW... ONLY FOR FUTURE API INTEGRATION
@@ -87,6 +81,11 @@ app.post('/insertEventToDb', (req, res) => {
       res.status(200).send(data);
     }
   });
+});
+
+app.post('/login', (req, res) => {
+  // not yet until auth
+
 });
 
 app.listen(3000, () => {
