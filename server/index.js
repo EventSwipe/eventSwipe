@@ -9,10 +9,10 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
 app.get('/favorites', (req, res) => {
-  //manipuate req.body to fit query parameters
-  //make db call to get data
+  // manipuate req.body to fit query parameters
+  // make db call to get data
   getAllEvents((err, data) => {
-    //in callback send status 200 and send data
+    // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
@@ -49,11 +49,6 @@ app.delete('/favorites', (err, data) => {
   });
 });
 
-app.post('/login', (req, res) => {
-  //not yet until auth
-
-});
-
 //NOT BEING USED RIGHT NOW... ONLY FOR FUTURE API INTEGRATION
 app.post('/events', (req, res) => {
   //makes the query the object from the body
@@ -85,6 +80,11 @@ app.post('/insertEventToDb', (req, res) => {
       res.status(200).send(data);
     }
   });
+});
+
+app.post('/login', (req, res) => {
+  // not yet until auth
+
 });
 
 app.listen(3000, () => {
