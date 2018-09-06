@@ -13,13 +13,17 @@ class App extends React.Component {
       showFaves: false
     };
     this.searchEvents = this.searchEvents.bind(this);
-    this.checkEventList = this.checkEventList.bind(this);
+    this.showFavorites = this.showFavorites.bind(this);
   }
 
-  checkEventList() {
-    console.log('e', this.state.events);
-    this.setState({ events: this.state.events.slice() });
-    console.log('t', this.state.events);
+  // checkEventList() {
+  //   console.log('e', this.state.events);
+  //   this.setState({ events: this.state.events.slice() });
+  //   console.log('t', this.state.events);
+  // }
+
+  showFavorites() {
+    this.setState({ showFaves: !this.state.showFaves })
   }
 
   searchEvents(query) {
@@ -31,7 +35,7 @@ class App extends React.Component {
 
   //renders navbar, searchbar, even & likes
   render () {
-    const showFavesOrEvents = this.state.showFaves ? <Favorites />: <SearchBar events={this.state.events} searchEvents={this.searchEvents}/>;
+    const showFavesOrEvents = this.state.showFaves ? <Favorites /> : <SearchBar events={this.state.events} searchEvents={this.searchEvents}/>;
     return (
       <div>
         <Nav/>
