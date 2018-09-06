@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { selectEventByUsername, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var apiHelper = require('./apihelper.js');
 
 var app = express();
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.get('/favorites', (req, res) => {
   //manipuate req.body to fit query parameters
   //make db call to get data
-  selectEventByUsername((err, data) => {
+  getAllEvents((err, data) => {
     //in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
