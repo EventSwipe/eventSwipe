@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.get('/favorite', (req, res) => {
   //manipuate req.body to fit query parameters
-  var query = req.body;
+  var query = req.query;
   //make db call to get data
   db.selectEventByUsername(query, (err, data) => {
     //in callback send status 200 and send data
@@ -21,11 +21,25 @@ app.get('/favorite', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-//not yet until authentication
+  //not yet until authentication
+
 });
 
+//NOT BEING USED RIGHT NOW... ONLY FOR FUTURE API INTEGRATION
 app.post('/events', (req, res) => {
-//call to api
+  //call to api
+  //makes the query the object from the body
+  var query = req.body;
+  //call the apihelper function to return a promise
+  apiHelper.getEventsByQuery(query)
+    //send the data and success code with data
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    //catch and handle the error
+    .catch((err) => {
+      console.error(err);
+    })
 });
 
 app.post('/insertEventToDb', (req, res) => {
@@ -41,4 +55,3 @@ app.post('/insertEventToDb', (req, res) => {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
