@@ -26,11 +26,6 @@ const Event = ({ event, like, dislike }) => {
                 <a href={event.url}>{event.url}</a></p>
             </div>
           </div>
-          <div className="column">
-            <button onClick={like}>
-              <span><img className="like-button" style={{height: 100, width: 100}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
-            </button>
-          </div>
         </div>
         <div className="column" onDragOver={(e) => e.preventDefault()} onDrop={like}>
           <button onClick={like}>
