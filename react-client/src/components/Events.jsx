@@ -8,39 +8,42 @@ class Events extends React.Component {
     super(props);
     this.state = { count: 0 };
     this.dislike = this.dislike.bind(this);
-    this.like = this.like.bind(this);
+    this.like = this.like.bind(this); 
   }
   componentDidMount() {
-    console.log(this.props.events)
-    
+    console.log(this.props.events);
   }
 
   like() {
     //check if out of items
-    if (this.props.events.length === 0) {
+    console.log(this.props.events);
+    if (this.props.events.length === 1) {
       //TODO:do something when you run out of items
-      console.log('ran out of items');
-      return;
+      alert('You have run out of events in your search. Please search again to view more events');
     }
     //set the query to the shifted item
     let query = this.props.events.shift();
     //axios post the item to the database
-    axios.post('/favorites',{params: {favoriteEvent: query}})
-      .then((response) => this.setState({ count: 0 }))
+    axios.post('/favorites', {params: {favoriteEvent: query}})
+      .then((response) => {
+        this.setState({ count: 0 });
+        alert('Event has been saved in your favorites. Check out more events!');
+      })
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
     //reset the state
   }
   dislike() {
     //check if there are any even items
-    if (this.props.events.length ===0) {
+    if (this.props.events.length === 1) {
       //TODO:do something when you run out of items
-      console.log('ran out of items');
-      return;
+      alert('You have run out of events in your search. Please search again to view more events');
     }
     //shift the item
-    let last = this.props.events.shift();
+    // console.log(this.props.events)
+    this.props.events.shift();
+    // console.log(this.props.events)
     //reset the state
-    this.setState({count: 0})
+    this.setState({ count: 0 });
   }
 
   render() {
