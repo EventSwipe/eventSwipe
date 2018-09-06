@@ -17,7 +17,7 @@ app.get('/favorites', (req, res) => {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
     } else {
-      console.log(`data in app.get /favorites: ${data}`);
+      // console.log(`data in app.get /favorites: ${data}`);
       res.status(200).send(data);
     }
   });
@@ -43,7 +43,7 @@ app.delete('/favorites', (err, data) => {
       console.error(`err in app.delete /favorites: ${err}`);
       res.status(400).send(err);
     } else {
-      console.log(`data in app.delete /favorites: ${data}`);
+      // console.log(`data in app.delete /favorites: ${data}`);
       res.status(202).send(data);
     }
   });
@@ -76,7 +76,7 @@ app.post('/insertEventToDb', (req, res) => {
       console.error(`err in app.post /insertEventToDb: ${err}`);
       res.status(400).send(err);
     } else {
-      console.log(`data in app.post /insertEventToDb: ${data}`);
+      // console.log(`data in app.post /insertEventToDb: ${data}`);
       res.status(200).send(data);
     }
   });
