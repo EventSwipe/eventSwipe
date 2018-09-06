@@ -24,10 +24,10 @@ class Favorites extends React.Component {
     axios
       .get('/favorites')
       .then(res => {
-        //console.log('RES.DATA  in axios.post loadMyLikes', res.data)
+        console.log('RES.DATA  in axios.get loadMyLikes', res.data)
         this.setState({ favorites: res.data });
       })
-      .catch(err => console.error(`err in getEvents in index.jsx: ${err}`));
+      .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 
   removeFave(favoriteListItem) {
