@@ -1,7 +1,6 @@
 import React from 'react';
 import Events from './Events.jsx';
 import axios from 'axios';
-import { callbackify } from 'util';
 
  class SearchBar extends React.Component {
   constructor(props) {
@@ -17,7 +16,7 @@ import { callbackify } from 'util';
     this.searchEvents = this.searchEvents.bind(this);
   }
   componentDidMount () {
-    //initial population
+    //initial population with hard coded search
     this.searchEvents({
       params: {
       "token": 'E5PTH3KVZH4MFUMMULAE',
@@ -38,10 +37,10 @@ import { callbackify } from 'util';
     
   }
   searchEvents(query) {
+    //axios get request from API and then populates the events state with the data
     axios.get('https://www.eventbriteapi.com/v3/events/search/', query)
     .then(({data}) => {
       this.setState({ events: data.events });
-      console.log(this.state.events)
     })
     .catch((err) => console.log('front end error', err))
   }

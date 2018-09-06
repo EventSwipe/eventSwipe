@@ -24,7 +24,8 @@ app.get('/favorites', (req, res) => {
 });
 
 app.post('/favorites', (req, res) => {
-  let { favoriteEvent } = req.body;
+  let { favoriteEvent } = req.body.params;
+  // console.log('app.post("/favorites"/)in the server index',req.body)
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);

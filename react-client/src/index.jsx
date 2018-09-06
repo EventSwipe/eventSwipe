@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
-import FavoritesList from "./components/FavoritesList.jsx";
+import Favorites from "./components/Favorites.jsx";
 import SearchBar from "./components/SearchBar.jsx";
-import Events from "./components/Events.jsx";
-import dummyData from "./dummyData.js";
 import Nav from "./components/Nav.jsx";
 
 class App extends React.Component {
@@ -22,7 +19,7 @@ class App extends React.Component {
 
   //renders navbar, searchbar, even & likes
   render () {
-    const showFavesOrEvents = this.state.showFaves ? <FavoritesList />: <SearchBar />;
+    const showFavesOrEvents = this.state.showFaves ? <Favorites />: <SearchBar />;
     return (
       <div>
         <Nav/>
