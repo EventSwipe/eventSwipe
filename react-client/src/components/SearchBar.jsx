@@ -1,49 +1,37 @@
 import React from 'react';
 import Events from './Events.jsx';
-import axios from 'axios';
-import { callbackify } from 'util';
 
  class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
       userInput: '',
       location: '',
       topic: '',
       date: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.searchEvents = this.searchEvents.bind(this);
   }
   componentDidMount () {
-    //initial population
-    this.searchEvents({
-      params: {
-      "token": 'E5PTH3KVZH4MFUMMULAE',
-      "location.address": 'newyorkcity',
-      "q": 'food'
-    }});
+    //initial population with hard coded search
+    // this.searchEvents({
+    //   params: {
+    //   "token": 'E5PTH3KVZH4MFUMMULAE',
+    //   "location.address": 'newyorkcity',
+    //   "q": 'food'
+    // }});
   }
   handleSubmit(e) {
     e.preventDefault();
     //run api request and pass in props
     //TODO: to add in date range
-    this.searchEvents({
+    this.props.searchEvents({
       params: {
       "token": 'E5PTH3KVZH4MFUMMULAE',
       "location.address": this.state.location,
       "q": this.state.topic
     }});
     
-  }
-  searchEvents(query) {
-    axios.get('https://www.eventbriteapi.com/v3/events/search/', query)
-    .then(({data}) => {
-      this.setState({ events: data.events });
-      console.log(this.state.events)
-    })
-    .catch((err) => console.log('front end error', err))
   }
 
   render() {
@@ -75,7 +63,7 @@ import { callbackify } from 'util';
         <button onClick={this.handleSubmit}>Submit</button>
       </form>
       {/* Create events component and passing down api request events array*/}
-      <Events events={this.state.events}/>
+      <Events events={this.props.events}/>
       </div>
     );
   }

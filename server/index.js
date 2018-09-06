@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { selectEventByUsername, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
-var apiHelper = require('./apihelper.js');
+var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -9,22 +8,23 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
 app.get('/favorites', (req, res) => {
-  //manipuate req.body to fit query parameters
-  //make db call to get data
-  selectEventByUsername((err, data) => {
-    //in callback send status 200 and send data
+  // manipuate req.body to fit query parameters
+  // make db call to get data
+  getAllEvents((err, data) => {
+    // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
     } else {
-      console.log(`data in app.get /favorites: ${data}`);
+      // console.log(`data in app.get /favorites: ${data}`);
       res.status(200).send(data);
     }
-  })
+  });
 });
 
 app.post('/favorites', (req, res) => {
-  let { favoriteEvent } = req.body;
+  let { favoriteEvent } = req.body.params;
+  // console.log('app.post("/favorites"/)in the server index',req.body)
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);
@@ -35,24 +35,19 @@ app.post('/favorites', (req, res) => {
   });
 });
 
-app.delete('/favorites', (err, data) => {
+app.delete('/favorites', (req, res) => {
   // add username to this once auth is setup
-  let { eventId } = req.query;
+  let { eventId } = req.body;
   deleteFavorite(eventId, (err, data) => {
+    
     if (err) {
       console.error(`err in app.delete /favorites: ${err}`);
       res.status(400).send(err);
     } else {
-      console.log(`data in app.delete /favorites: ${data}`);
+      // console.log(`data in app.delete /favorites: ${data}`);
       res.status(202).send(data);
     }
   });
-
-});
-
-app.post('/login', (req, res) => {
-  //not yet until auth
-
 });
 
 //NOT BEING USED RIGHT NOW... ONLY FOR FUTURE API INTEGRATION
@@ -63,7 +58,7 @@ app.post('/events', (req, res) => {
   getEventsByQuery(query)
     //send the data and success code with data
     .then((data) => {
-      console.log(`data in app.post /events: ${data}`);
+      // console.log(`data in app.post /events: ${data}`);
       res.status(200).send(data);
     })
     //catch and handle the error
@@ -82,12 +77,19 @@ app.post('/insertEventToDb', (req, res) => {
       console.error(`err in app.post /insertEventToDb: ${err}`);
       res.status(400).send(err);
     } else {
-      console.log(`data in app.post /insertEventToDb: ${data}`);
+      // console.log(`data in app.post /insertEventToDb: ${data}`);
       res.status(200).send(data);
     }
   });
 });
 
-app.listen(3000, () => {
-  console.log('listening on port 3000!');
+app.post('/login', (req, res) => {
+  // not yet until auth
+
 });
+
+let port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log(`listening on port ${port}!`);
+});
+
