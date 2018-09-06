@@ -11,7 +11,7 @@ class Favorites extends React.Component {
       favorites: []
     };
     this.loadMyFaves = this.loadMyFaves.bind(this);
-    this.removeFave = this.removeFave.bind(this)
+    this.removeFave = this.removeFave.bind(this);
   }
 
   //fill out

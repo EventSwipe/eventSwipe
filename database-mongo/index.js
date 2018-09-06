@@ -72,9 +72,9 @@ const addFavorite = (favorite, cb) => {
 
 // deleting favorite event
 // add username into argument when auth is setup
-const deleteFavorite = (eventId, cb) => {
+const deleteFavorite = (mongoId, cb) => {
   // add username in remove as a property
-  Event.findOneAndRemove({ _id: eventId }, err => {
+  Event.findOneAndRemove({ _id: mongoId }, err => {
     if (err) {
       console.error(`err in deleteEvent: ${err}`);
       cb(err);
@@ -85,7 +85,7 @@ const deleteFavorite = (eventId, cb) => {
 };
 
 //adding a new user to database
-const addUser = (username, password, cb) => {
+const addUser = (username, password) => {
   const newUser = new User({
     username: username,
     password: password
