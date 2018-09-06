@@ -28,7 +28,7 @@ const eventSchema = mongoose.Schema({
 const userSchema = mongoose.Schema({
   username: { type: String, unique: true },
   password: { type: String }
-})
+});
 
 const User = mongoose.model('User', userSchema);
 const Event = mongoose.model('Event', eventSchema);
