@@ -40,7 +40,7 @@ class App extends React.Component {
       <div>
         <NavBar />
         <button onClick={this.showFavorites}>
-          {this.state.showFaves ? "Search Events" : "Show Favorites"}
+          {this.state.showFaves ? 'Search Events' : 'Show Favorites'}
         </button>
         {showFavesOrEvents}
       </div>

@@ -57,30 +57,32 @@ const addFavoriteEvent = (query) => {
     date: query.date,
     free: query.free,
     username: query.username
-  })
+  });
 
   newEvent.save((err) => {
-    if (error) console.error(err)
-    else {
-      console.log('The new event has been saved into the database')
+    if (err) {
+      console.error(`err in newEvent.save: ${err}`)
+    } else {
+      console.log('The new event has been saved into the database!');
     }
-  })
-}
+  });
+};
 
 //adding a new user to database
 const addUser = (username, password, cb) => {
   var newUser = new User({
     username: username,
     password: password
-  })
+  });
   
   newUser.save((err) => {
-    if (error) console.error(err)
-    else {
-      console.log('The new user has been saved into the database')
+    if (err) {
+      console.error(`err in newUser.save: ${err}`);
+    } else {
+      console.log('The new user has been saved into the database!');
     }
-  })
-}
+  });
+};
 
 
 module.exports = { selectEventByUsername, addFavoriteEvent, addUser };
