@@ -8,7 +8,7 @@ const FavoritesCalendar = ({ favorites }) => (
     <h4> Calendar </h4>
     {favorites.map(like => <Favorites favorite={favorite}/>)}
   </div>
-)
+);
 
 
 export default FavoritesCalendar;

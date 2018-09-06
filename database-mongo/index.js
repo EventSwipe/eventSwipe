@@ -14,7 +14,7 @@ db.once('open', () => {
 
 //event data for each user
 const eventSchema = mongoose.Schema({
-  id: { type: Number, unique: true },
+  id: { type: Number },
   name: { type: String, required: true },
   description: { type: String },
   url: { type: String },
@@ -28,15 +28,16 @@ const eventSchema = mongoose.Schema({
 const userSchema = mongoose.Schema({
   username: { type: String, unique: true },
   password: { type: String }
-})
+});
 
 const User = mongoose.model('User', userSchema);
 const Event = mongoose.model('Event', eventSchema);
 
 //return events by username
-const selectEventByUsername = (username, cb) => {
-  Event.find({username : `${username}`}, (err, events) => {
-    if(err) {
+// add user here when authentication is setup 
+const selectEventByUsername = (cb) => {
+  Event.find({}, (err, events) => {
+    if (err) {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
     } else {
@@ -47,7 +48,7 @@ const selectEventByUsername = (username, cb) => {
 };
 
 //adding favorite events to database with username
-const addFavoriteEvent = (query) => {
+const addFavorite = (query, cb) => {
   var newEvent = new Event({
     id: query.id,
     name: query.name,
@@ -57,30 +58,46 @@ const addFavoriteEvent = (query) => {
     date: query.date,
     free: query.free,
     username: query.username
-  })
+  });
 
   newEvent.save((err) => {
-    if (error) console.error(err)
-    else {
-      console.log('The new event has been saved into the database')
+    if (err) {
+      console.error(`err in newEvent.save: ${err}`);
+      cb(err, null);
+    } else {
+      console.log('The new event has been saved into the database!');
+      cb();
     }
-  })
-}
+  });
+};
 
 //adding a new user to database
 const addUser = (username, password, cb) => {
   var newUser = new User({
     username: username,
     password: password
-  })
+  });
   
   newUser.save((err) => {
-    if (error) console.error(err)
-    else {
-      console.log('The new user has been saved into the database')
+    if (err) {
+      console.error(`err in newUser.save: ${err}`);
+    } else {
+      console.log('The new user has been saved into the database!');
     }
-  })
-}
+  });
+};
+
+//deleting favorite event
+// add username into argument when auth is setup
+const deleteFavorite = (eventId, cb) => {
+  // add username in remove as a property
+  Event.remove({ id: eventId }, (err) => {
+    if (err) {
+      console.error(`err in deleteEvent: ${err}`);
+      cb(err);
+    }
+  });
+};
 
 
-module.exports = { selectEventByUsername, addFavoriteEvent, addUser };
+module.exports = { selectEventByUsername, addFavorite, addUser, deleteFavorite };

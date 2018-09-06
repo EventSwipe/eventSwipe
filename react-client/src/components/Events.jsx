@@ -15,14 +15,14 @@ class Events extends React.Component {
     if (this.state.count >= this.props.events.length-1) {
       this.setState({ count: 0 })
     } else {
-      this.setState({ count: this.state.count+1 });
+      this.setState({ count: this.state.count + 1 });
     }
   }
   dislikeEvent() {
     if (this.state.count >= this.props.events.length-1) {
       this.setState({ count: 0 })
     } else {
-      this.setState({ count: this.state.count+1 });
+      this.setState({ count: this.state.count + 1 });
     }
   }
 
@@ -31,8 +31,6 @@ class Events extends React.Component {
       <div>
         <Event event={this.props.events[this.state.count]} like={this.addEventToFaves} dislike={this.dislikeEvent}/> 
       </div>
-      
-
     );
   }
 }
