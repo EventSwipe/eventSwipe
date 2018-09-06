@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Nav = () => (
-    <div>
+    <div style={{"borderStyle": "dotted"}}>
         <nav className="navbar navbar-light bg-light">
             <a className="navbar-brand" href="#">
                 <img src="https://image.flaticon.com/icons/svg/1051/1051124.svg" width="30" height="30" className="d-inline-block align-top" alt=""/>
