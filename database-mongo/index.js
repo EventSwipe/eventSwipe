@@ -14,7 +14,7 @@ db.once('open', () => {
 
 //event data for each user
 const eventSchema = mongoose.Schema({
-  id: { type: Number, unique: true },
+  id: { type: Number },
   name: { type: String, required: true },
   description: { type: String },
   url: { type: String },
@@ -35,7 +35,7 @@ const Event = mongoose.model('Event', eventSchema);
 
 //return events by username
 const selectEventByUsername = (username, cb) => {
-  Event.find({username : `${username}`}, (err, events) => {
+  Event.find({username : username}, (err, events) => {
     if(err) {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
@@ -84,5 +84,12 @@ const addUser = (username, password, cb) => {
   });
 };
 
+//deleting favorite event
+const deleteEvent = (eventId, username) => {
+  Event.remove({id:eventId, username:username}, (err) => {
+    console.error(err)
+  })
+}
 
-module.exports = { selectEventByUsername, addFavoriteEvent, addUser };
+
+module.exports = { selectEventByUsername, addFavoriteEvent, addUser, deleteEvent };
