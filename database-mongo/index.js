@@ -58,7 +58,7 @@ const addFavorite = (favorite, cb) => {
     // location: favorite.location,
     date: favorite.start.local,
     free: favorite.is_free,
-    logo: favorite.logo.url,d
+    logo: favorite.logo.url,
     // username: favorite.username
   });
   newEvent.save(err => {
