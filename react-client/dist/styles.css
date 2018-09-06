@@ -140,3 +140,8 @@
   display: table;
   clear: both;
 }
+
+.like-button{
+  height:50px;
+  width:50px;
+}
