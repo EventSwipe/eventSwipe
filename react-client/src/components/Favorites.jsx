@@ -44,7 +44,6 @@ class Favorites extends React.Component {
         {/* click */}
 
         {/* toggle state  */}
-        <button>Home</button>
         <h1>Likes</h1>
         {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
          <br/>
