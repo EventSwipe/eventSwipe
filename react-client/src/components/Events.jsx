@@ -6,12 +6,17 @@ import axios from 'axios';
 class Events extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0 };
+    this.state = { 
+      count: 0,
+      //hardcoded dummy data (should be this.props.events[0].location)
+      mapAddress: 'https://www.google.com/maps/embed/v1/place?q=newyorkcity&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE'
+    };
     this.dislike = this.dislike.bind(this);
     this.like = this.like.bind(this); 
+    this.changeAddress = this.changeAddress.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.events);
+    this.changeAddress();
   }
 
   like() {
@@ -27,7 +32,9 @@ class Events extends React.Component {
       .then((response) => {
         this.setState({ count: 0 });
         alert('Event has been saved in your favorites. Check out more events!');
+        this.changeAddress();
       })
+      //add change map location
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
     //reset the state
   }
@@ -36,11 +43,22 @@ class Events extends React.Component {
     if (this.props.events.length === 1) {
       //TODO:do something when you run out of items
       alert('You have run out of events in your search. Please search again to view more events');
+      this.changeAddress();
     }
     //shift the item
     this.props.events.shift();
     //reset the state
     this.setState({ count: 0 });
+  }
+
+  //customize to get the location of the this.props.events item.
+  changeAddress() {
+    //change map data
+    let eventLocation = '369LexingtonAvenuenewyork'
+    let address = `https://www.google.com/maps/embed/v1/place?q=${eventLocation}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`
+    this.setState({
+      mapAddress: address
+    })
   }
 
   render() {
@@ -49,6 +67,7 @@ class Events extends React.Component {
     return (
       <div>
         <Event event={events[count]} like={this.like} dislike={this.dislike}/> 
+        <iframe style={{width: "450px", height:"350px"}} src={this.state.mapAddress}allowFullScreen></iframe>
       </div>
     );
   }
