@@ -22,7 +22,7 @@ class FavoritesList extends React.Component {
 
 
   render () {
-    const { favorite } = this.props;
+    const { favorite, removeFave } = this.props;
 
     const tooltipStyle = {
       display: this.state.hover ? 'block' : 'none'
@@ -43,7 +43,7 @@ class FavoritesList extends React.Component {
         {favorite.free ? <b>"FREE!!!"</b> : null}
         <button
           onClick={() => {
-            removeFave(favorites);
+            removeFave(favorite);
           }}
         >
           Delete
