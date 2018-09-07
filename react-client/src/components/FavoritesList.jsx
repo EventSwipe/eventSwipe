@@ -10,15 +10,14 @@ class FavoritesList extends React.Component {
   // const FavoritesList = ({ favorites, removeFave }) =>
 
   render() {
-    const { favorites } = this.props;
+    const { favorites, removeFave } = this.props;
     return (
       <div>
         <h4> Faves </h4>
-
         <ul>
           {favorites.map(favorite => (
             <li key={favorite.id}>
-              <FavoritesListItem favorite={favorite} />
+              <FavoritesListItem favorite={favorite} removeFave={removeFave}/>
             </li>
           ))}
         </ul>
