@@ -16,7 +16,6 @@ class Events extends React.Component {
 
   like() {
     //check if out of items
-    console.log(this.props.events);
     if (this.props.events.length === 1) {
       //TODO:do something when you run out of items
       alert('You have run out of events in your search. Please search again to view more events');
@@ -39,17 +38,17 @@ class Events extends React.Component {
       alert('You have run out of events in your search. Please search again to view more events');
     }
     //shift the item
-    // console.log(this.props.events)
     this.props.events.shift();
-    // console.log(this.props.events)
     //reset the state
     this.setState({ count: 0 });
   }
 
   render() {
+    const { events } = this.props;
+    const { count } = this.state;
     return (
       <div>
-        <Event event={this.props.events[this.state.count]} like={this.like} dislike={this.dislike}/> 
+        <Event event={events[count]} like={this.like} dislike={this.dislike}/> 
       </div>
     );
   }
