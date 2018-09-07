@@ -22,7 +22,6 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.0.2",
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
