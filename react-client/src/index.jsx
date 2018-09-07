@@ -4,6 +4,7 @@ import Favorites from "./components/Favorites.jsx";
 import SearchBar from './components/SearchBar.jsx';
 import Nav from './components/Nav.jsx';
 import axios from 'axios';
+// import SnackBars from './components/SnackBars.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class App extends React.Component {
           {showFaves ? 'Search Events' : 'Show Favorites'}
         </button>
         {showFavesOrEvents}
+        {/* <SnackBars /> */}
       </div>
     );
   }
