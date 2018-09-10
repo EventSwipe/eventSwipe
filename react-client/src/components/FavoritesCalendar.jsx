@@ -1,44 +1,50 @@
 import React from 'react';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
+import axios from 'axios';
+import '!style-loader!css-loader!react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import '!style-loader!css-loader!react-big-calendar/lib/css/react-big-calendar.css';
-// import Favorites from './Favorites.jsx';
 
 Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 
 class FavoritesCalendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      events: [
-        {
-          start: new Date(),
-          end: new Date(moment().add(1, 'days')),
-          title: 'HI'
-        }
-      ]
-    };
-    this.favesToEvents = this.favesToEvents.bind(this);
+    this.state = { events: [] };
+    this.getFaves = this.getFaves.bind(this);
   }
 
   componentDidMount() {
-    // this.favesToEvents();
+    this.getFaves();
   }
 
-  favesToEvents() {
-    const { favorites } = this.props;
-    // console.log('123', favoritesToEvents)
-    this.setState({ events: favorites });
+  // get favorites from db and sort out start time, end time is 3 hours after event starts (for now - need to grab time it ends from api and save to db)
+  getFaves() {
+    axios.get('/favorites')
+      .then(({data}) => {
+        let promise = Promise.all(data.map((e, i) => {
+          let obj = {};
+          obj['id'] = i;
+          obj['start'] = new Date (e.date.substring(0, 4), e.date.substring(5, 7), e.date.substring(8, 10), e.date.substring(11, 13), e.date.substring(14, 16), 0, 0);
+          obj['end'] = new Date(moment(obj.start).add(3, 'hours'));
+          obj['title'] = e.name;
+          return obj;
+        }));
+        promise
+          .then(events => this.setState({ events }))
+          .catch(e => console.error('err', err));
+      })
+      .catch(err => console.error('err in getFaves in FavoritesCalendar.jsx', err));
   }
 
   render() {
+    const { events } = this.state;
     return (
       <div className="calendar">
-        {console.log(this.props.favorites)}
         <Calendar
           defaultDate={new Date()}
           defaultView="month"
-          events={this.state.events}
+          events={events}
           style={{ height: '100vh' }}
         />
       </div>
