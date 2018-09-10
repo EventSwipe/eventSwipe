@@ -29,7 +29,8 @@ class SearchBar extends React.Component {
       params: {
         token: 'E5PTH3KVZH4MFUMMULAE',
         'location.address': this.state.location,
-        q: this.state.topic
+        q: this.state.topic,
+        // start_date.range_start: 
       }
     });
   }
@@ -55,7 +56,7 @@ class SearchBar extends React.Component {
           <input
             onChange={e => this.setState({ date: e.target.value })}
             value={date}
-            placeholder="Date Range"
+            placeholder="Enter Date Range"
           />
           {/* <select>
           {[...Array(30)].map((x, i) => 
