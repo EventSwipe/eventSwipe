@@ -114,34 +114,3 @@
     text-overflow: ellipsis;
     max-width: 130ch;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-/* Create three equal columns that floats next to each other */
-.column-center {
-  float: left;
-  width: 30%;
-  padding: 10px;
-  height: 500px; /* Should be removed. Only for demonstration */
-}
-
-.column {
-  float: left;
-  width: 35%;
-  padding: 10px;
-  height: 500px; /* Should be removed. Only for demonstration */
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.like-button{
-  height:50px;
-  width:50px;
-}

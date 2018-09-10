@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import FavoritesListItem from "./FavoritesListItem.jsx";
+import React from 'react';
+import axios from 'axios';
+import FavoritesListItem from './FavoritesListItem.jsx';
 
 class FavoritesList extends React.Component {
   constructor(props) {

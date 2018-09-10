@@ -12,16 +12,17 @@ try {
 }
 
 //Generic api integration method (not used yet)
-let getFromEventBriteApi = function (query) {
+let getFromMeetUp = function (query) {
   //zip code, topic, free?
   var location = query.location;
   var topic = query.topic;
-  return axios.get('https://api.meetup.com/find/groups?key=48416f2b301d68647614267b3651601c&zip=11211&radius=1&category=14&order=members', {params: 
-    {
-      'upcoming_events': true,
-      'q': topic
-    }
-  });
+  return axios.get(`https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=food`, 
+    { params: 
+      {
+        'location.address': location,
+        'q': topic
+      }
+    });
 };
 
-module.exports = { getFromEventBriteApi };
+module.exports = { getFromMeetUp };

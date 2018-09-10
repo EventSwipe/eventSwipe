@@ -52,12 +52,12 @@ class Favorites extends React.Component {
 
         {/* toggle state  */}
         <h1>Likes</h1>
-        {/* <FavoritesCalendar favorites={this.props.favorites}/> */}
         <br />
         <FavoritesList
           favorites={favorites}
-          removeFave={this.removeFave}
+          removeFave={this.removeFave} 
         />
+        <FavoritesCalendar favorites={favorites}/> 
       </div>
     );
   }
