@@ -52,10 +52,11 @@ class Events extends React.Component {
   }
 
   //customize to get the location of the this.props.events item.
-  changeAddress() {
+  changeAddress(name) {
     //change map data
-    let eventLocation = '369LexingtonAvenuenewyork'
-    let address = `https://www.google.com/maps/embed/v1/place?q=${eventLocation}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`
+    let eventName = name;
+    let key = 'AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE';
+    let address = `https://www.google.com/maps/embed/v1/place?q=${eventLocation}&key=${key}`
     this.setState({
       mapAddress: address
     })
