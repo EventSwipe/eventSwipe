@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -57,7 +58,6 @@ app.delete('/favorites', (req, res) => {
   // add username to this once auth is setup
   let { eventId } = req.body;
   deleteFavorite(eventId, (err, data) => {
-    
     if (err) {
       console.error(`err in app.delete /favorites: ${err}`);
       res.status(400).send(err);
@@ -68,23 +68,35 @@ app.delete('/favorites', (req, res) => {
   });
 });
 
-//NOT BEING USED RIGHT NOW... ONLY FOR FUTURE API INTEGRATION
-app.post('/events', (req, res) => {
+//get events from db helper
+app.get('/events', (req, res) => {
   //makes the query the object from the body
-  let { query } = req.body;
+  console.log(req.query)
+  var query = {location: req.query.location,
+    topic: req.query.topic
+  }
   //call the apihelper function to return a promise
-  getEventsByQuery(query)
-    //send the data and success code with data
-    .then((data) => {
-      // console.log(`data in app.post /events: ${data}`);
-      res.status(200).send(data);
-    })
-    //catch and handle the error
-    .catch((err) => {
-      console.error(`err in app.post /events: ${data}`);
-      res.status(404).send(err);
-    });
+  getFromMeetUp(query, (err, data1) => {
+    if (err) {
+      console.error(err);
+      res.status(404).send();
+    }
+    else {
+      getFromEventBrite(query, (err, data2) => {
+        if (err) {
+          console.error(err);
+          res.status(404).send(err);
+        } else {
+          console.log(data2)
+          //insert 'JSON.parse(data1.body)' if want to add meetup data 
+          res.status(200).send(data2.events);
+        }
+      })
+    }
+  })
 });
+
+
 
 app.post('/insertEventToDb', (req, res) => {
   //manipulate req.body to fit query parameters
@@ -105,6 +117,11 @@ app.post('/login', (req, res) => {
   // not yet until auth
 
 });
+
+
+app.get('/lol', (req, res) => {
+
+})
 
 let port = process.env.PORT || 3000;
 app.listen(port, function() {
