@@ -22,8 +22,8 @@ class App extends React.Component {
 
   searchEvents(query) {
     //axios get request from API and then populates the events state with the data
-    axios.get('https://www.eventbriteapi.com/v3/events/search/', query)
-      .then(({data}) => this.setState({ events: data.events }))
+    axios.get('/events', query)
+      .then(({data}) => this.setState({ events: data }))
       .catch((err) => console.log('front end error', err));
   }
 
@@ -33,6 +33,7 @@ class App extends React.Component {
     const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return (
       <div>
+        {console.log(this.state.events)}
         <Nav/>
         <button onClick={this.showFavorites}>
           {showFaves ? 'Search Events' : 'Show Favorites'}

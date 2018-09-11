@@ -1,6 +1,7 @@
 import React from 'react';
 import Event from './Event.jsx';
 import axios from 'axios';
+import googleKey from '../../../config.js'
 //maps all events to each eventTinder item
 
 class Events extends React.Component {
@@ -9,14 +10,13 @@ class Events extends React.Component {
     this.state = { 
       count: 0,
       //hardcoded dummy data (should be this.props.events[0].location)
-      mapAddress: 'https://www.google.com/maps/embed/v1/place?q=newyorkcity&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE'
+      mapAddress: `https://www.google.com/maps/embed/v1/place?q=303springstnewyork&key=${googleKey.GOOGLE_TOKEN}`
     };
     this.dislike = this.dislike.bind(this);
     this.like = this.like.bind(this); 
     this.changeAddress = this.changeAddress.bind(this);
   }
   componentDidMount() {
-    this.changeAddress();
   }
 
   like() {
@@ -52,10 +52,9 @@ class Events extends React.Component {
   }
 
   //customize to get the location of the this.props.events item.
-  changeAddress() {
+  changeAddress(eventName) {
     //change map data
-    let eventLocation = '369LexingtonAvenuenewyork'
-    let address = `https://www.google.com/maps/embed/v1/place?q=${eventLocation}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`
+    let address = `https://www.google.com/maps/embed/v1/place?q=${eventName}&key=${googleKey.GOOGLE_TOKEN}`
     this.setState({
       mapAddress: address
     })
@@ -73,3 +72,4 @@ class Events extends React.Component {
   }
 }
 export default Events;
+  
