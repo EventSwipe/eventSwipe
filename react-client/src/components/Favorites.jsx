@@ -20,10 +20,10 @@ class Favorites extends React.Component {
 
   //loads all the favorites saved in database
   loadMyFaves() {
-    console.log(`whats my length`, this.state.favorites.length);
-    axios
+     axios
       .get('/favorites/ten', {
         params: {
+          //sends the lengths of the favorites array down to db to offset return by
           offset: this.state.favorites.length
         }
       })

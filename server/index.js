@@ -32,10 +32,10 @@ app.get('/favorites/ten', (req, res) => {
     // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
-      res.sendStatus(400).send();
+      res.status(400).send();
     } else {
       // console.log(`data in app.get /favorites: ${data}`);
-      res.sendStatus(200).send(data);
+      res.status(200).send(data);
     }
   });
 });
