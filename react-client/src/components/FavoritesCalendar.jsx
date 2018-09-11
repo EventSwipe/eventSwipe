@@ -18,21 +18,20 @@ class FavoritesCalendar extends React.Component {
     this.getFaves();
   }
 
-  // get favorites from db and sort out start time, end time is 3 hours after event starts (for now - need to grab time it ends from api and save to db)
   getFaves() {
     axios.get('/favorites')
       .then(({data}) => {
-        let promise = Promise.all(data.map((e, i) => {
+        let promise = Promise.all(data.map((event, i) => {
           let obj = {};
           obj['id'] = i;
-          obj['start'] = new Date (e.date.substring(0, 4), e.date.substring(5, 7), e.date.substring(8, 10), e.date.substring(11, 13), e.date.substring(14, 16), 0, 0);
-          obj['end'] = new Date(moment(obj.start).add(3, 'hours'));
-          obj['title'] = e.name;
+          obj['start'] = new Date(moment(event.date));
+          obj['end'] = new Date(moment(event.end));
+          obj['title'] = event.name.substring(0, 50);
           return obj;
         }));
         promise
           .then(events => this.setState({ events }))
-          .catch(e => console.error('err', err));
+          .catch(e => console.error('err in getFaves FavoritesCalendar.jsx', err));
       })
       .catch(err => console.error('err in getFaves in FavoritesCalendar.jsx', err));
   }
@@ -45,7 +44,7 @@ class FavoritesCalendar extends React.Component {
           defaultDate={new Date()}
           defaultView="month"
           events={events}
-          style={{ height: '100vh' }}
+          style={{ height: '100vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
         />
       </div>
     );

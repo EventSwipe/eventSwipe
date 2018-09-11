@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
 
 var app = express();
@@ -12,6 +12,24 @@ app.get('/favorites', (req, res) => {
   // manipuate req.body to fit query parameters
   // make db call to get data
   getAllEvents((err, data) => {
+    // in callback send status 200 and send data
+    if (err) {
+      console.error(`err in app.get /favorite: ${err}`);
+      res.status(400).send();
+    } else {
+      // console.log(`data in app.get /favorites: ${data}`);
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.get('/favorites/ten', (req, res) => {
+  // manipuate req.body to fit query parameters
+  // make db call to get data
+  //gets first 10
+  
+  getTenEvents(req.query.offset, (err, data) => {
+    console.log(`check yore data`, data);
     // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
