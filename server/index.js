@@ -21,7 +21,6 @@ var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
-// app.use(isAuthenticated(request, response, next))
 
 
 app.get('/favorites', (req, res) => {
