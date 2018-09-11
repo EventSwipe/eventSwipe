@@ -76,12 +76,13 @@ const addFavorite = (favorite, cb) => {
     id: favorite.id,
     name: favorite.name.text || favorite.name,
     description: favorite.description.text || favorite.name,
-    url: favorite.url,
+    url: favorite.url || favorite.link,
     // location: favorite.location,
-    date: favorite.start.local,
-    end: favorite.end.local,
-    free: favorite.is_free,
-    logo: favorite.logo.original.url
+    date: favorite.start ? favorite.start.local : favorite.local_date,
+    time: favorite.local_time || null,
+    end: favorite.end ? favorite.end.local : null,
+    free: favorite.is_free || true,
+    logo: favorite.logo ? favorite.logo.original.url : null
     // username: favorite.username
   });
   newEvent.save(err => {
