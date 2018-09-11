@@ -21,12 +21,12 @@ class FavoritesCalendar extends React.Component {
   getFaves() {
     axios.get('/favorites')
       .then(({data}) => {
-        let promise = Promise.all(data.map((e, i) => {
+        let promise = Promise.all(data.map((event, i) => {
           let obj = {};
           obj['id'] = i;
-          obj['start'] = new Date(moment(e.date));
-          obj['end'] = new Date(moment(e.end));
-          obj['title'] = e.name;
+          obj['start'] = new Date(moment(event.date));
+          obj['end'] = new Date(moment(event.end));
+          obj['title'] = event.name.substring(0, 50);
           return obj;
         }));
         promise
@@ -44,7 +44,7 @@ class FavoritesCalendar extends React.Component {
           defaultDate={new Date()}
           defaultView="month"
           events={events}
-          style={{ height: '100vh' }}
+          style={{ height: '100vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
         />
       </div>
     );
