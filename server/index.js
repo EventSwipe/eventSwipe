@@ -11,11 +11,11 @@ var firebaseAdmin = admin.initializeApp({
 })
 
 //create autentication middleware
-function isAuthenticated(request, response, next) {
+const isAuthenticated = (request, response, next) => {
   // check if user is logged in
   // if they are, attach them to the request object
   // if not, send to login page
-}
+};
 var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
 
@@ -88,7 +88,7 @@ app.delete('/favorites', (req, res) => {
 //get events from db helper
 app.get('/events', (req, res) => {
   //makes the query the object from the body
-  console.log(req.query)
+  // console.log(req.query)
   var query = {location: req.query.location,
     topic: req.query.topic
   }
@@ -104,9 +104,13 @@ app.get('/events', (req, res) => {
           console.error(err);
           res.status(404).send(err);
         } else {
-          console.log(data2)
+          if (data2.events.length > 25) {
+            data2.events = data2.events.slice(0, 25);
+          } 
+          // console.log(typeof data1.body);
+          data1.body = JSON.parse(data1.body);
           //insert 'JSON.parse(data1.body)' if want to add meetup data 
-          res.status(200).send(data2.events);
+          res.status(200).send([...data1.body.events, ...data2.events]);
         }
       })
     }
