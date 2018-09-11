@@ -74,8 +74,8 @@ const getTenEvents =  (offset, cb) => {
 const addFavorite = (favorite, cb) => {
   var newEvent = new Event({
     id: favorite.id,
-    name: favorite.name.text,
-    description: favorite.description.text,
+    name: favorite.name.text || favorite.name,
+    description: favorite.description.text || favorite.name,
     url: favorite.url,
     // location: favorite.location,
     date: favorite.start.local,

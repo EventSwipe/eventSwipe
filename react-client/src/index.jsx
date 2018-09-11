@@ -17,13 +17,23 @@ class App extends React.Component {
     this.showFavorites = this.showFavorites.bind(this);
   }
   showFavorites() {
-    this.setState({ showFaves: !this.state.showFaves })
+    this.setState({ showFaves: !this.state.showFaves });
   }
 
   searchEvents(query) {
     //axios get request from API and then populates the events state with the data
     axios.get('/events', query)
-      .then(({data}) => this.setState({ events: data }))
+      .then(({data}) => {
+        console.log('eeee', data);
+        let promise = Promise.all(data.sort((a, b) => {
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.date) - new Date(a.date);
+        }));
+        promise
+          .then(events => this.setState({ events }))
+          .catch(e => console.error('err in searchEvents promise', err));
+      })
       .catch((err) => console.log('front end error', err));
   }
 
