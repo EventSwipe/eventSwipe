@@ -20,8 +20,9 @@ class Favorites extends React.Component {
 
   //loads all the favorites saved in database
   loadMyFaves() {
+    // console.log(`check 1 load my faves`)
     axios
-      .get('/favorites')
+      .get('/favorites/ten')
       .then(res => {
         this.setState({ favorites: res.data });
       })
@@ -53,11 +54,12 @@ class Favorites extends React.Component {
         {/* toggle state  */}
         <h1>Likes</h1>
         <br />
+        <FavoritesCalendar favorites={favorites}/> 
+        
         <FavoritesList
           favorites={favorites}
           removeFave={this.removeFave} 
         />
-        <FavoritesCalendar favorites={favorites}/> 
       </div>
     );
   }
