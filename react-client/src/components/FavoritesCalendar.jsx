@@ -21,11 +21,22 @@ class FavoritesCalendar extends React.Component {
   getFaves() {
     axios.get('/favorites')
       .then(({data}) => {
+        console.log('dataaaa', data)
         let promise = Promise.all(data.map((event, i) => {
           let obj = {};
           obj['id'] = i;
-          obj['start'] = new Date(moment(event.date));
-          obj['end'] = new Date(moment(event.end));
+          if (event.local_time) {
+            let eventInfo = event.date + ' ' + event.time;
+            obj['start'] = new Date(moment(eventInfo));
+          } else {
+            obj['start'] = new Date(moment(event.date));
+          }
+          if (!event.end) {
+            obj['end'] = new Date(moment(obj.start).add('3', 'hours'));
+          } else {
+            obj['end'] = new Date(moment(event.end));
+          }
+          
           obj['title'] = event.name.substring(0, 50);
           return obj;
         }));
