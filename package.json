@@ -26,6 +26,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
+    "firebase-admin": "^6.0.0",
     "micro": "latest",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",

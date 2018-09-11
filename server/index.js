@@ -1,11 +1,28 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+//require firebase
+var admin = require('firebase-admin');
+var serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json')
+
+var firebaseAdmin = admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL:'https://eventswipe.firebaseio.com'
+})
+
+//create autentication middleware
+function isAuthenticated(request, response, next) {
+  // check if user is logged in
+  // if they are, attach them to the request object
+  // if not, send to login page
+}
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
+// app.use(isAuthenticated(request, response, next))
+
 
 app.get('/favorites', (req, res) => {
   // manipuate req.body to fit query parameters
@@ -22,7 +39,7 @@ app.get('/favorites', (req, res) => {
   });
 });
 
-app.post('/favorites', (req, res) => {
+app.post('/favorites', isAuthenticated, (req, res) => {
   let { favoriteEvent } = req.body.params;
   // console.log('app.post("/favorites"/)in the server index',req.body)
   addFavorite(favoriteEvent, (err) => {

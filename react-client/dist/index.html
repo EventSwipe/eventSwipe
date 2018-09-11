@@ -17,8 +17,39 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+  <script src='https://www.gstatic.com/firebasejs/5.4.2/firebase.js'></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: 'AIzaSyBVvm08-ZC3kUIHp9O0tY-ES1g1IDN1NC8',
+      authDomain: 'eventswipe.firebaseapp.com',
+      databaseURL: 'https://eventswipe.firebaseio.com',
+      projectId: 'eventswipe',
+      storageBucket: 'eventswipe.appspot.com',
+      messagingSenderId: '855689724386'
+    };
+    firebase.initializeApp(config);
+  </script>
 </head>
 <body class="main">
+  <script>
+    function signInWithGoogle() {
+      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+
+      firebase.auth().signInWithPopup(googleAuthProvider)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
+    }
+    
+    function signOutOfGoogle() {
+      firebase.auth().signOut();
+      console.log('signed out!')
+    }
+    </script>
+    <button onclick={signInWithGoogle()}>Login With Google</button>
+    <button onclick={signOutOfGoogle()}>Sign Out</button>
 <div id="app"></div>
 <script type="text/javascript" src="bundle.js"></script>
 </body>
