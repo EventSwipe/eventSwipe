@@ -33,6 +33,7 @@ class App extends React.Component {
     const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return (
       <div>
+        {console.log(this.state.events)}
         <Nav/>
         <button onClick={this.showFavorites}>
           {showFaves ? 'Search Events' : 'Show Favorites'}

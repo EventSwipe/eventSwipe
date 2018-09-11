@@ -23,6 +23,7 @@ const eventSchema = mongoose.Schema({
   url: { type: String },
   location: { type: String },
   date: { type: Date },
+  end: { type: Date },
   free: { type: Boolean },
   username: { type: String },
   logo: { type: String }
@@ -78,6 +79,7 @@ const addFavorite = (favorite, cb) => {
     url: favorite.url,
     // location: favorite.location,
     date: favorite.start.local,
+    end: favorite.end.local,
     free: favorite.is_free,
     logo: favorite.logo.original.url
     // username: favorite.username
