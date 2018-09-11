@@ -9,10 +9,7 @@ import axios from 'axios';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      events: [],
-      showFaves: false
-    };
+    this.state = { events: [], showFaves: false };
     this.searchEvents = this.searchEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
   }
@@ -23,11 +20,8 @@ class App extends React.Component {
   searchEvents(query) {
     //axios get request from API and then populates the events state with the data
     axios.get('/events', query)
-      .then(({data}) => {
-        // console.log('eeee', data);
+      .then(({ data }) => {
         let promise = Promise.all(data.sort((a, b) => {
-          // Turn your strings into dates, and then subtract them
-          // to get a value that is either negative, positive, or zero.
           return new Date(b.date) - new Date(a.date);
         }));
         promise
