@@ -28,9 +28,8 @@ class SearchBar extends React.Component {
     this.props.searchEvents({
       //call is made
       params: {
-        token: 'E5PTH3KVZH4MFUMMULAE',
-        'location.address': this.state.location,
-        q: this.state.topic,
+        'location': this.state.location,
+        'topic': this.state.topic,
         // start_date.range_start: 
       }
     });

@@ -71,20 +71,25 @@ app.delete('/favorites', (req, res) => {
 //get events from db helper
 app.get('/events', (req, res) => {
   //makes the query the object from the body
-  var data2 = [];
+  console.log(req.query)
+  var query = {location: req.query.location,
+    topic: req.query.topic
+  }
   //call the apihelper function to return a promise
-  getFromMeetUp({location:'newyorkcity',topic:'food'}, (err, data1) => {
+  getFromMeetUp(query, (err, data1) => {
     if (err) {
       console.error(err);
       res.status(404).send();
     }
     else {
-      getFromEventBrite({location:'newyorkcity',topic:'food'}, (err, data2) => {
+      getFromEventBrite(query, (err, data2) => {
         if (err) {
           console.error(err);
           res.status(404).send(err);
         } else {
-          res.status(200).send([JSON.parse(data1.body), ...data2.events]);
+          console.log(data2)
+          //insert 'JSON.parse(data1.body)' if want to add meetup data 
+          res.status(200).send(data2.events);
         }
       })
     }
