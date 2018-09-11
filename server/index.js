@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-<<<<<<< HEAD
 var { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 //require firebase
 var admin = require('firebase-admin');
@@ -17,10 +16,8 @@ function isAuthenticated(request, response, next) {
   // if they are, attach them to the request object
   // if not, send to login page
 }
-=======
 var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
->>>>>>> dev
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -43,9 +40,6 @@ app.get('/favorites', (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-app.post('/favorites', isAuthenticated, (req, res) => {
-=======
 app.get('/favorites/ten', (req, res) => {
   // manipuate req.body to fit query parameters
   // make db call to get data
@@ -65,7 +59,6 @@ app.get('/favorites/ten', (req, res) => {
 });
 
 app.post('/favorites', (req, res) => {
->>>>>>> dev
   let { favoriteEvent } = req.body.params;
   // console.log('app.post("/favorites"/)in the server index',req.body)
   addFavorite(favoriteEvent, (err) => {
