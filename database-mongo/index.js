@@ -51,17 +51,19 @@ const getAllEvents = cb => {
   });
 };
 
-//Returns first ten events
-const getTenEvents = cb => {
+//Returns first ten events, sorted by dates starting from now
+const getTenEvents =  (offset, cb) => {
+  var num = Number(offset)
   Event.find({ date: { '$gte' : new Date}})
     .sort({ date: +1 })
+    .skip(num)
     .limit(10)
     .exec((err, events) => {
       if (err) {
-        console.error(`err in selectEventByUsername db/index.js: ${err}`);
+        console.error(`err in  getTenEvents  db/index.js: ${err}`);
         cb(err, null);
       } else {
-        console.log(`events in selectEventByUsername db/index.js: ${events}`);
+        console.log(`events in  getTenEvents  db/index.js: ${events}`);
         cb(null, events);
       }
     });

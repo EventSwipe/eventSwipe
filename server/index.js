@@ -26,15 +26,16 @@ app.get('/favorites/ten', (req, res) => {
   // manipuate req.body to fit query parameters
   // make db call to get data
   //gets first 10
-  console.log(`check 3 server my faves`);
-  getTenEvents((err, data) => {
+  
+  getTenEvents(req.query.offset, (err, data) => {
+    console.log(`check yore data`, data);
     // in callback send status 200 and send data
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
-      res.status(400).send();
+      res.sendStatus(400).send();
     } else {
       // console.log(`data in app.get /favorites: ${data}`);
-      res.status(200).send(data);
+      res.sendStatus(200).send(data);
     }
   });
 });
