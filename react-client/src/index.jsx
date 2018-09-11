@@ -22,7 +22,7 @@ class App extends React.Component {
 
   searchEvents(query) {
     //axios get request from API and then populates the events state with the data
-    axios.get('https://www.eventbriteapi.com/v3/events/search/', query)
+    axios.get('/events', query)
       .then(({data}) => this.setState({ events: data.events }))
       .catch((err) => console.log('front end error', err));
   }

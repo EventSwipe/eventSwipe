@@ -32,6 +32,7 @@
     "react": "^15.4.2",
     "react-big-calendar": "^0.19.2",
     "react-dom": "^15.4.2",
+    "request": "^2.88.0",
     "style-loader": "^0.23.0"
   }
 }
