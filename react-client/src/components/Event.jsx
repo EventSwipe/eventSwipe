@@ -1,19 +1,16 @@
 import React from 'react';
+import googleKey from '../../../config.js'
+
 
 //component for each event in the event tinder
 const Event = ({ event, like, dislike }) => {
   return (
-    <div>
+    <div >
       {event ? (
-        <div>
-          <div className="column" onDragOver={(e) => e.preventDefault()} onDrop={dislike}>
-            <button className="float-right" onClick={dislike}>
-              <span><img className="like-button float-right" style={{height: 100, width: 100}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
-            </button>
-          </div>
-          <div className="column-center">
-            <img className="event-img" draggable="true" style={{width:410, height:300}} src={event.logo ? event.logo.url : 'http://www.jamiariyadhuljannah.com/wp-content/uploads/2014/02/500x300.png'} alt="Card image cap"/>
-            <div className="card" >
+        <div className="row">
+          <div className="col-6">
+            <img className="event-img" style={{width:410, height:300}} draggable="true" src={event.logo ? event.logo.url : 'http://www.jamiariyadhuljannah.com/wp-content/uploads/2014/02/500x300.png'} alt="Card image cap"/>
+            <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{event.name.text}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -27,10 +24,20 @@ const Event = ({ event, like, dislike }) => {
               </div>
             </div>
           </div>
-          <div className="column" onDragOver={(e) => e.preventDefault()} onDrop={like}>
-            <button onClick={like}>
-              <span><img className="like-button" style={{height: 100, width: 100}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
-            </button>
+          <div className="col-6">
+            <div>
+              <iframe style={{width: "400px", height:"300px"}} src={`https://www.google.com/maps/embed/v1/place?q=galvanizenyc&key=${googleKey.GOOGLE_TOKEN}`}allowFullScreen></iframe>
+            </div>
+            <div onDragOver={(e) => e.preventDefault()} onDrop={dislike}>
+              <button className="float-right" onClick={dislike}>
+                <span><img className="like-button float-right" style={{height: 100, width: 100}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
+              </button>
+            </div>
+            <div onDragOver={(e) => e.preventDefault()} onDrop={like}>
+              <button onClick={like}>
+                <span><img className="like-button" style={{height: 100, width: 100}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
+              </button>
+            </div>
           </div>
         </div>
       ) : (
