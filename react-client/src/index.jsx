@@ -24,7 +24,7 @@ class App extends React.Component {
     //axios get request from API and then populates the events state with the data
     axios.get('/events', query)
       .then(({data}) => {
-        console.log('eeee', data);
+        // console.log('eeee', data);
         let promise = Promise.all(data.sort((a, b) => {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.

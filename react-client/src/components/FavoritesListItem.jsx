@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import moment from 'moment';
 
 
 class FavoritesList extends React.Component {
@@ -29,6 +30,7 @@ class FavoritesList extends React.Component {
     };
     return (
       <span>
+        {console.log(this.props.favorite)}
         <a href={favorite.url} 
           onMouseOver={this.handleMouseIn.bind(this)} 
           onMouseOut={this.handleMouseOut.bind(this)}>
@@ -36,10 +38,9 @@ class FavoritesList extends React.Component {
         </a>, 
         <span style={tooltipStyle}>
           <img style={{width:410, height:300}} src={favorite.logo} />
-          {favorite.description} 
+          {favorite.description} &nbsp;
         </span>
-        Date: {favorite.date.substring(0, 10)} &nbsp;
-        Time: {favorite.date.substring(11, 16)} &nbsp;
+        Date: {favorite.date.substr(0, 10)} 
         {favorite.free ? <b>"FREE!!!"</b> : null}
         <button
           onClick={() => {
