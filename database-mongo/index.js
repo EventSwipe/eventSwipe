@@ -44,7 +44,7 @@ const getAllEvents = cb => {
   });
 };
 
-//Returns first ten events, sorted by dates starting from now
+// Returns first ten events, sorted by dates starting from now
 const getTenEvents =  (offset, cb) => {
   var num = Number(offset);
   Event.find({ date: { '$gte' : new Date }})
@@ -62,7 +62,7 @@ const getTenEvents =  (offset, cb) => {
     });
 };
 
-//adding favorite events to database with username
+// adding favorite events to database with username
 const addFavorite = (favorite, cb) => {
   var newEvent = new Event({
     id: favorite.id,

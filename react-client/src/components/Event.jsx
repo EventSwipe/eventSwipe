@@ -34,7 +34,10 @@ const Event = ({ event, like, dislike }) => {
           </div>
         </div>
       ) : (
-        <img src="https://media1.tenor.com/images/38153b27905ce716003dfdecc4989bb0/tenor.gif?itemid=9255733"></img>
+        <div>
+          <h4>To Search For Events</h4>
+          <h4>Please Enter Your City and Event Topic</h4>
+        </div>
       )}
     </div>
   );
