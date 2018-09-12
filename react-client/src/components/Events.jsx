@@ -1,18 +1,13 @@
 import React from 'react';
 import Event from './Event.jsx';
 import axios from 'axios';
-//maps all events to each eventTinder item
 
 class Events extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      count: 0
-    };
+    this.state = { count: 0 };
     this.dislike = this.dislike.bind(this);
     this.like = this.like.bind(this); 
-  }
-  componentDidMount() {
   }
 
   like() {
@@ -25,13 +20,11 @@ class Events extends React.Component {
     let query = this.props.events.shift();
     //axios post the item to the database
     axios.post('/favorites', {params: {favoriteEvent: query}})
-      .then((response) => {
+      .then(() => {
         this.setState({ count: 0 });
         alert('Event has been saved in your favorites. Check out more events!');
       })
-      //add change map location
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
-    //reset the state
   }
   dislike() {
     //check if there are any even items
@@ -50,11 +43,11 @@ class Events extends React.Component {
     const { count } = this.state;
     return (
       <div className="container" style={{'marginTop': '50px'}}>
-          <div className="row">
-              <div className="col-12">
-                <Event event={events[count]} like={this.like} dislike={this.dislike}/>  
-              </div>
+        <div className="row">
+          <div className="col-12">
+            <Event event={events[count]} like={this.like} dislike={this.dislike}/>  
           </div>
+        </div>
       </div>
     );
   }

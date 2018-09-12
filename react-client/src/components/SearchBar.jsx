@@ -12,21 +12,12 @@ class SearchBar extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount() {
-    //initial population with hard coded search
-    // this.searchEvents({
-    //   params: {
-    //   "token": 'E5PTH3KVZH4MFUMMULAE',
-    //   "location.address": 'newyorkcity',
-    //   "q": 'food'
-    // }});
-  }
+  
   handleSubmit(e) {
     e.preventDefault();
     //run api request and pass in props
     //TODO: to add in date range
     this.props.searchEvents({
-      //call is made
       params: {
         'location': this.state.location,
         'topic': this.state.topic,
