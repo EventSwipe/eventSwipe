@@ -6,6 +6,7 @@ const Event = ({ event, like, dislike }) => {
     <div >
       {event ? (
         <div className="row">
+          {console.log(event)}
           <div className="col">
             <div className="card" style={{borderRadius: '25px', 'backgroundImage': 'linear-gradient(to right, #77C9D4 , #57BC90)'}}>
               <div className="card-body" style={{ width: 550, color:'#015249'}}>
@@ -20,8 +21,8 @@ const Event = ({ event, like, dislike }) => {
                   Description: {event.description && event.description.text ? event.description.text : event.description}
                 </p>
                 <p className="card-text">
-                  <span className="Loc">Venue Address: </span>
-                  <span>{event.address ? event.address : event.group ? event.group.localized_location : 'N/A'}</span>
+                  <span className="Loc">Venue Address:</span>
+                  <span>{event.address ? event.address : event.venue ? event.venue.localized_location : 'N/A'}</span>
                 </p>
                 <p className="card-text">
                   <span className="date">Date: </span>
@@ -47,13 +48,13 @@ const Event = ({ event, like, dislike }) => {
             </div>
           </div>
           <div className="col" style={{'textAlign': 'left'}}>
-            <iframe style={{width: "400px", height:"350px"}} src={`https://www.google.com/maps/embed/v1/place?q=galvanizenyc&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`}allowFullScreen></iframe>
+            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address || event.venue.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
           </div>
         </div>
       ) : (
         <div>
-          <h4>To Search For Events</h4>
-          <h4>Please Enter Your City and Event Topic</h4>
+          <h3>To search for events,</h3>
+          <h3>please enter a zip code and topic</h3>
         </div>
       )}
     </div>

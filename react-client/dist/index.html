@@ -33,7 +33,8 @@
     firebase.initializeApp(config);
   </script>
 </head>
-<body class="main" >
+<body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
+  <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button>
   <script>
     function signInWithGoogle() {
       var googleAuthProvider = new firebase.auth.GoogleAuthProvider
@@ -67,12 +68,11 @@
       <input type="password" placeholder="Password..." id="password_field" /> -->
       <!-- <button onclick={signInWithGoogle()}>Login With Google</button>
       <button onclick={signOutOfGoogle()}>Sign Out</button> -->
-      <button class="main-button" onclick="signInWithGoogle()">Sign In With Google</button>
+      <button class="btn btn-dark" onclick="signInWithGoogle()">Sign In With Google</button>
     </div>
   
 <div id="user_div" class="loggedin-div">   
   <div id="app"></div>
-  <button onclick="signOutOfGoogle()">LogOut</button>
 </div>  
 <script>
     function signInWithGoogle() {
@@ -84,7 +84,7 @@
     
     function signOutOfGoogle() {
       firebase.auth().signOut();
-      console.log('signed out!')
+      console.log('signed out!');
     }
 
     firebase.auth().onAuthStateChanged(function(user) {

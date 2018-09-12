@@ -37,7 +37,7 @@ class Favorites extends React.Component {
         <h1>Favorite Events</h1>
         <br />
         <FavoritesCalendar favorites={favorites}/> 
-        <FavoritesList favorites={favorites} removeFave={this.removeFave} />
+        <FavoritesList favorites={favorites} removeFave={this.removeFave}/>
       </div>
     );
   }
