@@ -15,8 +15,8 @@ class SearchBar extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    //run api request and pass in props
-    //TODO: to add in date range
+    // run api request and pass in props
+    // TODO: to add in date range
     this.props.searchEvents({
       params: {
         'location': this.state.location,
@@ -33,10 +33,10 @@ class SearchBar extends React.Component {
       <div>
         <form>
           <input
-            //passed an anonymous function to the onChange so it is associated with it's respective state
+            // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
-            placeholder="Location"
+            placeholder="Enter ZipCode"
           />
           <input
             onChange={e => this.setState({ topic: e.target.value })}

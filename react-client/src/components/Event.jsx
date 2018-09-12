@@ -19,7 +19,7 @@ const Event = ({ event, like, dislike }) => {
                 <p className="card-text"><span className="date">Date: </span>
                   <span>{event.start ? event.start.local : event.local_date}</span></p>
                 <p className="card-text"><span className="link">Link: </span>
-                  <a href={event.url}>{event.url || event.link}</a></p>
+                  <a href={event.url || event.link}>Click on Link Event</a></p>
               </div>
             </div>
           </div>
@@ -34,7 +34,10 @@ const Event = ({ event, like, dislike }) => {
           </div>
         </div>
       ) : (
-        <img src="https://media1.tenor.com/images/38153b27905ce716003dfdecc4989bb0/tenor.gif?itemid=9255733"></img>
+        <div>
+          <h4>To Search For Events</h4>
+          <h4>Please Enter Your City and Event Topic</h4>
+        </div>
       )}
     </div>
   );

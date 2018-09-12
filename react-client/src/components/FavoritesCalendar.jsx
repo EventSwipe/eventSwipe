@@ -21,7 +21,6 @@ class FavoritesCalendar extends React.Component {
   getFaves() {
     axios.get('/favorites')
       .then(({data}) => {
-        console.log('dataaaa', data)
         let promise = Promise.all(data.map((event, i) => {
           let obj = {};
           obj['id'] = i;
