@@ -1,4 +1,3 @@
-const axios = require('axios');
 const request = require('request');
 
 let MEETUP_TOKEN = null;
@@ -17,33 +16,28 @@ try {
 }
 
 //Generic api integration method (not used yet)
-let getFromMeetUp = function (query, callback) {
+const getFromMeetUp = (query, cb) => {
   var location = query.location;
   var topic = query.topic;
-  var options = {
-    url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}` 
-  }
-  request.get(options, function (err, response, body) {
-    // console.log(response,'fuckman')
-    // console.log('supman',body)
-    callback(err, response);
-
-  })
+  var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}` };
+  request.get(options, (err, response) => {
+    cb(err, response);
+  });
 };
 
-let getFromEventBrite = function (query, callback) {
+const getFromEventBrite = (query, cb) => {
   var location = query.location;
   var topic = query.topic;
   var options = {
     url: `https://www.eventbriteapi.com/v3/events/search/?location.address=${location}&expand=organizer,venue&token=${EVENTBRITE_TOKEN}&q=${topic}`,
     headers: {
       //have to hardcode the key to be able to make request work (template literal is breaking it)
-      Authorization: `Bearer E5PTH3KVZH4MFUMMULAE`
+      Authorization: 'Bearer E5PTH3KVZH4MFUMMULAE'
     }
-  }
-  request.get(options, function (err, response, body) {
-    callback(err, JSON.parse(body))
-  })
+  };
+  request.get(options, (err, response, body) => {
+    cb(err, JSON.parse(body));
+  });
 };
 
 

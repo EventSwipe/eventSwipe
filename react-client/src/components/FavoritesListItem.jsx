@@ -1,7 +1,4 @@
-import React from "react";
-import axios from 'axios';
-import moment from 'moment';
-
+import React from 'react';
 
 class FavoritesList extends React.Component {
   constructor(props) {
@@ -11,23 +8,17 @@ class FavoritesList extends React.Component {
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
-  handleMouseIn(e) {
+  handleMouseIn() {
     this.setState({ hover: true });
   }
   
-  handleMouseOut(e) {
+  handleMouseOut() {
     this.setState({ hover: false });
   }
-// just make a list of all the likes passed down by props
-// const FavoritesList = ({ favorites, removeFave }) =>
-
 
   render () {
     const { favorite, removeFave } = this.props;
-
-    const tooltipStyle = {
-      display: this.state.hover ? 'block' : 'none'
-    };
+    const tooltipStyle = { display: this.state.hover ? 'block' : 'none' };
     return (
       <span>
         {console.log(this.props.favorite)}
@@ -37,20 +28,15 @@ class FavoritesList extends React.Component {
           {favorite.name}
         </a>, 
         <span style={tooltipStyle}>
-          <img style={{width:410, height:300}} src={favorite.logo} />
-          {favorite.description} &nbsp;
+          <img style={{ width: 410, height: 300 }} src={favorite.logo} />
+          {favorite.description} 
         </span>
         Date: {favorite.date.substr(0, 10)} 
         {favorite.free ? <b>"FREE!!!"</b> : null}
-        <button
-          onClick={() => {
-            removeFave(favorite);
-          }}
-        >
+        <button onClick={() => removeFave(favorite)}>
           Delete
         </button>
     ))
-
       </span>
     );
   }

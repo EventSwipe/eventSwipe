@@ -5,7 +5,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const styles = theme => ({
+const styles = (theme) => ({
   close: {
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
@@ -14,7 +14,7 @@ const styles = theme => ({
 
 class SnackBars extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = { open: false };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -24,8 +24,10 @@ class SnackBars extends React.Component {
     this.setState({ open: true });
   }
 
-  handleClose(event, reason) {
-    if (reason === 'clickaway') return;
+  handleClose(e, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
     this.setState({ open: false });
   }
 
