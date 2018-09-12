@@ -32,7 +32,6 @@ class FavoritesList extends React.Component {
       let favorite = favorites.slice(count + 5, count + 10);
       this.setState({ currentList: favorite });
     }
-
   }
 
   getFavorites() {
