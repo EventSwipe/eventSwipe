@@ -25,7 +25,7 @@ class FavoritesCalendar extends React.Component {
           let obj = {};
           obj['id'] = i;
           if (event.local_time) {
-            let eventInfo = event.date + ' ' + event.time;
+            let eventInfo = `${event.date} ${event.time}`;
             obj['start'] = new Date(moment(eventInfo));
           } else {
             obj['start'] = new Date(moment(event.date));
@@ -35,8 +35,8 @@ class FavoritesCalendar extends React.Component {
           } else {
             obj['end'] = new Date(moment(event.end));
           }
-          
           obj['title'] = event.name.substring(0, 50);
+
           return obj;
         }));
         promise
@@ -54,7 +54,7 @@ class FavoritesCalendar extends React.Component {
           defaultDate={new Date()}
           defaultView="month"
           events={events}
-          style={{ height: '100vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
+          style={{ height: '80vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
         />
       </div>
     );
