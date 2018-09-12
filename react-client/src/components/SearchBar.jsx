@@ -36,7 +36,7 @@ class SearchBar extends React.Component {
             // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
-            placeholder="Enter ZipCode"
+            placeholder="Enter Zip Code"
           />
           <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
             onChange={e => this.setState({ topic: e.target.value })}
