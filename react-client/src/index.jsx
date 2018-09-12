@@ -47,7 +47,7 @@ class App extends React.Component {
       <container>
         <Nav home={this.showHome} showFaves={this.showFaves}/>
         <div className="d-flex justify-content-center">
-          <div className="container" style={{'width': '100%', 'textAlign': 'center'}}>
+          <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
               {showFaves ? 'Search Events' : 'Show Favorites'}
             </button>

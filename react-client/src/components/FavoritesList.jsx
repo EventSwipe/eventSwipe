@@ -41,7 +41,7 @@ class FavoritesList extends React.Component {
   }
 
   render() {
-    const { removeFave } = this.props;
+    const { removeFave, getFaves } = this.props;
     const { show, currentList } = this.state;
     return (
       <div className="container-fluid">
