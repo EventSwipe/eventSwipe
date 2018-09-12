@@ -9,7 +9,6 @@ const Nav = () => (
       <a className="navbar-brand" href="#">GOING</a>
       <a className="navbar-brand" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
       <a className="navbar-brand" href="#" data-toggle="modal" data-target="#signup-modal">Sign Up</a>
-
       <div
         className="modal fade"
         id="login-modal"
@@ -68,7 +67,7 @@ const Nav = () => (
             </form>
 
             <div className="login-help">
-              <a href="#">Already Have an Account</a> ---{' '}
+              <a href="#">Already Have an Account</a>
               <a href="#">Forgot Password</a>
             </div>
           </div>

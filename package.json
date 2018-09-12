@@ -22,13 +22,18 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.0.2",
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
+    "css-loader": "^1.0.0",
     "express": "^4.15.0",
+    "firebase-admin": "^6.0.0",
     "micro": "latest",
+    "moment": "^2.22.2",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-big-calendar": "^0.19.2",
+    "react-dom": "^15.4.2",
+    "request": "^2.88.0",
+    "style-loader": "^0.23.0"
   }
 }

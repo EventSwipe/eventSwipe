@@ -12,24 +12,16 @@ class SearchBar extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount() {
-    //initial population with hard coded search
-    // this.searchEvents({
-    //   params: {
-    //   "token": 'E5PTH3KVZH4MFUMMULAE',
-    //   "location.address": 'newyorkcity',
-    //   "q": 'food'
-    // }});
-  }
+  
   handleSubmit(e) {
     e.preventDefault();
-    //run api request and pass in props
-    //TODO: to add in date range
+    // run api request and pass in props
+    // TODO: to add in date range
     this.props.searchEvents({
       params: {
-        token: 'E5PTH3KVZH4MFUMMULAE',
-        'location.address': this.state.location,
-        q: this.state.topic
+        'location': this.state.location,
+        'topic': this.state.topic,
+        // start_date.range_start: 
       }
     });
   }
@@ -41,10 +33,10 @@ class SearchBar extends React.Component {
       <div>
         <form>
           <input
-            //passed an anonymous function to the onChange so it is associated with it's respective state
+            // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
-            placeholder="Location"
+            placeholder="Enter ZipCode"
           />
           <input
             onChange={e => this.setState({ topic: e.target.value })}
@@ -55,7 +47,7 @@ class SearchBar extends React.Component {
           <input
             onChange={e => this.setState({ date: e.target.value })}
             value={date}
-            placeholder="Date Range"
+            placeholder="Enter Date Range"
           />
           {/* <select>
           {[...Array(30)].map((x, i) => 
