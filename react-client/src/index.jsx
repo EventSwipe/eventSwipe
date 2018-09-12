@@ -36,18 +36,19 @@ class App extends React.Component {
     const { showFaves, events } = this.state;
     const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar  events={events} searchEvents={this.searchEvents}/>;
     return (
-      <container>
-        <Nav/>
-        <div className="d-flex justify-content-center">
-          <div className="container" style={{'width': '100%', 'textAlign': 'center'}}>
-            <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
-              {showFaves ? 'Search Events' : 'Show Favorites'}
-            </button>
-            {showFavesOrEvents}
-            {/* <SnackBars /> */}
+      <div className="container" style={{textAlign: 'center'}}>
+        <button className="btn" onClick={this.showFavorites} style={{backgroundColor: '#77C9D4', color: 'white', 'borderStyle': 'solid', borderColor: 'black'}}>
+          {showFaves ? 'Search Events' : 'Show Favorites'}
+        </button>
+        <div style={{marginLeft: 'auto', marginRight: 'auto', marginTop: '25px'}}>
+          <div className="row">
+            <div className="col">
+                {showFavesOrEvents} 
+            </div>
           </div>
+            {/* <SnackBars /> */}
         </div>
-      </container>
+      </div>
     );
   }
 }

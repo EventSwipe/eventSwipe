@@ -30,21 +30,21 @@ class SearchBar extends React.Component {
     const { topic, location, date } = this.state;
     const { events } = this.props;
     return (
-      <div style={{'width': '100%', 'textAlign': 'center'}}>
+      <div style={{ 'marginTop': '50px','textAlign': 'center','backgroundImage': 'linear-gradient(to right, #77C9D4 , #57BC90)'}}>
         <form className="form-inline justify-content-center" role="form" >
-          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}}
+          <input className="form-control" type="text" aria-label="Search" 
             // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
             placeholder="Enter ZipCode"
           />
-          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
+          <input className="form-control" type="text" aria-label="Search"  
             onChange={e => this.setState({ topic: e.target.value })}
             value={topic}
             placeholder="Topic"
           />
           {/* right now just have customer enter a date and next week enter a range  */}
-          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
+          <input className="form-control" type="text" aria-label="Search"  
             onChange={e => this.setState({ date: e.target.value })}
             value={date}
             placeholder="Enter Date Range"
