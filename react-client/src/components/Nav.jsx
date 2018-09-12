@@ -27,7 +27,6 @@ const Nav = ({ home, showFaves }) => (
         <a className="nav-link disabled" href="#" style={{ color: 'rgb(165, 165, 175)' }}>Signout</a>
       </div>
     </div>
-    {/* </ul> */}
   </nav>
 );
 

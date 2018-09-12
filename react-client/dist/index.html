@@ -68,7 +68,7 @@
       <input type="password" placeholder="Password..." id="password_field" /> -->
       <!-- <button onclick={signInWithGoogle()}>Login With Google</button>
       <button onclick={signOutOfGoogle()}>Sign Out</button> -->
-      <button class="main-button" onclick="signInWithGoogle()">Sign In With Google</button>
+      <button class="btn btn-dark" onclick="signInWithGoogle()">Sign In With Google</button>
     </div>
   
 <div id="user_div" class="loggedin-div">   
@@ -84,7 +84,7 @@
     
     function signOutOfGoogle() {
       firebase.auth().signOut();
-      console.log('signed out!')
+      console.log('signed out!');
     }
 
     firebase.auth().onAuthStateChanged(function(user) {
