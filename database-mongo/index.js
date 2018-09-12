@@ -38,7 +38,7 @@ const getAllEvents = cb => {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
     } else {
-      console.log(`events in selectEventByUsername db/index.js: ${events}`);
+      // console.log(`events in selectEventByUsername db/index.js: ${events}`);
       cb(null, events);
     }
   });
@@ -56,7 +56,7 @@ const getTenEvents =  (offset, cb) => {
         console.error(`err in  getTenEvents  db/index.js: ${err}`);
         cb(err, null);
       } else {
-        console.log(`events in  getTenEvents  db/index.js: ${events}`);
+        // console.log(`events in  getTenEvents  db/index.js: ${events}`);
         cb(null, events);
       }
     });
