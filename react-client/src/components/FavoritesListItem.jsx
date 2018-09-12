@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class FavoritesList extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +21,7 @@ class FavoritesList extends React.Component {
     const tooltipStyle = { display: this.state.hover ? 'block' : 'none' };
     return (
       <span>
+        {console.log(this.props.favorite)}
         <a href={favorite.url} 
           onMouseOver={this.handleMouseIn.bind(this)} 
           onMouseOut={this.handleMouseOut.bind(this)}>
@@ -31,8 +31,7 @@ class FavoritesList extends React.Component {
           <img style={{ width: 410, height: 300 }} src={favorite.logo} />
           {favorite.description} 
         </span>
-        Date: {favorite.date.substring(0, 10)} &nbsp;
-        Time: {favorite.date.substring(11, 16)} &nbsp;
+        Date: {favorite.date.substr(0, 10)} 
         {favorite.free ? <b>"FREE!!!"</b> : null}
         <button onClick={() => removeFave(favorite)}>
           Delete
