@@ -47,21 +47,23 @@ class FavoritesList extends React.Component {
     return (
       <div className="container-fluid">
         <h4>Saved Events</h4>
-        <button onClick={this.showFavorites}>{show ? 'Hide Events' : 'Display Events'}</button> 
-        <button onClick={this.displayNext}>Show More Events</button>
-        <br />
-        {this.state.show 
-          ? 
-          <div className="row">
-            {currentList.map(favorite => (
-              <div className="col" key={favorite.id}>
-                <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites}/>
-              </div>
-            ))}
-          </div>
-          :
-          ''
-        }
+        <div style={{ marginBottom: 30 }}>
+          <button className="btn btn-dark" onClick={this.showFavorites} style={{ marginRight: 10, marginBottom: 20 }}>{show ? 'Hide Events' : 'Display Events'}</button> 
+          {show ? <button className="btn btn-dark" style={{ marginBottom: 20 }} onClick={this.displayNext}>Show More Events</button> : ''}
+          <br />
+          {this.state.show 
+            ? 
+            <div className="row">
+              {currentList.map(favorite => (
+                <div className="col" key={favorite.id}>
+                  <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites}/>
+                </div>
+              ))}
+            </div>
+            :
+            ''
+          }
+        </div>
       </div>
     );
   }
