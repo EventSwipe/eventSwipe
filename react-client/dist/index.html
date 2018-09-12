@@ -35,37 +35,7 @@
   </script>
 </head>
 <body class="main">
-  <script>
-    function signInWithGoogle() {
-      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-
-      firebase.auth().signInWithPopup(googleAuthProvider)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
-    }
-    
-    function signOutOfGoogle() {
-      firebase.auth().signOut();
-      console.log('signed out!')
-    }
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-
-        document.getElementById("user_div").style.display = "block";
-        document.getElementById("login_div").style.display = "none";        
-
-      } else {
-        // No user is signed in.
-
-        document.getElementById("user_div").style.display = "none";
-        document.getElementById("login_div").style.display = "block";
-
-      }
-    });
-    
-    </script>
+  
     <div id="login_div" class="main-div">
       <h3>EventSwipe Login Page</h3>
       <!-- <input type="email" placeholder="Email..." id="email_field" />
@@ -80,37 +50,49 @@
   <div id="app"></div>
   <button onclick="signOutOfGoogle()">LogOut</button>
 </div>  
+<script type="text/javascript" src="bundle.js"></script>
 <script>
     function signInWithGoogle() {
       var googleAuthProvider = new firebase.auth.GoogleAuthProvider
 
+      googleAuthProvider.setCustomParameters({
+        prompt: 'select_account'
+      });
+
       firebase.auth().signInWithPopup(googleAuthProvider)
-      .then((data) => console.log(data))
+      .then((data) => console.log('data from signing in with google',data))
       .catch((err) => console.log(err))
+
+      checkIfSignedIn()
     }
     
     function signOutOfGoogle() {
       firebase.auth().signOut();
       console.log('signed out!')
+      checkIfSignedIn()
     }
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-
-        document.getElementById("user_div").style.display = "block";
-        document.getElementById("login_div").style.display = "none";        
-
-      } else {
-        // No user is signed in.
-
-        document.getElementById("user_div").style.display = "none";
-        document.getElementById("login_div").style.display = "block";
-
-      }
-    });
     
+    function checkIfSignedIn() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log('if there is a user', firebase.auth().currentUser)
+          document.getElementById("user_div").style.display = "block";
+          document.getElementById("login_div").style.display = "none";        
+          
+        } else {
+          // No user is signed in.
+          
+          document.getElementById("user_div").style.display = "none";
+          document.getElementById("login_div").style.display = "block";
+          
+        }
+      });
+
+    }
+    
+    window.onload = () => checkIfSignedIn()
+
     </script>
-<script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>

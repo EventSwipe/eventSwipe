@@ -16,6 +16,7 @@ function isAuthenticated(request, response, next) {
   // if they are, attach them to the request object
   // if not, send to login page
 }
+
 var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
 var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
 
@@ -24,6 +25,16 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 //using body-parser middleware
 app.use(bodyParser.json());
 
+app.get('/loggedin/:uid', (req, res) => {
+  admin.auth().getUser(req.params.uid)
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    console.log("Successfully fetched user data:", userRecord.toJSON());
+  })
+  .catch(function(error) {
+    console.log("Error fetching user data:", error);
+  });
+})
 
 app.get('/favorites', (req, res) => {
   // manipuate req.body to fit query parameters
@@ -112,8 +123,6 @@ app.get('/events', (req, res) => {
     }
   })
 });
-
-
 
 app.post('/insertEventToDb', (req, res) => {
   //manipulate req.body to fit query parameters

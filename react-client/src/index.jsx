@@ -16,6 +16,20 @@ class App extends React.Component {
     this.searchEvents = this.searchEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
   }
+
+  componentDidMount() {
+    var user = firebase.auth().currentUser
+    console.log('this is the currentUser information', user)
+
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      // Send token to your backend via HTTPS
+      console.log('this is the idToken', idToken)
+    }).catch(function(error) {
+      // Handle error
+      console.error(error)
+    });
+  }
+
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves })
   }
