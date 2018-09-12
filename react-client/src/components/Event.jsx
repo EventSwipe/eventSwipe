@@ -19,7 +19,7 @@ const Event = ({ event, like, dislike }) => {
                 <p className="card-text"><span className="date">Date: </span>
                   <span>{event.start ? event.start.local : event.local_date}</span></p>
                 <p className="card-text"><span className="link">Link: </span>
-                  <a href={event.url}>{event.url || event.link}</a></p>
+                  <a href={event.url || event.link}>Click on Link Event</a></p>
               </div>
             </div>
           </div>

@@ -45,8 +45,6 @@ const getFromMeetUp = (query, cb) => {
         if (err) {
           cb(err, null);
         } else {
-          // console.log('11', l.events[0].venue.lat, l.events[0].venue.lon);
-          // getZipCodeBasedOnLonAndLat()
           cb(null, results);
         }
       });
@@ -63,7 +61,7 @@ const getFromEventBrite = (query, cb) => {
   var options = {
     url: `https://www.eventbriteapi.com/v3/events/search/?location.address=${location}&expand=organizer,venue&token=${EVENTBRITE_TOKEN}&q=${topic}`,
     headers: {
-      //have to hardcode the key to be able to make request work (template literal is breaking it)
+      // have to hardcode the key to be able to make request work (template literal is breaking it)
       Authorization: 'Bearer E5PTH3KVZH4MFUMMULAE'
     }
   };
