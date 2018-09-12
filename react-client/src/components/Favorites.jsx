@@ -17,8 +17,8 @@ class Favorites extends React.Component {
 
   //loads all the favorites saved in database
   loadMyFaves() {
-    axios.get('/favorites/ten', { params: { offset: this.state.favorites.length } }) //sends the lengths of the favorites array down to db to offset return by
-      .then(res => this.setState({ favorites: res.data }))
+    axios.get('/favorites/') //sends the lengths of the favorites array down to db to offset return by
+      .then(({ data }) => this.setState({ favorites: data }))
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 
