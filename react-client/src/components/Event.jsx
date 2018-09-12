@@ -10,7 +10,7 @@ const Event = ({ event, like, dislike }) => {
         <div className="row">
           <div className="col">
             <div className="card" >
-              <div className="card-body" style={{ width: 550, color:'#015249'}}>
+              <div className="card-body" style={{ width: 550, color: '#015249' }}>
                 <img className="event-img" style={{ width: 460, height: 300 }} src={event.logo ? event.logo.url : 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} alt="Card image cap"/>
                 <h5 className="card-title">{event.name.text || event.name}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -40,13 +40,13 @@ const Event = ({ event, like, dislike }) => {
           </div>
 
           <div className="col" style={{'textAlign': 'left'}}>
-            <iframe style={{width: "400px", height:"350px"}} src={`https://www.google.com/maps/embed/v1/place?q=galvanizenyc&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`}allowFullScreen></iframe>
+            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=galvanizenyc&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
           </div>
         </div>
       ) : (
         <div>
-          <h4>To Search For Events</h4>
-          <h4>Please Enter Your City and Event Topic</h4>
+          <h3>To search for events,</h3>
+          <h3>please enter a zip code and topic</h3>
         </div>
       )}
     </div>
