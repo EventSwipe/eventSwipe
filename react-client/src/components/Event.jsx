@@ -8,6 +8,7 @@ const Event = ({ event, like, dislike }) => {
     <div >
       {event ? (
         <div className="row">
+          {console.log(event)}
           <div className="col">
             <div className="card" >
               <div className="card-body" style={{ width: 550, color: '#015249' }}>
@@ -18,8 +19,8 @@ const Event = ({ event, like, dislike }) => {
                   Description: {event.description && event.description.text ? event.description.text : event.description}
                 </p>
                 <p className="card-text">
-                  <span className="Loc">Venue Address: </span>
-                  <span>{event.address ? event.address : event.group ? event.group.localized_location : 'N/A'}</span>
+                  <span className="Loc">Venue Address:</span>
+                  <span>{event.address ? event.address : event.venue ? event.venue.localized_location : 'N/A'}</span>
                 </p>
                 <p className="card-text">
                   <span className="date">Date: </span>
@@ -40,7 +41,7 @@ const Event = ({ event, like, dislike }) => {
           </div>
 
           <div className="col" style={{'textAlign': 'left'}}>
-            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=galvanizenyc&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
+            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address || event.venue.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
           </div>
         </div>
       ) : (
