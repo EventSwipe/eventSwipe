@@ -12,9 +12,17 @@ class App extends React.Component {
     this.state = { events: [], showFaves: false };
     this.searchEvents = this.searchEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
+    this.showFaves = this.showFaves.bind(this);
+    this.showHome = this.showHome.bind(this);
   }
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves });
+  }
+  showFaves() {
+    this.setState({ showFaves: true });
+  }
+  showHome() {
+    this.setState({ showFaves: false });
   }
 
   searchEvents(query) {
@@ -37,7 +45,7 @@ class App extends React.Component {
     const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return (
       <container>
-        {/* <Nav/> */}
+        <Nav home={this.showHome} showFaves={this.showFaves}/>
         <div className="d-flex justify-content-center">
           <div className="container" style={{'width': '100%', 'textAlign': 'center'}}>
             <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
