@@ -20,6 +20,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 
+
+
   <script src='https://www.gstatic.com/firebasejs/5.4.2/firebase.js'></script>
   <script>
     // Initialize Firebase
@@ -34,7 +36,7 @@
     firebase.initializeApp(config);
   </script>
 </head>
-<body class="main">
+<body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
   <script>
     function signInWithGoogle() {
       var googleAuthProvider = new firebase.auth.GoogleAuthProvider
@@ -112,5 +114,19 @@
     
     </script>
 <script type="text/javascript" src="bundle.js"></script>
+<style>
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: white !important;
+}
+  </style>
 </body>
 </html>

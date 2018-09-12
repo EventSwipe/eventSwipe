@@ -30,21 +30,21 @@ class SearchBar extends React.Component {
     const { topic, location, date } = this.state;
     const { events } = this.props;
     return (
-      <div>
-        <form>
-          <input
+      <div style={{'width': '100%', 'textAlign': 'center'}}>
+        <form className="form-inline justify-content-center" role="form" >
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}}
             // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
             placeholder="Enter ZipCode"
           />
-          <input
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
             onChange={e => this.setState({ topic: e.target.value })}
             value={topic}
             placeholder="Topic"
           />
           {/* right now just have customer enter a date and next week enter a range  */}
-          <input
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
             onChange={e => this.setState({ date: e.target.value })}
             value={date}
             placeholder="Enter Date Range"
@@ -54,7 +54,7 @@ class SearchBar extends React.Component {
             <option value={i+1} onChange={this.handleDate}>{i+1} days</option>
           )}
         </select> */}
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button className="btn" onClick={this.handleSubmit} style={{backgroundColor: '#015249', color: 'white'}}>Submit</button>
         </form>
         {/* Create events component and passing down api request events array*/}
         <Events events={events} />
