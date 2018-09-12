@@ -34,6 +34,7 @@
   </script>
 </head>
 <body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
+  <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button>
   <script>
     function signInWithGoogle() {
       var googleAuthProvider = new firebase.auth.GoogleAuthProvider
@@ -72,7 +73,6 @@
   
 <div id="user_div" class="loggedin-div">   
   <div id="app"></div>
-  <button onclick="signOutOfGoogle()">LogOut</button>
 </div>  
 <script>
     function signInWithGoogle() {

@@ -23,14 +23,14 @@ class FavoritesList extends React.Component {
     const { favorites, count } = this.state;
     this.setState({ count: count + 5 });
     if ((count + 10) > favorites.length) {
-      if (count < favorites.length) {
-        this.setState({ currentList: favorites.slice(count + 5, favorites.length), count: 0});
+      if ((count + 5) < favorites.length && count < favorites.length) {
+        this.setState({ currentList: favorites.slice(count + 5, favorites.length)});
       } else {
         this.setState({ currentList: favorites.slice(0, 5), count: 0});
       }
     } else {
       let favorite = favorites.slice(count + 5, count + 10);
-      this.setState({ currentList: favorite});
+      this.setState({ currentList: favorite });
     }
 
   }
@@ -47,21 +47,23 @@ class FavoritesList extends React.Component {
     return (
       <div className="container-fluid">
         <h4>Saved Events</h4>
-        <button onClick={this.showFavorites}>{show ? 'Hide Events' : 'Display Events'}</button> 
-        <button onClick={this.displayNext}>Show More Events</button>
-        <br />
-        {this.state.show 
-          ? 
-          <div className="row">
-            {currentList.map(favorite => (
-              <div className="col" key={favorite.id}>
-                <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites}/>
-              </div>
-            ))}
-          </div>
-          :
-          ''
-        }
+        <div style={{ marginBottom: 30 }}>
+          <button className="btn btn-dark" onClick={this.showFavorites} style={{ marginRight: 10, marginBottom: 20 }}>{show ? 'Hide Events' : 'Display Events'}</button> 
+          {show ? <button className="btn btn-dark" style={{ marginBottom: 20 }} onClick={this.displayNext}>Show More Events</button> : ''}
+          <br />
+          {this.state.show 
+            ? 
+            <div className="row">
+              {currentList.map(favorite => (
+                <div className="col" key={favorite.id}>
+                  <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites}/>
+                </div>
+              ))}
+            </div>
+            :
+            ''
+          }
+        </div>
       </div>
     );
   }
