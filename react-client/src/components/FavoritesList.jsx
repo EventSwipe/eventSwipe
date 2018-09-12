@@ -6,9 +6,9 @@ const FavoritesList = ({ favorites, removeFave }) => (
     <h4>Favorite Events</h4>
     <ul>
       {favorites.map(favorite => (
-        <li key={favorite.id}>
+        <div key={favorite.id}>
           <FavoritesListItem favorite={favorite} removeFave={removeFave}/>
-        </li>
+        </div>
       ))}
     </ul>
   </div>
