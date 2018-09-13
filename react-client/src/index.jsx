@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
-import Nav from './components/Nav.jsx';
+// import Nav from './components/Nav.jsx';
 import axios from 'axios';
 // import SnackBars from './components/SnackBars.jsx';
 

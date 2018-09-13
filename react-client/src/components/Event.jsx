@@ -13,7 +13,7 @@ const Event = ({ event, like, dislike }) => {
             <div className="card" >
               <div className="card-body" style={{ width: 550, color: '#015249' }}>
                 <img className="event-img" style={{ width: 460, height: 300 }} src={event.logo ? event.logo.url : 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} alt="Card image cap"/>
-                <h5 className="card-title">{event.name.text || event.name}</h5>
+                <h5 className="card-title">{event.name ? event.name.text : event.group.name}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 <p className="card-text">
                   Description: {event.description && event.description.text ? event.description.text : event.description}
@@ -41,7 +41,7 @@ const Event = ({ event, like, dislike }) => {
           </div>
 
           <div className="col" style={{'textAlign': 'left'}}>
-            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address || event.venue.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
+            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address ? event.address : event.venue ? event.venue.name : event.group.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
           </div>
         </div>
       ) : (

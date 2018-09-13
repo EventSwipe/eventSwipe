@@ -35,8 +35,7 @@ class FavoritesCalendar extends React.Component {
           } else {
             obj['end'] = new Date(moment(event.end));
           }
-          obj['title'] = event.name.substring(0, 50);
-
+          obj['title'] = event.name ? event.name.substring(0, 50) : event.description.substring(0, 20);
           return obj;
         }));
         promise

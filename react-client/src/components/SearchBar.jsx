@@ -37,18 +37,18 @@ class SearchBar extends React.Component {
     });
   }
 
-  handleSelect(range){
+  handleSelect(range) {
     this.setState({
       startDate: range.startDate._d,
       endDate: range.endDate._d
-    })
+    });
   }
 
   toggleHidden (e) {
     e.preventDefault();
     this.setState({
       dateHidden: !this.state.dateHidden
-    })
+    });
   }
 
   render() {
