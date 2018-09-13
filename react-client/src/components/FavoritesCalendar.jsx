@@ -19,7 +19,7 @@ class FavoritesCalendar extends React.Component {
   }
 
   getFaves() {
-    axios.get('/favorites')
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
       .then(({data}) => {
         let promise = Promise.all(data.map((event, i) => {
           let obj = {};
