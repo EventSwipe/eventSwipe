@@ -15,6 +15,41 @@ class App extends React.Component {
     this.showFaves = this.showFaves.bind(this);
     this.showHome = this.showHome.bind(this);
   }
+<<<<<<< HEAD
+
+  signInWithGoogle() {
+    var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+    
+    // googleAuthProvider.setCustomParameters({
+    //   prompt: 'select_account'
+    // });
+    
+    firebase.auth().signInWithPopup(googleAuthProvider)
+    .then((data) => console.log('data from signing in with google',data))
+    .catch((err) => console.log(err))
+  }
+
+  signOutOfGoogle() {
+    firebase.auth().signOut()
+    this.setState({
+      authenticated:false
+    })
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        this.setState({authenticated:true, user:user}, 
+          () => axios.get(`/loggedin/${this.state.user.uid}`)
+          .then((res) => console.log(res))
+          .catch(() => console.log('catch'))) 
+      }
+    });
+  }
+
+=======
+>>>>>>> dev
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves });
   }
