@@ -17,14 +17,15 @@ class Favorites extends React.Component {
 
   // loads all the favorites saved in database
   loadMyFaves() {
-    axios.get('/favorites') //sends the lengths of the favorites array down to db to offset return by
+    console.log('uid when loading myfaves()', firebase.auth().currentUser.uid)
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
       .then(({ data }) => this.setState({ favorites: data }))
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 
   // removes a favorite from the favorite list
   removeFave(favoriteListItem) {
-    axios.delete('/favorites', { data: { eventId: favoriteListItem._id }} )
+    axios.delete('/favorites', { data: { eventId: favoriteListItem._id, uid: firebase.auth().currentUser.uid}} )
       .then(() => this.loadMyFaves())
       .catch(err => console.error('err in removeFave in favorites.jsx', err));
   }

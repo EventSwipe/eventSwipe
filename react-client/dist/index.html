@@ -33,140 +33,26 @@
     firebase.initializeApp(config);
   </script>
 </head>
-<<<<<<< HEAD
-<script>
-=======
 <body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
-  <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button>
-  <script>
->>>>>>> dev
-    function signInWithGoogle() {
-      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-      
-      googleAuthProvider.setCustomParameters({
-        prompt: 'select_account'
-      });
-      
-      firebase.auth().signInWithPopup(googleAuthProvider)
-      .then((data) => console.log('data from signing in with google',data))
-      .catch((err) => console.log(err))
-    
-    }
-    
-    // function signOutOfGoogle() {
-    //   firebase.auth().signOut();
-    //   this.setState({authenticated:false})
-    //   console.log('signed out!')
-    // }
-    
-    // function checkIfSignedIn() {
-    //   firebase.auth().onAuthStateChanged(function(user) {
-    //     if (user) {
-    //       // User is signed in.
-    //       globalAuthId = firebase.auth().currentUser.uid;
-    //       console.log('the global auth id', globalAuthId)
-    //       console.log('if there is a user1', firebase.auth().currentUser)
-    //       document.getElementById("user_div").style.display = "block";
-    //       document.getElementById("login_div").style.display = "none";
-
-<<<<<<< HEAD
-          
-    //     } else {
-    //       // No user is signed in.
-          
-    //       document.getElementById("user_div").style.display = "none";
-    //       document.getElementById("login_div").style.display = "block";
-          
-    //     }
-    //   });
-      
-    // }
-    
-    // checkIfSignedIn()
-    // var globalAuthId;
-    
-    </script>
-<body class="main">
-  
-  <!-- <div id="login_div" class="main-div">
-    <h3>EventSwipe Login Page</h3>
-    <br/>
-    <button class="main-button" onclick="signInWithGoogle()">Sign In With Google</button>
-  </div> -->
+  <!-- <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button> -->
   
   <div id="user_div" class="loggedin-div">   
     <div id="app"></div>
-    <!-- <button onclick="signOutOfGoogle()">LogOut</button> -->
   </div>  
-
-  <script type="text/javascript" src="bundle.js"></script>
-=======
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        document.getElementById("user_div").style.display = "block";
-        document.getElementById("login_div").style.display = "none";        
-      } else {
-        // No user is signed in.
-        document.getElementById("user_div").style.display = "none";
-        document.getElementById("login_div").style.display = "block";
-      }
-    });
-    
-    </script>
-    <div id="login_div" class="main-div">
-      <h3>EventSwipe Login Page</h3>
-      <!-- <input type="email" placeholder="Email..." id="email_field" />
-      <input type="password" placeholder="Password..." id="password_field" /> -->
-      <!-- <button onclick={signInWithGoogle()}>Login With Google</button>
-      <button onclick={signOutOfGoogle()}>Sign Out</button> -->
-      <button class="btn btn-dark" onclick="signInWithGoogle()">Sign In With Google</button>
-    </div>
-  
-<div id="user_div" class="loggedin-div">   
-  <div id="app"></div>
-</div>  
-<script>
-    function signInWithGoogle() {
-      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-      firebase.auth().signInWithPopup(googleAuthProvider)
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err))
-    }
-    
-    function signOutOfGoogle() {
-      firebase.auth().signOut();
-      console.log('signed out!');
-    }
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        document.getElementById("user_div").style.display = "block";
-        document.getElementById("login_div").style.display = "none";        
-      } else {
-        // No user is signed in.
-        document.getElementById("user_div").style.display = "none";
-        document.getElementById("login_div").style.display = "block";
-      }
-    });
-    
-    </script>
 <script type="text/javascript" src="bundle.js"></script>
-<style>
-  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: white !important;
-    opacity: 1; /* Firefox */
-}
+  <style>
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: white !important;
+      opacity: 1; /* Firefox */
+  }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: white !important;
-}
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: white !important;
+  }
 
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: white !important;
-}
-  </style>
->>>>>>> dev
+  ::-ms-input-placeholder { /* Microsoft Edge */
+      color: white !important;
+  }
+    </style>
 </body>
 </html>
