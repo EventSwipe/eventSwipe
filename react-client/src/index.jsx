@@ -24,10 +24,8 @@ class App extends React.Component {
   }
 
   signOutOfGoogle() {
-    firebase.auth().signOut()
-    this.setState({
-      authenticated:false
-    })
+    firebase.auth().signOut();
+    this.setState({ authenticated: false });
   }
 
   componentWillMount() {

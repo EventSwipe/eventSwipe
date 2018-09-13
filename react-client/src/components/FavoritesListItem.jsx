@@ -38,7 +38,7 @@ class FavoriteListItem extends React.Component {
             <li>{favorite.description.substring(100, 200)}</li>
           </ul>
           :
-          <p>{favorite.description.substring(0, favorite.description.length)}</p>
+          <p>{favorite.description ? favorite.description.substring(0, favorite.description.length) : favorite.name}</p>
         }
         <b style={{ color: '#343a40'}}>Date:</b> {favorite.date.substr(0, 10)}
         <br /> 
