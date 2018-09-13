@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
+const { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json');
-const { getAllEvents, getTenEvents, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
-const { getFromMeetUp, getFromEventBrite } = require('./apihelper.js');
 
 
 const app = express();
@@ -12,8 +12,6 @@ const firebaseAdmin = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:'https://eventswipe.firebaseio.com'
 });
-
-
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
@@ -42,7 +40,6 @@ app.get('/favorites/:uid', (req, res) => {
 
 app.post('/favorites', (req, res) => {
   let { favoriteEvent } = req.body.params;
-  console.log('favoriteEvent query passing onto addfavorites in index.js of server', favoriteEvent)
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);
