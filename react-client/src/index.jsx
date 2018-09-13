@@ -15,6 +15,35 @@ class App extends React.Component {
     this.showFaves = this.showFaves.bind(this);
     this.showHome = this.showHome.bind(this);
   }
+  signInWithGoogle() {
+    var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+    
+    // googleAuthProvider.setCustomParameters({
+    //   prompt: 'select_account'
+    // });
+    
+    firebase.auth().signInWithPopup(googleAuthProvider)
+      .then((data) => console.log('data from signing in with google',data))
+      .catch((err) => console.error('err in index.jsx', err));
+  }
+
+  signOutOfGoogle() {
+    firebase.auth().signOut()
+    this.setState({
+      authenticated:false
+    })
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {  // User is signed in.
+        this.setState({ authenticated: true, user: user }, () => {
+          axios.get(`/loggedin/${this.state.user.uid}`);
+        });
+      }
+    });
+  }
+  
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves });
   }
@@ -42,21 +71,28 @@ class App extends React.Component {
   //renders navbar, searchbar, even & likes
   render () {
     const { showFaves, events } = this.state;
-    const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
-    return (
+
+    const showFavesOrEvents = showFaves ? <Favorites user={this.state.user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
+    return this.state.authenticated ? (
       <container>
-        <Nav home={this.showHome} showFaves={this.showFaves}/>
+        {/* <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/> */}
+
         <div className="d-flex justify-content-center">
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
               {showFaves ? 'Search Events' : 'Show Favorites'}
             </button>
             {showFavesOrEvents}
-            {/* <SnackBars /> */}
           </div>
         </div>
       </container>
-    );
+    ) : (
+      <div>
+        <h3>EventSwipe Login Page</h3>
+        <br/>
+        <button className="main-button" onClick={this.signInWithGoogle}>Sign In With Google</button>
+      </div>
+    )
   }
 }
 

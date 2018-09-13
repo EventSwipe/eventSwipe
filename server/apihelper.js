@@ -14,7 +14,7 @@ try { // The config.js file is ignored by git
 
 //Generic api integration method (not used yet)
 const getZipCodeBasedOnLonAndLat = (zip, cb) => {
-  let options = { url: `https://us-zipcode.api.smartystreets.com/lookup?auth-id=17c47573-337b-42f4-aee1-73c39539d6fd&auth-token=WpTpsyzxwL5MKIslmj57&city=&state=&zipcode=${zip}`};
+  let options = { url: `https://www.zipcodeapi.com/rest/ncucN8D5hCeYccab8JKN8H0aQYl5pIaQ4XPKE1OWgGyAhD19wI2DeK3FNyoCKpXD/info.json/${zip}/degrees`};
   request.get(options, (err, results) => {
     if (err) {
       console.error(`err in getZipCode: ${err}`);
@@ -35,9 +35,9 @@ const getFromMeetUp = (query, cb) => {
       cb(err, null);
     } else {
       data = JSON.parse(data.body);
-      let lat = data[0].zipcodes[0].latitude;
-      let lon = data[0].zipcodes[0].longitude;
-      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lon}` };
+      let lat = data.lat;
+      let lng = data.lng;
+      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lng}` };
       request.get(options, (err, results) => {
         if (err) {
           console.error(`err in request.get to zipcode: ${err}`);

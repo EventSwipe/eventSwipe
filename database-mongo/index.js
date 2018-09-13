@@ -17,14 +17,18 @@ const eventSchema = mongoose.Schema({
   date: { type: Date },
   end: { type: Date },
   free: { type: Boolean },
-  username: { type: String },
-  logo: { type: String }
-});
+  logo: { type: String },
+  uid: { type: String }
 
 // user data for login
 const userSchema = mongoose.Schema({
-  username: { type: String, unique: true },
-  password: { type: String }
+  uid: { type: String },
+  userInfo: {
+    displayName: String,
+    email: String,
+    photoUrl: String
+  },
+  // favorites: { type: Object }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -32,8 +36,8 @@ const Event = mongoose.model('Event', eventSchema);
 
 // return events by username
 // add user here when authentication is setup
-const getAllEvents = cb => {
-  Event.find({}, (err, events) => {
+const getAllEvents = (uid, cb) => {
+  Event.find({ uid: uid }, (err, events) => {
     if (err) {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
@@ -44,22 +48,25 @@ const getAllEvents = cb => {
   });
 };
 
-// Returns first ten events, sorted by dates starting from now
-const getTenEvents =  (offset, cb) => {
-  var num = Number(offset);
-  Event.find({ date: { '$gte' : new Date }})
-    .sort({ date: +1 })
-    .skip(num)
-    .limit(10)
-    .exec((err, events) => {
-      if (err) {
-        console.error(`err in  getTenEvents  db/index.js: ${err}`);
-        cb(err, null);
-      } else {
-        // console.log(`events in  getTenEvents  db/index.js: ${events}`);
-        cb(null, events);
-      }
-    });
+//adding a new user to database
+const addUser = (userData) => {
+  const newUser = new User({
+    uid: userData.uid,
+    userInfo: {
+      displayName: userData.displayName,
+      email: userData.email,
+      photoUrl: userData.photoURL
+    },
+    favorites: { type: Object, required: true }
+  });
+
+  newUser.save((err) => {
+    if (err) {
+      console.error(`err in newUser.save: ${err}`);
+    } else {
+      console.log('The new user has been saved into the database!');
+    }
+  });
 };
 
 // adding favorite events to database with username
@@ -74,9 +81,9 @@ const addFavorite = (favorite, cb) => {
     end: favorite.end ? favorite.end.local : null,
     free: favorite.is_free || true,
     logo: favorite.logo ? favorite.logo.original.url : null,
-    // location: favorite.location,
-    // username: favorite.username
+    uid: favorite.uid
   });
+
   newEvent.save(err => {
     if (err) {
       console.error(`err in newEvent.save: ${err}`);

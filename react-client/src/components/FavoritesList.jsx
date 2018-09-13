@@ -35,11 +35,13 @@ class FavoritesList extends React.Component {
   }
 
   getFavorites() {
-    axios.get('/favorites')
-      .then(({ data }) => this.setState({ favorites: data, currentList: data.slice(0, 5) }))
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ favorites: data, currentList: data.slice(0, 5) });
+      })
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
-
   render() {
     const { removeFave, getFaves } = this.props;
     const { show, currentList } = this.state;
