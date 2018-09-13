@@ -15,7 +15,7 @@ const Event = ({ event, like, dislike }) => {
                 <img className="event-img" style={{ width: 460, height: 300 }} src={event.logo ? event.logo.url : 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} alt="Card image cap"/>
                 <h5 className="card-title">{event.name.text || event.name}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p className=" event-description card-text">
+                <p className="card-text">
                   Description: {event.description && event.description.text ? event.description.text : event.description}
                 </p>
                 <p className="card-text">
