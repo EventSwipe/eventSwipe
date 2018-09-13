@@ -1,55 +1,35 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
-// const { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite, getTenEvents } = require('../database-mongo/index.js');
-// const { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json');
+const { getAllEvents, getTenEvents, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
+const { getFromMeetUp, getFromEventBrite } = require('./apihelper.js');
+
+
+const app = express();
 
 const firebaseAdmin = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:'https://eventswipe.firebaseio.com'
-})
+});
 
-//create autentication middleware
-const isAuthenticated = (request, response, next) => {
-  // check if user is logged in
-  // if they are, attach them to the request object
-  // if not, send to login page
-}
 
-var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
-var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
 app.get('/loggedin/:uid', (req, res) => {
   admin.auth().getUser(req.params.uid)
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    addUser(userRecord)
-  })
-  .catch(function(error) {
-    console.log("Error fetching user data:", error);
-  });
-})
+    .then((userRecord) => {
+      addUser(userRecord); // See the UserRecord reference doc for the contents of userRecord.
+    })
+    .catch((error) => {
+      console.log('Error fetching user data:', error);
+    });
+});
 
 app.get('/favorites/:uid', (req, res) => {
   getAllEvents(req.params.uid, (err, data) => {
-    if (err) {
-      console.error(`err in app.get /favorite: ${err}`);
-      res.status(400).send();
-    } else {
-      // console.log(`data in app.get /favorites: ${data}`);
-      res.status(200).send(data);
-    }
-  });
-});
-
-app.get('/favorites/ten', (req, res) => {
-  // manipuate req.body to fit query parameters make db call to get data gets first 10
-  getTenEvents(req.query.offset, (err, data) => {
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
@@ -114,9 +94,9 @@ app.get('/events', (req, res) => {
 });
 
 app.post('/insertEventToDb', (req, res) => {
-  //manipulate req.body to fit query parameters
+  // manipulate req.body to fit query parameters
   var { query } = req.body;
-  //make db call to change data
+  // make db call to change data
   addFavorite(query, (err, data) => {
     if (err) {
       console.error(`err in app.post /insertEventToDb: ${err}`);
@@ -126,16 +106,6 @@ app.post('/insertEventToDb', (req, res) => {
       res.status(200).send(data);
     }
   });
-});
-
-app.post('/login', (req, res) => {
-  // not yet until auth
-
-});
-
-
-app.get('/lol', (req, res) => {
-
 });
 
 let PORT = process.env.PORT || 3000;
