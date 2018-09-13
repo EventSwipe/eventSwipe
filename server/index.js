@@ -68,7 +68,8 @@ app.delete('/favorites', (req, res) => {
 //get events from db helper
 app.get('/events', (req, res) => {
   // makes the query the object from the body
-  var query = { location: req.query.location, topic: req.query.topic };
+  console.log(req.query);
+  var query = { location: req.query.location, topic: req.query.topic, startDate: req.query.startDate, endDate: req.query.endDate };
   // call the apihelper function to return a promise
   getFromMeetUp(query, (err, data1) => {
     if (err) {

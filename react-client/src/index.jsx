@@ -59,7 +59,7 @@ class App extends React.Component {
         }));
         promise
           .then(events => this.setState({ events }))
-          .catch(e => console.error('err in searchEvents promise', err));
+          .catch(err => console.error('err in searchEvents promise', err));
       })
       .catch((err) => console.log('front end error', err));
   }
