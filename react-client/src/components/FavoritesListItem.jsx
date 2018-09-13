@@ -30,11 +30,19 @@ class FavoriteListItem extends React.Component {
         <br />
         <a href={favorite.url}>{favorite.name}</a>
         <br/>
-        <b>Description: </b> {favorite.description.substr(0, 200)}
+        <b style={{ color: '#343a40'}}>Description: </b> 
+        {favorite.description && (favorite.description.length >= 200) 
+          ? 
+          <ul>
+            <li>{favorite.description.substring(0, 100)}</li>
+            <li>{favorite.description.substring(100, 200)}</li>
+          </ul>
+          :
+          <p>{favorite.description.substring(0, favorite.description.length)}</p>
+        }
+        <b style={{ color: '#343a40'}}>Date:</b> {favorite.date.substr(0, 10)}
         <br /> 
-        <b>Date:</b> {favorite.date.substr(0, 10)}
-        <br /> 
-        <b>Price:</b> {<b>favorite.free</b> ? <b>"FREE!"</b> : null}
+        <b style={{ color: '#343a40'}}>Price:</b> {<b>favorite.free</b> ? <b>"FREE!"</b> : null}
       </div>
     );
   }

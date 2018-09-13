@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
-import Nav from './components/Nav.jsx';
+// import Nav from './components/Nav.jsx';
 import axios from 'axios';
 // import SnackBars from './components/SnackBars.jsx';
 
@@ -82,11 +82,12 @@ class App extends React.Component {
         </div>
       </container>
     ) : (
-      <div>
-        <h3>EventSwipe Login Page</h3>
-        <br/>
-        <button className="main-button" onClick={this.signInWithGoogle}>Sign In With Google</button>
-      </div>
+      // <div style={{ textAlign: 'center' }}>
+      //   <h2>Please Login</h2>
+      //   <br/>
+      //   <button className="btn btn-dark" onClick={this.signInWithGoogle}>Sign In With Google</button>
+      // </div>
+      <div/>
     )
   }
 }

@@ -10,7 +10,7 @@ db.once('open', () => console.log('mongoose connected successfully'));
 // event data for each user
 const eventSchema = mongoose.Schema({
   id: { type: String },
-  name: { type: String, required: true },
+  name: { type: String },
   description: { type: String },
   url: { type: String },
   location: { type: String },
@@ -75,8 +75,8 @@ const addFavorite = (favorite, cb) => {
   console.log('fave', favorite);
   var newEvent = new Event({
     id: favorite.id,
-    name: favorite.name ? favorite.name : favorite.name.text ? 'No Name' : 'No',
-    description: favorite.description.text || favorite.name,
+    name: favorite.name && !favorite.name.text ? favorite.name : favorite.name.text,
+    description: favorite.description ? favorite.description.text : favorite.name,
     url: favorite.url || favorite.link,
     date: favorite.start ? favorite.start.local : favorite.local_date,
     time: favorite.local_time || null,
