@@ -23,9 +23,9 @@ class App extends React.Component {
   signInWithGoogle() {
     var googleAuthProvider = new firebase.auth.GoogleAuthProvider
     
-    googleAuthProvider.setCustomParameters({
-      prompt: 'select_account'
-    });
+    // googleAuthProvider.setCustomParameters({
+    //   prompt: 'select_account'
+    // });
     
     firebase.auth().signInWithPopup(googleAuthProvider)
     .then((data) => console.log('data from signing in with google',data))
@@ -44,7 +44,7 @@ class App extends React.Component {
       console.log('this is the user in checkifsignedin', user)
       if (user) {
         // User is signed in.
-        this.setState({authenticated:true, user:user}, () => console.log(this.state))
+        this.setState({authenticated:true, user:user}, () => console.log('the state after onauthstate',this.state))
         console.log('if there is a user1', firebase.auth().currentUser)       
       }
     });
