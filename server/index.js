@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite } = require('../database-mongo/index.js');
-const { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js');
+const { getAllEvents, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
+const { getFromMeetUp, getFromEventBrite } = require('./apihelper.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json');
 
@@ -38,8 +38,9 @@ app.get('/favorites/:uid', (req, res) => {
   });
 });
 
-app.post('/favorites', (req, res) => {
+app.post('/favorites/:uid', (req, res) => {
   let { favoriteEvent } = req.body.params;
+  console.log(favoriteEvent, '234234234')
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);
