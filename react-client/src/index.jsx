@@ -9,19 +9,12 @@ import axios from 'axios';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      events: [],
-      showFaves: false,
-      authenticated: false,
-      user:null
-    };
+    this.state = { events: [], showFaves: false };
     this.searchEvents = this.searchEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
-    this.signOutOfGoogle = this.signOutOfGoogle.bind(this);
     this.showFaves = this.showFaves.bind(this);
     this.showHome = this.showHome.bind(this);
   }
-
   signInWithGoogle() {
     var googleAuthProvider = new firebase.auth.GoogleAuthProvider
     
@@ -50,7 +43,7 @@ class App extends React.Component {
       }
     });
   }
-
+  
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves });
   }
@@ -78,10 +71,12 @@ class App extends React.Component {
   //renders navbar, searchbar, even & likes
   render () {
     const { showFaves, events } = this.state;
+
     const showFavesOrEvents = showFaves ? <Favorites user={this.state.user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return this.state.authenticated ? (
       <container>
         {/* <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/> */}
+
         <div className="d-flex justify-content-center">
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>

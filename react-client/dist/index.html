@@ -34,25 +34,86 @@
   </script>
 </head>
 <body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
-  <!-- <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button> -->
+  <button class="btn btn-dark" onclick="signOutOfGoogle()">LogOut</button>
+  <script>
+    function signInWithGoogle() {
+      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+
+      firebase.auth().signInWithPopup(googleAuthProvider)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
+    }
+    
+    function signOutOfGoogle() {
+      firebase.auth().signOut();
+      console.log('signed out!')
+    }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        document.getElementById("user_div").style.display = "block";
+        document.getElementById("login_div").style.display = "none";        
+      } else {
+        // No user is signed in.
+        document.getElementById("user_div").style.display = "none";
+        document.getElementById("login_div").style.display = "block";
+      }
+    });
+    
+    </script>
+    <div id="login_div" class="main-div">
+      <h3>EventSwipe Login Page</h3>
+      <!-- <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" /> -->
+      <!-- <button onclick={signInWithGoogle()}>Login With Google</button>
+      <button onclick={signOutOfGoogle()}>Sign Out</button> -->
+      <button class="btn btn-dark" onclick="signInWithGoogle()">Sign In With Google</button>
+    </div>
   
-  <div id="user_div" class="loggedin-div">   
-    <div id="app"></div>
-  </div>  
+<div id="user_div" class="loggedin-div">   
+  <div id="app"></div>
+</div>  
+<script>
+    function signInWithGoogle() {
+      var googleAuthProvider = new firebase.auth.GoogleAuthProvider
+      firebase.auth().signInWithPopup(googleAuthProvider)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
+    }
+    
+    function signOutOfGoogle() {
+      firebase.auth().signOut();
+      console.log('signed out!');
+    }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        document.getElementById("user_div").style.display = "block";
+        document.getElementById("login_div").style.display = "none";        
+      } else {
+        // No user is signed in.
+        document.getElementById("user_div").style.display = "none";
+        document.getElementById("login_div").style.display = "block";
+      }
+    });
+    
+    </script>
 <script type="text/javascript" src="bundle.js"></script>
-  <style>
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: white !important;
-      opacity: 1; /* Firefox */
-  }
+<style>
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
 
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: white !important;
-  }
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white !important;
+}
 
-  ::-ms-input-placeholder { /* Microsoft Edge */
-      color: white !important;
-  }
-    </style>
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: white !important;
+}
+  </style>
 </body>
 </html>

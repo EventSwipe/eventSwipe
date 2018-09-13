@@ -19,7 +19,6 @@ const eventSchema = mongoose.Schema({
   free: { type: Boolean },
   logo: { type: String },
   uid: { type: String }
-});
 
 // user data for login
 const userSchema = mongoose.Schema({
@@ -49,24 +48,6 @@ const getAllEvents = (uid, cb) => {
   });
 };
 
-// Returns first ten events, sorted by dates starting from now
-const getTenEvents =  (offset, cb) => {
-  var num = Number(offset);
-  Event.find({ date: { '$gte' : new Date }})
-    .sort({ date: +1 })
-    .skip(num)
-    .limit(10)
-    .exec((err, events) => {
-      if (err) {
-        console.error(`err in  getTenEvents  db/index.js: ${err}`);
-        cb(err, null);
-      } else {
-        // console.log(`events in  getTenEvents  db/index.js: ${events}`);
-        cb(null, events);
-      }
-    });
-};
-
 //adding a new user to database
 const addUser = (userData) => {
   const newUser = new User({
@@ -92,7 +73,7 @@ const addUser = (userData) => {
 const addFavorite = (favorite, cb) => {
   var newEvent = new Event({
     id: favorite.id,
-    name: favorite.name || favorite.name.text,
+    name: favorite.name.text || favorite.name,
     description: favorite.description.text || favorite.name,
     url: favorite.url || favorite.link,
     date: favorite.start ? favorite.start.local : favorite.local_date,
@@ -102,8 +83,7 @@ const addFavorite = (favorite, cb) => {
     logo: favorite.logo ? favorite.logo.original.url : null,
     uid: favorite.uid
   });
-  
-  // console.log('this is the newEvent', newEvent);
+
   newEvent.save(err => {
     if (err) {
       console.error(`err in newEvent.save: ${err}`);
@@ -130,5 +110,20 @@ const deleteFavorite = (mongoId, cb) => {
   });
 };
 
+//adding a new user to database
+const addUser = (username, password) => {
+  const newUser = new User({
+    username: username,
+    password: password
+  });
+
+  newUser.save((err) => {
+    if (err) {
+      console.error(`err in newUser.save: ${err}`);
+    } else {
+      console.log('The new user has been saved into the database!');
+    }
+  });
+};
 
 module.exports = { getAllEvents, getTenEvents, addFavorite, addUser, deleteFavorite };
