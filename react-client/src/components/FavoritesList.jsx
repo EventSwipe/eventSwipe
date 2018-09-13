@@ -23,7 +23,7 @@ class FavoritesList extends React.Component {
     const { favorites, count } = this.state;
     this.setState({ count: count + 5 });
     if ((count + 10) > favorites.length) {
-      if ((count + 5) < favorites.length && count < favorites.length) {
+      if ((count + 5) < favorites.length) {
         this.setState({ currentList: favorites.slice(count + 5, favorites.length)});
       } else {
         this.setState({ currentList: favorites.slice(0, 5), count: 0});
