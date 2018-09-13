@@ -19,6 +19,7 @@ const eventSchema = mongoose.Schema({
   free: { type: Boolean },
   logo: { type: String },
   uid: { type: String }
+});
 
 // user data for login
 const userSchema = mongoose.Schema({
