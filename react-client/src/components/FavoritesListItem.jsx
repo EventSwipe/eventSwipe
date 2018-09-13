@@ -1,58 +1,43 @@
-import React from "react";
-import axios from 'axios';
+import React from 'react';
 
-
-class FavoritesList extends React.Component {
+class FavoriteListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false };
-    this.handleMouseIn = this.handleMouseIn.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.state = { clicked: false };
+    this.show = this.show.bind(this);
   }
-
-  handleMouseIn(e) {
-    this.setState({ hover: true });
+  componentDidMount() {
+    this.show();
+    this.setState({ clicked: true });
   }
-  
-  handleMouseOut(e) {
-    this.setState({ hover: false });
+  show() {
+    document.getElementById('show').scrollIntoView({ behavior: 'smooth', inline: 'end' });
   }
-// just make a list of all the likes passed down by props
-// const FavoritesList = ({ favorites, removeFave }) =>
-
-
-  render () {
-    const { favorite, removeFave } = this.props;
-
-    const tooltipStyle = {
-      display: this.state.hover ? 'block' : 'none'
-    };
+  render() {
+    const { removeFave, favorite, getFaves } = this.props;
     return (
-      <span>
-        <a href={favorite.url} 
-          onMouseOver={this.handleMouseIn.bind(this)} 
-          onMouseOut={this.handleMouseOut.bind(this)}>
-          {favorite.name}
-        </a>, 
-        <span style={tooltipStyle}>
-          <img style={{width:410, height:300}} src={favorite.logo} />
-          {favorite.description} 
-        </span>
-        Date: {favorite.date.substring(0, 10)} &nbsp;
-        Time: {favorite.date.substring(11, 16)} &nbsp;
-        {favorite.free ? <b>"FREE!!!"</b> : null}
-        <button
+      <div id="show">
+        <img style={{ width: 280, height: 300, paddingBottom: 10 }} src={favorite.logo || 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} />
+        <button 
+          className="btn btn-dark"
           onClick={() => {
             removeFave(favorite);
+            getFaves();
           }}
         >
-          Delete
+          Delete Event
         </button>
-    ))
-
-      </span>
+        <br />
+        <a href={favorite.url}>{favorite.name}</a>
+        <br/>
+        <b>Description: </b> {favorite.description.substr(0, 200)}
+        <br /> 
+        <b>Date:</b> {favorite.date.substr(0, 10)}
+        <br /> 
+        <b>Price:</b> {<b>favorite.free</b> ? <b>"FREE!"</b> : null}
+      </div>
     );
   }
 }
 
-export default FavoritesList;
+export default FavoriteListItem;

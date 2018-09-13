@@ -12,21 +12,12 @@ class SearchBar extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount() {
-    //initial population with hard coded search
-    // this.searchEvents({
-    //   params: {
-    //   "token": 'E5PTH3KVZH4MFUMMULAE',
-    //   "location.address": 'newyorkcity',
-    //   "q": 'food'
-    // }});
-  }
+  
   handleSubmit(e) {
     e.preventDefault();
-    //run api request and pass in props
-    //TODO: to add in date range
+    // run api request and pass in props
+    // TODO: to add in date range
     this.props.searchEvents({
-      //call is made
       params: {
         'location': this.state.location,
         'topic': this.state.topic,
@@ -39,21 +30,21 @@ class SearchBar extends React.Component {
     const { topic, location, date } = this.state;
     const { events } = this.props;
     return (
-      <div>
-        <form>
-          <input
-            //passed an anonymous function to the onChange so it is associated with it's respective state
+      <div style={{'width': '100%', 'textAlign': 'center'}}>
+        <form className="form-inline justify-content-center" role="form" >
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}}
+            // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}
             value={location}
-            placeholder="Location"
+            placeholder="Enter Zip Code"
           />
-          <input
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
             onChange={e => this.setState({ topic: e.target.value })}
             value={topic}
             placeholder="Topic"
           />
           {/* right now just have customer enter a date and next week enter a range  */}
-          <input
+          <input className="form-control" type="text" aria-label="Search" style={{'backgroundColor': '#A5A5AF', color: 'white'}} 
             onChange={e => this.setState({ date: e.target.value })}
             value={date}
             placeholder="Enter Date Range"
@@ -63,7 +54,7 @@ class SearchBar extends React.Component {
             <option value={i+1} onChange={this.handleDate}>{i+1} days</option>
           )}
         </select> */}
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button className="btn" onClick={this.handleSubmit} style={{backgroundColor: '#015249', color: 'white'}}>Submit</button>
         </form>
         {/* Create events component and passing down api request events array*/}
         <Events events={events} />
