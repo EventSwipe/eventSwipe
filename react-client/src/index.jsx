@@ -82,11 +82,12 @@ class App extends React.Component {
         </div>
       </container>
     ) : (
-      <div>
-        <h3>EventSwipe Login Page</h3>
-        <br/>
-        <button className="main-button" onClick={this.signInWithGoogle}>Sign In With Google</button>
-      </div>
+      // <div style={{ textAlign: 'center' }}>
+      //   <h2>Please Login</h2>
+      //   <br/>
+      //   <button className="btn btn-dark" onClick={this.signInWithGoogle}>Sign In With Google</button>
+      // </div>
+      ''
     )
   }
 }
