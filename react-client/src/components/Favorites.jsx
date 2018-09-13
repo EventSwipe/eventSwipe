@@ -15,21 +15,21 @@ class Favorites extends React.Component {
     this.loadMyFaves();
   }
 
-  //loads all the favorites saved in database
+  // loads all the favorites saved in database
   loadMyFaves() {
-    axios.get('/favorites/ten', { params: { offset: this.state.favorites.length } }) //sends the lengths of the favorites array down to db to offset return by
-      .then(res => this.setState({ favorites: res.data }))
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
+      .then(({ data }) => this.setState({ favorites: data }))
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 
-  //removes a favorite from the favorite list
+  // removes a favorite from the favorite list
   removeFave(favoriteListItem) {
     axios.delete('/favorites', { data: { eventId: favoriteListItem._id }} )
       .then(() => this.loadMyFaves())
       .catch(err => console.error('err in removeFave in favorites.jsx', err));
   }
 
-  //renders a new endpoint with the calendar and list
+  // renders a new endpoint with the calendar and list
   render() {
     const { favorites } = this.state;
     return (
@@ -37,7 +37,7 @@ class Favorites extends React.Component {
         <h1>Favorite Events</h1>
         <br />
         <FavoritesCalendar favorites={favorites}/> 
-        <FavoritesList favorites={favorites} removeFave={this.removeFave} />
+        <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave}/>
       </div>
     );
   }

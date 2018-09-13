@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
-import Nav from './components/Nav.jsx';
+// import Nav from './components/Nav.jsx';
 import axios from 'axios';
 // import SnackBars from './components/SnackBars.jsx';
 
@@ -12,9 +12,40 @@ class App extends React.Component {
     this.state = { events: [], showFaves: false };
     this.searchEvents = this.searchEvents.bind(this);
     this.showFavorites = this.showFavorites.bind(this);
+    this.showFaves = this.showFaves.bind(this);
+    this.showHome = this.showHome.bind(this);
   }
+  signInWithGoogle() {
+    var googleAuthProvider = new firebase.auth.GoogleAuthProvider;
+    
+    firebase.auth().signInWithPopup(googleAuthProvider)
+      .then((data) => console.log('data from signing in with google',data))
+      .catch((err) => console.error('err in index.jsx', err));
+  }
+
+  signOutOfGoogle() {
+    firebase.auth().signOut();
+    this.setState({ authenticated: false });
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {  // User is signed in.
+        this.setState({ authenticated: true, user: user }, () => {
+          axios.get(`/loggedin/${this.state.user.uid}`);
+        });
+      }
+    });
+  }
+  
   showFavorites() {
     this.setState({ showFaves: !this.state.showFaves });
+  }
+  showFaves() {
+    this.setState({ showFaves: true });
+  }
+  showHome() {
+    this.setState({ showFaves: false });
   }
 
   searchEvents(query) {
@@ -26,7 +57,7 @@ class App extends React.Component {
         }));
         promise
           .then(events => this.setState({ events }))
-          .catch(e => console.error('err in searchEvents promise', err));
+          .catch(err => console.error('err in searchEvents promise', err));
       })
       .catch((err) => console.log('front end error', err));
   }
@@ -34,21 +65,28 @@ class App extends React.Component {
   //renders navbar, searchbar, even & likes
   render () {
     const { showFaves, events } = this.state;
-    const showFavesOrEvents = showFaves ? <Favorites /> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
-    return (
+
+    const showFavesOrEvents = showFaves ? <Favorites user={this.state.user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
+    return this.state.authenticated ? (
       <container>
-        <Nav/>
+        {/* <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/> */}
         <div className="d-flex justify-content-center">
-          <div className="container">
-            <button onClick={this.showFavorites}>
+          <div className="container" style={{ width: '100%', textAlign: 'center' }}>
+            <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
               {showFaves ? 'Search Events' : 'Show Favorites'}
             </button>
             {showFavesOrEvents}
-            {/* <SnackBars /> */}
           </div>
         </div>
       </container>
-    );
+    ) : (
+      // <div style={{ textAlign: 'center' }}>
+      //   <h2>Please Login</h2>
+      //   <br/>
+      //   <button className="btn btn-dark" onClick={this.signInWithGoogle}>Sign In With Google</button>
+      // </div>
+      <div/>
+    )
   }
 }
 

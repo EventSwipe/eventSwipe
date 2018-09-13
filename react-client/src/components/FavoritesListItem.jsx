@@ -1,45 +1,51 @@
 import React from 'react';
 
-class FavoritesList extends React.Component {
+class FavoriteListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hover: false };
-    this.handleMouseIn = this.handleMouseIn.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.state = { clicked: false };
+    this.show = this.show.bind(this);
   }
-
-  handleMouseIn() {
-    this.setState({ hover: true });
+  componentDidMount() {
+    this.show();
+    this.setState({ clicked: true });
   }
-  
-  handleMouseOut() {
-    this.setState({ hover: false });
+  show() {
+    document.getElementById('show').scrollIntoView({ behavior: 'smooth', inline: 'end' });
   }
-
-  render () {
-    const { favorite, removeFave } = this.props;
-    const tooltipStyle = { display: this.state.hover ? 'block' : 'none' };
+  render() {
+    const { removeFave, favorite, getFaves } = this.props;
     return (
-      <span>
-        {console.log(this.props.favorite)}
-        <a href={favorite.url} 
-          onMouseOver={this.handleMouseIn.bind(this)} 
-          onMouseOut={this.handleMouseOut.bind(this)}>
-          {favorite.name}
-        </a>, 
-        <span style={tooltipStyle}>
-          <img style={{ width: 410, height: 300 }} src={favorite.logo} />
-          {favorite.description} 
-        </span>
-        Date: {favorite.date.substr(0, 10)} 
-        {favorite.free ? <b>"FREE!!!"</b> : null}
-        <button onClick={() => removeFave(favorite)}>
-          Delete
+      <div id="show">
+        <img style={{ width: 280, height: 300, paddingBottom: 10 }} src={favorite.logo || 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} />
+        <button 
+          className="btn btn-dark"
+          onClick={() => {
+            removeFave(favorite);
+            getFaves();
+          }}
+        >
+          Delete Event
         </button>
-    ))
-      </span>
+        <br />
+        <a href={favorite.url}>{favorite.name}</a>
+        <br/>
+        <b style={{ color: '#343a40'}}>Description: </b> 
+        {favorite.description && (favorite.description.length >= 200) 
+          ? 
+          <ul>
+            <li>{favorite.description.substring(0, 100)}</li>
+            <li>{favorite.description.substring(100, 200)}</li>
+          </ul>
+          :
+          <p>{favorite.description ? favorite.description.substring(0, favorite.description.length) : favorite.name}</p>
+        }
+        <b style={{ color: '#343a40'}}>Date:</b> {favorite.date.substr(0, 10)}
+        <br /> 
+        <b style={{ color: '#343a40'}}>Price:</b> {<b>favorite.free</b> ? <b>"FREE!"</b> : null}
+      </div>
     );
   }
 }
 
-export default FavoritesList;
+export default FavoriteListItem;

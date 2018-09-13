@@ -11,15 +11,14 @@ class Events extends React.Component {
   }
 
   like() {
-    //check if out of items
-    if (this.props.events.length === 1) {
-      //TODO:do something when you run out of items
+    if (this.props.events.length === 1) { // check if out of items
+      // TODO: something when you run out of items
       alert('You have run out of events in your search. Please search again to view more events');
     }
-    //set the query to the shifted item
-    let query = this.props.events.shift();
-    //axios post the item to the database
-    axios.post('/favorites', {params: {favoriteEvent: query}})
+    let query = this.props.events.shift(); // set the query to the shifted item
+    // axios post the item to the database
+    query.uid = firebase.auth().currentUser.uid;
+    axios.post(`/favorites/${query.uid}`, {params: { favoriteEvent: query }})
       .then(() => {
         this.setState({ count: 0 });
         alert('Event has been saved in your favorites. Check out more events!');
@@ -27,15 +26,12 @@ class Events extends React.Component {
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
   }
   dislike() {
-    //check if there are any even items
-    if (this.props.events.length === 1) {
-      //TODO:do something when you run out of items
+    if (this.props.events.length === 1) { // check if there are any even items
+      // TODO: something when you run out of items
       alert('You have run out of events in your search. Please search again to view more events');
     }
-    //shift the item
-    this.props.events.shift();
-    //reset the state
-    this.setState({ count: 0 });
+    this.props.events.shift(); // shift the item
+    this.setState({ count: 0 }); // reset the state
   }
 
   render() {
