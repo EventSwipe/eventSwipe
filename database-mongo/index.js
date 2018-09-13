@@ -18,19 +18,13 @@ const eventSchema = mongoose.Schema({
   end: { type: Date },
   free: { type: Boolean },
   username: { type: String },
-  logo: { type: String },
-  uid: { type: String }
+  logo: { type: String }
 });
 
 // user data for login
 const userSchema = mongoose.Schema({
-  uid: { type: String, unique: true },
-  userInfo: {
-    displayName: String,
-    email: String,
-    photoUrl: String
-  },
-  favorites: { type: Object, required: true }
+  username: { type: String, unique: true },
+  password: { type: String }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -38,8 +32,8 @@ const Event = mongoose.model('Event', eventSchema);
 
 // return events by username
 // add user here when authentication is setup
-const getAllEvents = (uid, cb) => {
-  Event.find({uid:uid}, (err, events) => {
+const getAllEvents = cb => {
+  Event.find({}, (err, events) => {
     if (err) {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
@@ -68,31 +62,10 @@ const getTenEvents =  (offset, cb) => {
     });
 };
 
-//adding a new user to database
-const addUser = (userData) => {
-  const newUser = new User({
-    uid: userData.uid,
-    userInfo: {
-      displayName: userData.displayName,
-      email: userData.email,
-      photoUrl: userData.photoURL
-    },
-  favorites: { type: Object, required: true }
-  });
-
-  newUser.save((err) => {
-    if (err) {
-      console.error(`err in newUser.save: ${err}`);
-    } else {
-      console.log('The new user has been saved into the database!');
-    }
-  });
-};
-
 // adding favorite events to database with username
 const addFavorite = (favorite, cb) => {
   var newEvent = new Event({
-    id: favorite._id,
+    id: favorite.id,
     name: favorite.name.text || favorite.name,
     description: favorite.description.text || favorite.name,
     url: favorite.url || favorite.link,
@@ -102,9 +75,8 @@ const addFavorite = (favorite, cb) => {
     free: favorite.is_free || true,
     logo: favorite.logo ? favorite.logo.original.url : null,
     // location: favorite.location,
-    uid: favorite.uid
+    // username: favorite.username
   });
-  console.log('this is the newEvent', newEvent)
   newEvent.save(err => {
     if (err) {
       console.error(`err in newEvent.save: ${err}`);
@@ -131,5 +103,20 @@ const deleteFavorite = (mongoId, cb) => {
   });
 };
 
+//adding a new user to database
+const addUser = (username, password) => {
+  const newUser = new User({
+    username: username,
+    password: password
+  });
+
+  newUser.save((err) => {
+    if (err) {
+      console.error(`err in newUser.save: ${err}`);
+    } else {
+      console.log('The new user has been saved into the database!');
+    }
+  });
+};
 
 module.exports = { getAllEvents, getTenEvents, addFavorite, addUser, deleteFavorite };

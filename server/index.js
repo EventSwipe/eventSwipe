@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-// const { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite, getTenEvents } = require('../database-mongo/index.js');
-// const { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js');
+const { getAllEvents, getEventsByQuery, addFavorite, deleteFavorite, getTenEvents } = require('../database-mongo/index.js');
+const { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json');
 
@@ -16,27 +16,13 @@ const isAuthenticated = (request, response, next) => {
   // check if user is logged in
   // if they are, attach them to the request object
   // if not, send to login page
-}
-
-var { getAllEvents, getTenEvents, getEventsByQuery, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
-var { getFromMeetUp, getFromEventBrite, sortApis } = require('./apihelper.js')
+};
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
-app.get('/loggedin/:uid', (req, res) => {
-  admin.auth().getUser(req.params.uid)
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    addUser(userRecord)
-  })
-  .catch(function(error) {
-    console.log("Error fetching user data:", error);
-  });
-})
-
-app.get('/favorites/:uid', (req, res) => {
-  getAllEvents(req.params.uid, (err, data) => {
+app.get('/favorites', (req, res) => {
+  getAllEvents((err, data) => {
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
@@ -62,7 +48,6 @@ app.get('/favorites/ten', (req, res) => {
 
 app.post('/favorites', (req, res) => {
   let { favoriteEvent } = req.body.params;
-  console.log('favoriteEvent query passing onto addfavorites in index.js of server', favoriteEvent)
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);
