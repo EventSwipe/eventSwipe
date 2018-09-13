@@ -30,8 +30,8 @@ class SearchBar extends React.Component {
     const { topic, location, date } = this.state;
     const { events } = this.props;
     return (
-      <div style={{ 'marginTop': '50px','textAlign': 'center','backgroundImage': 'linear-gradient(to right, #77C9D4 , #57BC90)'}}>
-        <form className="form-inline justify-content-center" role="form" >
+      <div >
+        <form className="form-inline justify-content-center" role="form" style={{ height: '75px','marginTop': '25px','textAlign': 'center','backgroundImage': 'linear-gradient(to right, #77C9D4 , #57BC90)'}} >
           <input className="form-control" type="text" aria-label="Search" 
             // passed an anonymous function to the onChange so it is associated with it's respective state
             onChange={e => this.setState({ location: e.target.value })}

@@ -8,7 +8,7 @@ const Event = ({ event, like, dislike }) => {
         <div className="row">
           <div className="col">
             <div className="card" style={{borderRadius: '25px', 'backgroundImage': 'linear-gradient(to right, #77C9D4 , #57BC90)'}}>
-              <div className="card-body" style={{ width: 550, color:'#015249'}}>
+              <div className="card-body" style={{ width: 420, color:'#015249'}}>
                 <img className="event-img" style={{ width: 460, height: 300 }} src={event.logo ? event.logo.url : 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} alt="Card image cap"/>
                 <h5 className="card-title">
                   {event.name.text || event.name}
@@ -46,8 +46,8 @@ const Event = ({ event, like, dislike }) => {
               </div>
             </div>
           </div>
-          <div className="col" style={{'textAlign': 'left'}}>
-            <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address || event.venue.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
+          <div className="col" style={{}}>
+            <iframe style={{ width: 450, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address || event.venue.name}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
           </div>
         </div>
       ) : (

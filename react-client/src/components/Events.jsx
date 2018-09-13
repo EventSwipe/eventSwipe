@@ -37,7 +37,7 @@ class Events extends React.Component {
     const { events } = this.props;
     const { count } = this.state;
     return (
-      <div className="container" style={{'marginTop': '50px'}}>
+      <div className="container" style={{'marginTop': '50px', 'textAlign': 'center'}}>
         <div className="row">
           <div className="col-12">
             <Event event={events[count]} like={this.like} dislike={this.dislike}/>  
