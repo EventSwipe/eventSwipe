@@ -16,11 +16,7 @@ class App extends React.Component {
     this.showHome = this.showHome.bind(this);
   }
   signInWithGoogle() {
-    var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-    
-    // googleAuthProvider.setCustomParameters({
-    //   prompt: 'select_account'
-    // });
+    var googleAuthProvider = new firebase.auth.GoogleAuthProvider;
     
     firebase.auth().signInWithPopup(googleAuthProvider)
       .then((data) => console.log('data from signing in with google',data))
@@ -75,7 +71,7 @@ class App extends React.Component {
     const showFavesOrEvents = showFaves ? <Favorites user={this.state.user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return this.state.authenticated ? (
       <container>
-        <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/>
+        {/* <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/> */}
         <div className="d-flex justify-content-center">
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>

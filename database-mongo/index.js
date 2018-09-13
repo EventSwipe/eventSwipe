@@ -9,7 +9,7 @@ db.once('open', () => console.log('mongoose connected successfully'));
 
 // event data for each user
 const eventSchema = mongoose.Schema({
-  id: { type: Number },
+  id: { type: String },
   name: { type: String, required: true },
   description: { type: String },
   url: { type: String },
@@ -19,6 +19,7 @@ const eventSchema = mongoose.Schema({
   free: { type: Boolean },
   logo: { type: String },
   uid: { type: String }
+});
 
 // user data for login
 const userSchema = mongoose.Schema({
@@ -57,7 +58,7 @@ const addUser = (userData) => {
       email: userData.email,
       photoUrl: userData.photoURL
     },
-    favorites: { type: Object, required: true }
+    // favorites: { type: Object, required: true }
   });
 
   newUser.save((err) => {
@@ -71,9 +72,10 @@ const addUser = (userData) => {
 
 // adding favorite events to database with username
 const addFavorite = (favorite, cb) => {
+  console.log('fave', favorite);
   var newEvent = new Event({
     id: favorite.id,
-    name: favorite.name.text || favorite.name,
+    name: favorite.name ? favorite.name : favorite.name.text ? 'No Name' : 'No',
     description: favorite.description.text || favorite.name,
     url: favorite.url || favorite.link,
     date: favorite.start ? favorite.start.local : favorite.local_date,
@@ -110,20 +112,4 @@ const deleteFavorite = (mongoId, cb) => {
   });
 };
 
-//adding a new user to database
-const addUser = (username, password) => {
-  const newUser = new User({
-    username: username,
-    password: password
-  });
-
-  newUser.save((err) => {
-    if (err) {
-      console.error(`err in newUser.save: ${err}`);
-    } else {
-      console.log('The new user has been saved into the database!');
-    }
-  });
-};
-
-module.exports = { getAllEvents, getTenEvents, addFavorite, addUser, deleteFavorite };
+module.exports = { getAllEvents, addFavorite, addUser, deleteFavorite };
