@@ -19,7 +19,7 @@ class Favorites extends React.Component {
   loadMyFaves() {
     console.log('uid when loading myfaves()', firebase.auth().currentUser.uid)
     axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
-      .then(({ data }) => this.setState({ favorites: data }))
+      .then(({ data }) => this.setState({ favorites: data }), () => cosole.log('the state after loadmyfaves()', this.state))
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
 

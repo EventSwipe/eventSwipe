@@ -35,7 +35,7 @@ class FavoritesList extends React.Component {
   }
 
   getFavorites() {
-    axios.get('/favorites')
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
       .then(({ data }) => this.setState({ favorites: data, currentList: data.slice(0, 5) }))
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
