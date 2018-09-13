@@ -87,7 +87,7 @@ class App extends React.Component {
       //   <br/>
       //   <button className="btn btn-dark" onClick={this.signInWithGoogle}>Sign In With Google</button>
       // </div>
-      ''
+      <div/>
     )
   }
 }

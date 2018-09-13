@@ -54,24 +54,24 @@
         // User is signed in.
         document.getElementById("user_div").style.display = "block";
         document.getElementById("login_div").style.display = "none";     
-        // document.getElementById("logout").style.display = "block";     
+        document.getElementById("logout").style.display = "block";     
       } else {
         // No user is signed in.
         document.getElementById("user_div").style.display = "none";
         document.getElementById("login_div").style.display = "block";
-        // document.getElementById("logout_button").style.display = "none"; 
+        document.getElementById("logout").style.display = "none"; 
       }
     });
     
     </script>
-    <!-- <!-- <div id="login_div" class="main-div">
-      <h3>EventSwipe Login Page</h3> -->
+    <div id="login_div" class="main-div">
+      <h3>EventSwipe Login Page</h3>
       <!-- <input type="email" placeholder="Email..." id="email_field" />
       <input type="password" placeholder="Password..." id="password_field" />
       <button onclick={signInWithGoogle()}>Login With Google</button>
       <button onclick={signOutOfGoogle()}>Sign Out</button>  -->
       <button class="btn btn-dark" onclick="signInWithGoogle()">Sign In With Google</button>
-    </div> -->
+    </div>
   
 <div id="user_div" class="loggedin-div">   
   <div id="app"></div>
@@ -101,8 +101,8 @@
       }
     });
     
-    </script>
-<script type="text/javascript" src="bundle.js"></script> -->
+    </script> -->
+<script type="text/javascript" src="bundle.js"></script>
 <style>
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white !important;
