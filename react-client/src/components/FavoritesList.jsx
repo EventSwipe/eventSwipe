@@ -29,8 +29,7 @@ export default class FavoritesList extends React.Component {
         this.setState({ currentList: favorites.slice(0, 5), count: 0});
       }
     } else {
-      let favorite = favorites.slice(count + 5, count + 10);
-      this.setState({ currentList: favorite });
+      this.setState({ currentList: favorites.slice(count + 5, count + 10) });
     }
   }
 
