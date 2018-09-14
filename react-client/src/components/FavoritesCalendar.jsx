@@ -7,7 +7,7 @@ import '!style-loader!css-loader!react-big-calendar/lib/css/react-big-calendar.c
 
 Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 
-class FavoritesCalendar extends React.Component {
+export default class FavoritesCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { events: [] };
@@ -59,5 +59,3 @@ class FavoritesCalendar extends React.Component {
     );
   }
 }
-
-export default FavoritesCalendar;

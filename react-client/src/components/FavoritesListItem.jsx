@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FavoriteListItem extends React.Component {
+export default class FavoriteListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = { clicked: false };
@@ -30,7 +30,7 @@ class FavoriteListItem extends React.Component {
         <br />
         <a href={favorite.url}>{favorite.name}</a>
         <br/>
-        <b style={{ color: '#343a40'}}>Description: </b> 
+        <b style={{ color: '#343a40'}}>Description:</b> 
         {favorite.description && (favorite.description.length >= 200) 
           ? 
           <ul>
@@ -47,5 +47,3 @@ class FavoriteListItem extends React.Component {
     );
   }
 }
-
-export default FavoriteListItem;
