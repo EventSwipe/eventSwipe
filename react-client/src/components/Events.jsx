@@ -18,7 +18,7 @@ export default class Events extends React.Component {
     let query = this.props.events.shift(); // set the query to the shifted item
     // axios post the item to the database
     query.uid = firebase.auth().currentUser.uid;
-    axios.post(`/favorites/${query.uid}`, {params: { favoriteEvent: query }})
+    axios.post(`/favorites/${query.uid}`, { params: { favoriteEvent: query }})
       .then(() => {
         this.setState({ count: 0 });
         alert('Event has been saved in your favorites. Check out more events!');
