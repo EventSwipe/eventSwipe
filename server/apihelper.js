@@ -41,7 +41,7 @@ const getFromMeetUp = (query, cb) => {
       let lat = data.lat;
       let lng = data.lng;
       console.log(lat,lng)
-      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lng}&start_date_range=${startDate}&end_date_range=${endDate}` };
+      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lng}&start_date_range=${startDate}&end_date_range=${endDate}&fields=featured_photo` };
       request.get(options, (err, results) => {
         if (err) {
           console.error(`err in request.get to zipcode: ${err}`);
