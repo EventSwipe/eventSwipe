@@ -21,9 +21,9 @@ export default class FavoritesCalendar extends React.Component {
   getFaves() {
     axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
       .then(({data}) => {
-        let promise = Promise.all(data.map((event, i) => {
+        let promise = Promise.all(data.map((event) => {
           let obj = {};
-          obj['id'] = i;
+          obj['id'] = event.id;
           if (event.local_time) {
             let eventInfo = `${event.date} ${event.time}`;
             obj['start'] = new Date(moment(eventInfo));
