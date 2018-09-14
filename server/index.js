@@ -40,7 +40,7 @@ app.get('/favorites/:uid', (req, res) => {
 
 app.post('/favorites/:uid', (req, res) => {
   let { favoriteEvent } = req.body.params;
-  console.log(favoriteEvent, '234234234')
+  // console.log(favoriteEvent, '234234234');
   addFavorite(favoriteEvent, (err) => {
     if (err) {
       console.error(`err in app.post /favorites: ${err}`);
@@ -68,7 +68,7 @@ app.delete('/favorites', (req, res) => {
 //get events from db helper
 app.get('/events', (req, res) => {
   // makes the query the object from the body
-  console.log(req.query);
+  // console.log('3333333', req.query);
   var query = { location: req.query.location, topic: req.query.topic, startDate: req.query.startDate, endDate: req.query.endDate };
   // call the apihelper function to return a promise
   getFromMeetUp(query, (err, data1) => {
@@ -85,7 +85,13 @@ app.get('/events', (req, res) => {
             data2.events = data2.events.slice(0, 25);
           } 
           data1.body = JSON.parse(data1.body);
-          res.status(200).send([...data1.body.events, ...data2.events]);
+          console.log('123', data1.body)
+          if (data1.body.events && data1.body.events.length > 1) {
+            res.status(200).send([...data1.body.events, ...data2.events]);
+          } else {
+            res.status(200).send([data1.body.events, ...data2.events]);
+          }
+          
         }
       });
     }
