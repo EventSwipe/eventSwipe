@@ -12,7 +12,7 @@ const Event = ({ event, like, dislike }) => (
         <div className="col">
           <div className="card" >
             <div className="card-body" style={{ width: 550, color: '#015249' }}>
-              <img className="event-img" style={{ width: 500, height: 400 }} src={event.logo ? event.logo.url : event.events ? event.events.featured_photo : 'http://tiny.cc/vaikyy' } alt="Card image cap"/>
+              <img className="event-img" style={{ width: 500, height: 400 }} src={event.logo ? event.logo.url : event.featured_photo ? event.featured_photo.highres_link : 'http://tiny.cc/vaikyy' } alt="Card image cap"/>
               <h5 className="card-title">{event.name ? event.name.text : event.group.name}</h5>
               {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
               <p className="card-text">
