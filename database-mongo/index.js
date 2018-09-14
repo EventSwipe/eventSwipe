@@ -62,7 +62,7 @@ const addUser = (userData) => {
   
   User.find({uid: userData.uid}, (err, data) => {
     if (err) {
-      console.log(`err in User.find: ${err}`)
+      console.log(`err in User.find: ${err}`);
     } 
     if (data.length === 0) {
       newUser.save((err) => {
@@ -73,7 +73,7 @@ const addUser = (userData) => {
         }
       });
     } else {
-      console.log('user alreayd exists in the db')
+      console.log('user alreayd exists in the db');
     }
   })
 };

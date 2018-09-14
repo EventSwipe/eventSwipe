@@ -4,16 +4,12 @@ import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
 // import Nav from './components/Nav.jsx';
 import axios from 'axios';
-// import SnackBars from './components/SnackBars.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { events: [], showFaves: false };
     this.searchEvents = this.searchEvents.bind(this);
-    this.showFavorites = this.showFavorites.bind(this);
-    this.showFaves = this.showFaves.bind(this);
-    this.showHome = this.showHome.bind(this);
   }
   signInWithGoogle() {
     var googleAuthProvider = new firebase.auth.GoogleAuthProvider;
@@ -30,27 +26,14 @@ class App extends React.Component {
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {  // User is signed in.
-        this.setState({ authenticated: true, user: user }, () => {
-          axios.get(`/loggedin/${this.state.user.uid}`);
-        });
+      if (user) { // User is signed in.
+        this.setState({ authenticated: true, user }, () => axios.get(`/loggedin/${this.state.user.uid}`));
       }
     });
   }
-  
-  showFavorites() {
-    this.setState({ showFaves: !this.state.showFaves });
-  }
-  showFaves() {
-    this.setState({ showFaves: true });
-  }
-  showHome() {
-    this.setState({ showFaves: false });
-  }
 
   searchEvents(query) {
-    //axios get request from API and then populates the events state with the data
-    axios.get('/events', query)
+    axios.get('/events', query) // axios get request from API and then populates the events state with the data
       .then(({ data }) => {
         let promise = Promise.all(data.sort((a, b) => {
           return new Date(b.date) - new Date(a.date);
@@ -62,17 +45,16 @@ class App extends React.Component {
       .catch((err) => console.log('front end error', err));
   }
 
-  //renders navbar, searchbar, even & likes
+  // renders navbar, searchbar, even & likes
   render () {
-    const { showFaves, events } = this.state;
+    const { showFaves, events, user } = this.state;
 
-    const showFavesOrEvents = showFaves ? <Favorites user={this.state.user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
+    const showFavesOrEvents = showFaves ? <Favorites user={user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return this.state.authenticated ? (
       <container>
-        {/* <Nav home={this.showHome} showFaves={this.showFaves} signOutOfGoogle={this.signOutOfGoogle}/> */}
         <div className="d-flex justify-content-center">
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
-            <button className="btn btn-dark" onClick={this.showFavorites} style={{marginBottom: '20px', marginTop: '20px'}}>
+            <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{marginBottom: '20px', marginTop: '20px'}}>
               {showFaves ? 'Search Events' : 'Show Favorites'}
             </button>
             {showFavesOrEvents}
@@ -86,7 +68,7 @@ class App extends React.Component {
       //   <button className="btn btn-dark" onClick={this.signInWithGoogle}>Sign In With Google</button>
       // </div>
       <div/>
-    )
+    );
   }
 }
 

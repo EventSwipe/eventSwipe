@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import FavoritesListItem from './FavoritesListItem.jsx';
 
-class FavoritesList extends React.Component {
+export default class FavoritesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { show: false, currentList: [], favorites: [], count: 0 };
@@ -43,7 +43,7 @@ class FavoritesList extends React.Component {
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
   render() {
-    const { removeFave, getFaves } = this.props;
+    const { removeFave } = this.props;
     const { show, currentList } = this.state;
     return (
       <div className="container-fluid">
@@ -52,7 +52,7 @@ class FavoritesList extends React.Component {
           <button className="btn btn-dark" onClick={this.showFavorites} style={{ marginRight: 10, marginBottom: 20 }}>{show ? 'Hide Events' : 'Display Events'}</button> 
           {show ? <button className="btn btn-dark" style={{ marginBottom: 20 }} onClick={this.displayNext}>Show More Events</button> : ''}
           <br />
-          {this.state.show 
+          {show 
             ? 
             <div className="row">
               {currentList.map(favorite => (
@@ -69,5 +69,3 @@ class FavoritesList extends React.Component {
     );
   }
 }
-
-export default FavoritesList;
