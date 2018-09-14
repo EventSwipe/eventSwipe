@@ -17,7 +17,7 @@ export default class FavoriteListItem extends React.Component {
     const { removeFave, favorite, getFaves } = this.props;
     return (
       <div id="show">
-        <img style={{ width: 280, height: 300, paddingBottom: 10 }} src={favorite.logo || 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png'} />
+        <img style={{ width: 280, height: 300, paddingBottom: 10 }} src={favorite.logo ? favorite.logo : favorite.featured_photo ? favorite.featured_photo.highres_link : 'http://tiny.cc/vaikyy'} />
         <button 
           className="btn btn-dark"
           onClick={() => {
