@@ -35,8 +35,11 @@ class App extends React.Component {
   searchEvents(query) {
     axios.get('/events', query) // axios get request from API and then populates the events state with the data
       .then(({ data }) => {
+        console.log('dataaaaaa', data)
         let promise = Promise.all(data.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
+          if (a !== null && b !== null) {
+            return new Date(b.date) - new Date(a.date);
+          }
         }));
         promise
           .then(events => this.setState({ events }))
