@@ -85,11 +85,11 @@ app.get('/events', (req, res) => {
             data2.events = data2.events.slice(0, 25);
           } 
           data1.body = JSON.parse(data1.body);
-          console.log('123', data1.body)
-          if (data1.body.events && data1.body.events.length > 1) {
+          console.log('123', data1.body);
+          if (data1.body.events && data1.body.events.length > 1 && !data1.body.errors) {
             res.status(200).send([...data1.body.events, ...data2.events]);
           } else {
-            res.status(200).send([data1.body.events, ...data2.events]);
+            res.status(200).send([...data2.events]);
           }
           
         }
