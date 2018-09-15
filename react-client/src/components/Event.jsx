@@ -13,7 +13,6 @@ const Event = ({ event, like, dislike }) => {
     <div>
       {event ? (
         <div className="row">
-          {console.log(event)}
           <div className="col">
             <div className="card" >
               <div className="card-body" style={{ width: 550, color: '#015249' }}>
