@@ -3,7 +3,7 @@ import axios from 'axios';
 import FavoritesList from './FavoritesList.jsx';
 import FavoritesCalendar from './FavoritesCalendar.jsx';
 
-class Favorites extends React.Component {
+export default class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = { favorites: [] };
@@ -42,5 +42,3 @@ class Favorites extends React.Component {
     );
   }
 }
-
-export default Favorites;

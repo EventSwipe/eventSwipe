@@ -14,7 +14,7 @@ try { // The config.js file is ignored by git
 
 //Generic api integration method (not used yet)
 const getZipCodeBasedOnLonAndLat = (zip, cb) => {
-  let options = { url: `https://www.zipcodeapi.com/rest/ncucN8D5hCeYccab8JKN8H0aQYl5pIaQ4XPKE1OWgGyAhD19wI2DeK3FNyoCKpXD/info.json/${zip}/degrees`};
+  let options = { url: `https://www.zipcodeapi.com/rest/XMKqvcDNDMsCb42QfQTb9aGrKcrdR5TrEmHM41cry91wj2WPDu10Q0p97Jjuk5JM/info.json/${zip}/degrees`};
   request.get(options, (err, results) => {
     if (err) {
       console.error(`err in getZipCode: ${err}`);
@@ -29,9 +29,10 @@ const getZipCodeBasedOnLonAndLat = (zip, cb) => {
 const getFromMeetUp = (query, cb) => {
   var location = query.location;
   var topic = query.topic;
+  // console.log('222222', query.startDate, query.endDate)
   var startDate = query.startDate.substring(0, query.startDate.length-5);
   var endDate = query.endDate.substring(0, query.endDate.length-5);
-  console.log(startDate,endDate)
+  console.log(startDate , endDate)
   getZipCodeBasedOnLonAndLat(location, (err, data) => {
     if (err) {
       console.error('err in call for getZip', err);
@@ -40,8 +41,8 @@ const getFromMeetUp = (query, cb) => {
       data = JSON.parse(data.body);
       let lat = data.lat;
       let lng = data.lng;
-      console.log(lat,lng)
-      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lng}&start_date_range=${startDate}&end_date_range=${endDate}` };
+      console.log(lat, lng)
+      var options = { url: `https://api.meetup.com/find/upcoming_events?key=48416f2b301d68647614267b3651601c&text=${topic}&lat=${lat}&lon=${lng}&start_date_range=${startDate}&end_date_range=${endDate}&fields=featured_photo,group_photo` };
       request.get(options, (err, results) => {
         if (err) {
           console.error(`err in request.get to zipcode: ${err}`);

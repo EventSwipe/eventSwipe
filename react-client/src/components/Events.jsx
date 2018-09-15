@@ -2,7 +2,7 @@ import React from 'react';
 import Event from './Event.jsx';
 import axios from 'axios';
 
-class Events extends React.Component {
+export default class Events extends React.Component {
   constructor(props) {
     super(props);
     this.state = { count: 0 };
@@ -18,7 +18,7 @@ class Events extends React.Component {
     let query = this.props.events.shift(); // set the query to the shifted item
     // axios post the item to the database
     query.uid = firebase.auth().currentUser.uid;
-    axios.post(`/favorites/${query.uid}`, {params: { favoriteEvent: query }})
+    axios.post(`/favorites/${query.uid}`, { params: { favoriteEvent: query }})
       .then(() => {
         this.setState({ count: 0 });
         alert('Event has been saved in your favorites. Check out more events!');
@@ -35,18 +35,16 @@ class Events extends React.Component {
   }
 
   render() {
-    const { events } = this.props;
-    const { count } = this.state;
     return (
       <div className="container" style={{'marginTop': '50px'}}>
         <div className="row">
           <div className="col-12">
-            <Event event={events[count]} like={this.like} dislike={this.dislike}/>  
+            <Event event={this.props.events[this.state.count]} like={this.like} dislike={this.dislike}/>  
           </div>
         </div>
       </div>
     );
   }
 }
-export default Events;
+
   
