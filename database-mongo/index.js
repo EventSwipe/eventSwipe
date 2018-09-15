@@ -90,8 +90,9 @@ const addFavorite = (favorite, cb) => {
     time: favorite.local_time || null,
     end: favorite.end ? favorite.end.local : null,
     free: favorite.is_free || true,
-    logo: favorite.logo ? favorite.logo.original.url : null,
-    uid: favorite.uid
+    logo: favorite.logo ? favorite.logo.url : favorite.featured_photo ? favorite.featured_photo.highres_link : null,
+    uid: favorite.uid, 
+    address: favorite.address ? favorite.address : favorite.venue && favorite.venue.address ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite.venue && favorite.venue.address_1 ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite.group && favorite.group.localized_location ? favorite.group.localized_location : 'TBD',
   });
 
   newEvent.save(err => {

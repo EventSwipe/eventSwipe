@@ -1,6 +1,6 @@
 import React from 'react';
-import Event from './Event.jsx';
 import axios from 'axios';
+import SwipeEvent from './SwipeEvent.jsx';
 
 export default class Events extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export default class Events extends React.Component {
       <div className="container" style={{'marginTop': '50px'}}>
         <div className="row">
           <div className="col-12">
-            <Event event={this.props.events[this.state.count]} like={this.like} dislike={this.dislike}/>  
+            <SwipeEvent events={this.props.events} like={this.like} dislike={this.dislike}/>  
           </div>
         </div>
       </div>
