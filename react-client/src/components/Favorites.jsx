@@ -2,13 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import FavoritesList from './FavoritesList.jsx';
 import FavoritesCalendar from './FavoritesCalendar.jsx';
+import moment from 'moment';
 
 export default class Favorites extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { favorites: [] };
+    this.state = { favorites: [], events: [] };
     this.loadMyFaves = this.loadMyFaves.bind(this);
     this.removeFave = this.removeFave.bind(this);
+    this.getCalendarFaves = this.getCalendarFaves.bind(this);
   }
 
   componentDidMount() {
@@ -29,15 +31,42 @@ export default class Favorites extends React.Component {
       .catch(err => console.error('err in removeFave in favorites.jsx', err));
   }
 
+  getCalendarFaves() {
+    axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
+      .then(({data}) => {
+        let promise = Promise.all(data.map((event) => {
+          let obj = {};
+          obj['id'] = event.id;
+          if (event.local_time) {
+            let eventInfo = `${event.date} ${event.time}`;
+            obj['start'] = new Date(moment(eventInfo));
+          } else {
+            obj['start'] = new Date(moment(event.date));
+          }
+          if (!event.end) {
+            obj['end'] = new Date(moment(obj.start).add('3', 'hours'));
+          } else {
+            obj['end'] = new Date(moment(event.end));
+          }
+          obj['title'] = event.name ? event.name.substring(0, 50) : event.description.substring(0, 20);
+          return obj;
+        }));
+        promise
+          .then(events => this.setState({ events }))
+          .catch(e => console.error('err in getFaves FavoritesCalendar.jsx', err));
+      })
+      .catch(err => console.error('err in getFaves in FavoritesCalendar.jsx', err));
+  }
+
   // renders a new endpoint with the calendar and list
   render() {
-    const { favorites } = this.state;
+    const { favorites, events } = this.state;
     return (
       <div>
         <h1>Favorite Events</h1>
         <br />
-        <FavoritesCalendar favorites={favorites}/> 
-        <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave}/>
+        <FavoritesCalendar favorites={events} getFaves={this.getCalendarFaves}/> 
+        <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave} getFaves={this.loadMyFaves} getCalendarFaves={this.getCalendarFaves}/>
       </div>
     );
   }

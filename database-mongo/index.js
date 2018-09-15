@@ -15,6 +15,7 @@ const eventSchema = mongoose.Schema({
   url: { type: String },
   location: { type: String },
   date: { type: Date },
+  time: { type: String },
   end: { type: Date },
   free: { type: Boolean },
   logo: { type: String },
@@ -73,9 +74,9 @@ const addUser = (userData) => {
         }
       });
     } else {
-      console.log('user alreayd exists in the db');
+      console.log('User already exists in the db');
     }
-  })
+  });
 };
 
 // adding favorite events to database with username
@@ -86,13 +87,13 @@ const addFavorite = (favorite, cb) => {
     name: favorite.name && !favorite.name.text ? favorite.name : favorite.name.text,
     description: favorite.description ? favorite.description.text : favorite.name,
     url: favorite.url || favorite.link,
+    location: favorite.address ? favorite.address : favorite.venue && favorite.venue.address && favorite.venue.address.address_1 ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite.venue ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite.group && favorite.group.localized_location ? favorite.group.localized_location : 'TBD',
     date: favorite.start ? favorite.start.local : favorite.local_date,
     time: favorite.local_time || null,
     end: favorite.end ? favorite.end.local : null,
     free: favorite.is_free || true,
     logo: favorite.logo ? favorite.logo.url : favorite.featured_photo ? favorite.featured_photo.highres_link : null,
     uid: favorite.uid, 
-    address: favorite.address ? favorite.address : favorite.venue && favorite.venue.address ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite.venue && favorite.venue.address_1 ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite.group && favorite.group.localized_location ? favorite.group.localized_location : 'TBD',
   });
 
   newEvent.save(err => {

@@ -56,7 +56,7 @@ export default class FavoritesList extends React.Component {
             <div className="row">
               {currentList.map(favorite => (
                 <div className="col" key={favorite.id}>
-                  <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites}/>
+                  <FavoritesListItem favorite={favorite} removeFave={removeFave} getFaves={this.getFavorites} getCalendarFaves={this.props.getCalendarFaves}/>
                 </div>
               ))}
             </div>

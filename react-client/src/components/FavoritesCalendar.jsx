@@ -10,49 +10,20 @@ Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 export default class FavoritesCalendar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { events: [] };
-    this.getFaves = this.getFaves.bind(this);
   }
 
   componentDidMount() {
-    this.getFaves();
-  }
-
-  getFaves() {
-    axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
-      .then(({data}) => {
-        let promise = Promise.all(data.map((event) => {
-          let obj = {};
-          obj['id'] = event.id;
-          if (event.local_time) {
-            let eventInfo = `${event.date} ${event.time}`;
-            obj['start'] = new Date(moment(eventInfo));
-          } else {
-            obj['start'] = new Date(moment(event.date));
-          }
-          if (!event.end) {
-            obj['end'] = new Date(moment(obj.start).add('3', 'hours'));
-          } else {
-            obj['end'] = new Date(moment(event.end));
-          }
-          obj['title'] = event.name ? event.name.substring(0, 50) : event.description.substring(0, 20);
-          return obj;
-        }));
-        promise
-          .then(events => this.setState({ events }))
-          .catch(e => console.error('err in getFaves FavoritesCalendar.jsx', err));
-      })
-      .catch(err => console.error('err in getFaves in FavoritesCalendar.jsx', err));
+    this.props.getFaves();
   }
 
   render() {
-    const { events } = this.state;
+    const { favorites } = this.props;
     return (
       <div className="calendar">
         <Calendar
           defaultDate={new Date()}
           defaultView="month"
-          events={events}
+          events={favorites}
           style={{ height: '80vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
         />
       </div>
