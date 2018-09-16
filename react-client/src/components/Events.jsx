@@ -39,7 +39,7 @@ export default class Events extends React.Component {
       <div className="container" style={{'marginTop': '50px'}}>
         <div className="row">
           <div className="col-12">
-            <Event events={this.props.events} like={this.like} dislike={this.dislike}/>  
+            <Event events={this.props.events} />  
           </div>
         </div>
       </div>

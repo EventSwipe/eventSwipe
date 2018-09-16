@@ -91,7 +91,7 @@ class Event extends React.Component {
                   </p>
                   <p className="card-text">
                     <span className="price"><b>Price: </b> {price}</span>
-                  </p>
+                  </p>  
                   <p className="card-text">
                     <span className="description"><b>Description:</b> {description}</span>
                   </p>

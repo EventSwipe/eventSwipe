@@ -5,8 +5,7 @@ import FavoritesListItem from './FavoritesListItem.jsx';
 export default class FavoritesList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { show: false, currentList: [], favorites: [], count: 0 };
-    this.showFavorites = this.showFavorites.bind(this);
+    this.state = { currentList: [], favorites: [], count: 0 };
     this.displayNext = this.displayNext.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
   }
@@ -15,8 +14,8 @@ export default class FavoritesList extends React.Component {
     this.getFavorites();
   }
 
-  showFavorites() {
-    this.setState({ show: !this.state.show });
+  showDisplay() {
+    this.setState({ showDisplay: !this.state.showDisplay });
   }
 
   displayNext() {
@@ -42,13 +41,12 @@ export default class FavoritesList extends React.Component {
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }
   render() {
-    const { removeFave } = this.props;
-    const { show, currentList } = this.state;
+    const { removeFave, show } = this.props;
+    const { currentList } = this.state;
     return (
       <div className="container-fluid">
-        <div style={{ marginBottom: 30 }}>
-          <button className="btn btn-dark" onClick={this.showFavorites} style={{ marginRight: 10, marginBottom: 20 }}>{show ? 'Hide Events' : 'Display Events'}</button> 
-          {show ? <button className="btn btn-dark" style={{ marginBottom: 20 }} onClick={this.displayNext}>Show More Events</button> : ''}
+        <div>
+          {show ? <button className="btn btn-dark" style={{ marginBottom: 5 }} onClick={this.displayNext}>Show More Events</button> : null}
           <br />
           {show 
             ? 
