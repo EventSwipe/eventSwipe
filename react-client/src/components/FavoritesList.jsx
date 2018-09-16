@@ -46,7 +46,6 @@ export default class FavoritesList extends React.Component {
     const { show, currentList } = this.state;
     return (
       <div className="container-fluid">
-        <h4>Saved Events</h4>
         <div style={{ marginBottom: 30 }}>
           <button className="btn btn-dark" onClick={this.showFavorites} style={{ marginRight: 10, marginBottom: 20 }}>{show ? 'Hide Events' : 'Display Events'}</button> 
           {show ? <button className="btn btn-dark" style={{ marginBottom: 20 }} onClick={this.displayNext}>Show More Events</button> : ''}

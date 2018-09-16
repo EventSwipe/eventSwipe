@@ -63,10 +63,11 @@ export default class Favorites extends React.Component {
     const { favorites, events } = this.state;
     return (
       <div>
-        <h1>Favorite Events</h1>
-        <br />
-        <FavoritesCalendar favorites={events} getFaves={this.getCalendarFaves}/> 
-        <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave} getFaves={this.loadMyFaves} getCalendarFaves={this.getCalendarFaves}/>
+        <span>
+          <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave} getFaves={this.loadMyFaves} getCalendarFaves={this.getCalendarFaves}/>
+          <FavoritesCalendar favorites={events} getFaves={this.getCalendarFaves}/> 
+        </span>
+
       </div>
     );
   }
