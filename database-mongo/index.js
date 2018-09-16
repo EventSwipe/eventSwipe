@@ -9,9 +9,9 @@ db.once('open', () => console.log('mongoose connected successfully'));
 
 // event data for each user
 const eventSchema = mongoose.Schema({
-  id: { type: String },
+  id: { type: String, unique: true },
   name: { type: String },
-  description: { type: String },
+  description: { type: String},
   url: { type: String },
   location: { type: String },
   date: { type: Date },
@@ -85,14 +85,14 @@ const addFavorite = (favorite, cb) => {
   var newEvent = new Event({
     id: favorite.id,
     name: favorite.name && !favorite.name.text ? favorite.name : favorite.name.text,
-    description: favorite.description ? favorite.description.text : favorite.name,
+    description: favorite && favorite.plain_text_description ? favorite.plain_text_description : favorite && favorite.description && favorite.description.text ? favorite.description.text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : favorite && event.description ? event.description.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : null,
     url: favorite.url || favorite.link,
-    location: favorite.address ? favorite.address : favorite.venue && favorite.venue.address && favorite.venue.address.address_1 ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite.venue ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite.group && favorite.group.localized_location ? favorite.group.localized_location : 'TBD',
+    location: favorite.address ? favorite.address : favorite.venue && favorite.venue.address && favorite.venue.address.address_1 ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite.venue ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite.group && favorite.group.localized_location ? favorite.group.localized_location : null,
     date: favorite.start ? favorite.start.local : favorite.local_date,
     time: favorite.local_time || null,
     end: favorite.end ? favorite.end.local : null,
-    free: favorite.is_free || true,
-    logo: favorite.logo ? favorite.logo.url : favorite.featured_photo ? favorite.featured_photo.highres_link : null,
+    free: favorite.is_free || null,
+    logo: favorite.logo ? favorite.logo.url : favorite.featured_photo ? favorite.featured_photo.highres_link : favorite.group && favorite.group.photo ? favorite.group.photo.highres_link : null, 
     uid: favorite.uid, 
   });
 
