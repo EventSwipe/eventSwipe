@@ -2,6 +2,7 @@ const request = require('request');
 
 let MEETUP_TOKEN = null;
 let EVENTBRITE_TOKEN = null;
+let ZIPCODE_TOKEN = require('../config.js').ZIPCODE_KEY;
 // Trying to resolve a non-existent file will result in an error
 // The try block will attempt an error-prone action and if it doesn't work, the catch block runs
 try { // The config.js file is ignored by git
@@ -14,7 +15,7 @@ try { // The config.js file is ignored by git
 
 //Generic api integration method (not used yet)
 const getZipCodeBasedOnLonAndLat = (zip, cb) => {
-  let options = { url: `https://www.zipcodeapi.com/rest/XMKqvcDNDMsCb42QfQTb9aGrKcrdR5TrEmHM41cry91wj2WPDu10Q0p97Jjuk5JM/info.json/${zip}/degrees`};
+  let options = { url: `https://www.zipcodeapi.com/rest/${ZIPCODE_TOKEN}/info.json/${zip}/degrees`};
   request.get(options, (err, results) => {
     if (err) {
       console.error(`err in getZipCode: ${err}`);

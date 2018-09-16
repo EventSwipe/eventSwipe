@@ -1,9 +1,9 @@
 import React from 'react';
-import HomePageInfo from './HomePageInfo.jsx';
 import moment from 'moment';
 import axios from 'axios';
+import HomePageInfo from './HomePageInfo.jsx';
  
-class SwipeEvent extends React.Component {
+class Event extends React.Component {
   constructor(props) {
     super(props);
     this.state = { count: 0, x: 0, y: 0 };
@@ -40,9 +40,9 @@ class SwipeEvent extends React.Component {
     this.setState({ x: e.screenX, y: e.screenY }, () => {
       // console.log('333', x);
       if (this.state.x > 1100) {
-        this.like(e);
+        this.like();
       } else {
-        this.dislike(e)
+        this.dislike();
       }
       // console.log(this.state.x, this.state.y)
     });
@@ -56,6 +56,7 @@ class SwipeEvent extends React.Component {
     const description = event && event.plain_text_description ? event.plain_text_description : event && event.description && event.description.text ? event.description.text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : event && event.description ? event.description.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : 'Click Link Below For Info';
     const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city || event.venue.address.localized_address_display : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city + ` ${event.venue.state || ''}` : 'TBD';
     const image = event && event.logo ? event.logo.url : event && event.featured_photo ? event.featured_photo.highres_link : event && event.group && event.group.photo ? event.group.photo.highres_link : 'http://tiny.cc/vaikyy'; 
+    const price = event && event.is_free ? 'Free :)' : event && event.is_free === false ? 'Not Free' : event && event.fee ? event.fee.currency.replace('USD', '$') + event.fee.amount + ' ' + event.fee.description : 'N/A';
     const bold = { fontWeight: 'bold' };
     return (
       <div>
@@ -89,6 +90,10 @@ class SwipeEvent extends React.Component {
                     <span>{time}</span>
                   </p>
                   <p className="card-text">
+                    <span className="price" style={bold}>Price: </span>
+                    <span>{price}</span>
+                  </p>
+                  <p className="card-text">
                     <span className="link" style={bold}>Link: </span>
                     <a href={event.url || event.link} style={{ color: 'white' }}>Check Out The Event</a>
                   </p>
@@ -113,4 +118,4 @@ class SwipeEvent extends React.Component {
   }
 }
  
-export default SwipeEvent;
+export default Event;

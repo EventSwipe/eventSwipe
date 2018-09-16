@@ -37,5 +37,8 @@
     "react-swipeable": "^4.3.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.0"
+  },
+  "engines": {
+    "node": "8.11.2"
   }
 }
