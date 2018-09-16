@@ -63,7 +63,12 @@ class Event extends React.Component {
         {event ? (
           <div className="row">
             {console.log(event)}
-            <div className="col">
+            <div className="col-1" style={{marginTop: '20%'}}>
+              <button onClick={this.dislike}>
+                <span><img className="like-button" style={{ height: 50, width: 50}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
+              </button>
+            </div>
+            <div className="col-auto">
               <div className="card" style={{ backgroundColor: 'rgba(47, 168, 184, 0.925)' }}>
                 <div className="card-body" style={{ width: 550, color: '#015249' }}>
                   <img 
@@ -97,16 +102,15 @@ class Event extends React.Component {
                     <span className="link" style={bold}>Link: </span>
                     <a href={event.url || event.link} style={{ color: 'white' }}>Check Out The Event</a>
                   </p>
-                  <button onClick={this.dislike}>
-                    <span><img className="like-button" style={{ height: 50, width: 50}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
-                  </button>
-                  <button onClick={this.like}>
-                    <span><img className="like-button" style={{ height: 50, width: 50}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
-                  </button>
                 </div>
               </div>
             </div>
-            <div className="col" style={{'textAlign': 'left'}}>
+            <div className="col-1" style={{marginTop: '20%'}}>
+              <button onClick={this.like}>
+                <span><img className="like-button" style={{ height: 50, width: 50}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
+              </button>
+            </div>
+            <div className="col-3" style={{'textAlign': 'left'}}>
               <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address ? event.address : event.venue ? event.venue.name : event && event.group ? event.group.name : 'No Name'}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
             </div>
           </div>
