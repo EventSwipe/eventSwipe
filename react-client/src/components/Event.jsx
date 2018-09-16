@@ -36,7 +36,7 @@ class Event extends React.Component {
           beep: false,
           timeout: 3000,
           offset: 100
-      });
+        });
       })
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
   }
@@ -55,15 +55,12 @@ class Event extends React.Component {
   }
   _onMouseMove(e) {
     e.preventDefault();
-    // e.stopPropagation();
     this.setState({ x: e.screenX, y: e.screenY }, () => {
-      // console.log('333', x);
       if (this.state.x > 1100) {
         this.like();
       } else {
         this.dislike();
       }
-      // console.log(this.state.x, this.state.y)
     });
   }
 
