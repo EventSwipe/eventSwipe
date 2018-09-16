@@ -41,7 +41,7 @@ export default class FavoriteListItem extends React.Component {
           <p className="card-text" style={{ color: 'white' }}><span><b style={{ color: '#343a40' }}>Address: </b>{address}</span></p>
           <p className="card-text" style={{ color: 'white' }}>{description}</p>
           <p className="card-text" style={{ color: 'white' }}><span><b style={{ color: '#343a40'}}>Date: </b>{favorite.date.substr(0, 10)}</span></p>
-          <p className="card-text"><b style={{ color: '#343a40', marginBottom: 5, wordWrap: 'break-word' }}>Price: </b>{<b>favorite.free</b> ? <b>"FREE!"</b> : null}</p>
+          <p className="card-text"><b style={{ color: '#343a40', marginBottom: 5, wordWrap: 'break-word' }}>Price: </b><b>{favorite.free || 'N/A'}</b></p>
         </div>
       </div>
     );

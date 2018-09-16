@@ -91,7 +91,7 @@ const addFavorite = (favorite, cb) => {
     date: favorite.start ? favorite.start.local : favorite.local_date,
     time: favorite.local_time || null,
     end: favorite.end ? favorite.end.local : null,
-    free: favorite.is_free || true,
+    free: favorite.is_free || null,
     logo: favorite.logo ? favorite.logo.url : favorite.featured_photo ? favorite.featured_photo.highres_link : favorite.group && favorite.group.photo ? favorite.group.photo.highres_link : null, 
     uid: favorite.uid, 
   });
