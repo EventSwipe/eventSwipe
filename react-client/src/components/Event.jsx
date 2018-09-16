@@ -7,7 +7,8 @@ import HomePageInfo from './HomePageInfo.jsx';
 const Event = ({ event, like, dislike }) => {
   const date = event && event.start ? new Date(moment(event.start.local)).toString().substring(0, 15) : event && event.local_date ? new Date(moment(event.local_date)).toString().substring(0, 15) : 'TBD';
   const time = event && event.local_time ? event.local_time : event && event.start ? event.start.local.substring(11) : 'Time Not Given';
-  const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city || event.venue.address.localized_address_display : event && event.group && event.group.localized_location ? event.group.localized_location : 'TBD';
+  const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city || event.venue.address.localized_address_display : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city + (', ' + event.venue.state) || '' : 'TBD';
+  const image = event && event.logo ? event.logo.url : event && event.featured_photo ? event.featured_photo.highres_link : event && event.group && event.group.photo ? event.group.photo.highres_link : 'http://tiny.cc/vaikyy'; 
   const bold = { fontWeight: 'bold' };
   return (
     <div>
@@ -16,7 +17,7 @@ const Event = ({ event, like, dislike }) => {
           <div className="col">
             <div className="card" >
               <div className="card-body" style={{ width: 550, color: '#015249' }}>
-                <img className="event-img" style={{ width: 500, height: 400 }} src={event.logo ? event.logo.url : event.featured_photo ? event.featured_photo.highres_link : 'http://tiny.cc/vaikyy' } alt="Card image cap"/>
+                <img className="event-img" style={{ width: 500, height: 400 }} src={image} alt="Card image cap"/>
                 <h5 className="card-title">{event.name ? event.name.text : event.group.name}</h5>
                 {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
                 <p className="card-text">

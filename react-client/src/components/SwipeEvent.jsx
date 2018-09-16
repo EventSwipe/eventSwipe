@@ -53,7 +53,9 @@ class SwipeEvent extends React.Component {
     let event = events ? events[this.state.count] : events;
     const date = event && event.start ? new Date(moment(event.start.local)).toString().substring(0, 15) : event && event.local_date ? new Date(moment(event.local_date)).toString().substring(0, 15) : 'TBD';
     const time = event && event.local_time ? event.local_time : event && event.start ? event.start.local.substring(11) : 'Time Not Given';
-    const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city || event.venue.address.localized_address_display : event && event.group && event.group.localized_location ? event.group.localized_location : 'TBD';
+    const description = event && event.plain_text_description ? event.plain_text_description : event && event.description && event.description.text ? event.description.text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : event && event.description ? event.description.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : 'Click Link Below For Info';
+    const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city || event.venue.address.localized_address_display : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city + (`, ${event.venue.state}` || '') : 'TBD';
+    const image = event && event.logo ? event.logo.url : event && event.featured_photo ? event.featured_photo.highres_link : event && event.group && event.group.photo ? event.group.photo.highres_link : 'http://tiny.cc/vaikyy'; 
     const bold = { fontWeight: 'bold' };
     return (
       <div>
@@ -61,17 +63,18 @@ class SwipeEvent extends React.Component {
           <div className="row">
             {console.log(event)}
             <div className="col">
-              <div className="card" >
+              <div className="card" style={{ backgroundColor: 'rgba(47, 168, 184, 0.925)' }}>
                 <div className="card-body" style={{ width: 550, color: '#015249' }}>
                   <img 
                     className="event-img" 
                     onDragEnd={this._onMouseMove.bind(this)}
                     style={{ width: 500, height: 400 }} 
-                    src={event.logo ? event.logo.url : event.featured_photo ? event.featured_photo.highres_link : 'http://tiny.cc/vaikyy' } alt="Card image cap"
+                    src={image} alt="Card image cap"
                   />
-                  <h5 className="card-title">{event.name ? event.name.text : event.group.name}</h5>
+                  <h5 className="card-title" style={{ marginTop: 10 }}>{event.name && !event.name.text ? event.name : event && event.name && event.name.text ? event.name.text : event && event.group && event.group.name ? event.group.name : 'No Name Given'}</h5>
                   <p className="card-text">
-                    <b>Description:</b> {event.description && event.description.text ? event.description.text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '') : event.description ? event.description.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '') : 'Click Link Below For Info'}
+                    <span className="description" style={bold}>Description: </span>
+                    <span>{description}</span>
                   </p>
                   <p className="card-text">
                     <span className="Loc" style={bold}>Venue Address: </span>
@@ -87,7 +90,7 @@ class SwipeEvent extends React.Component {
                   </p>
                   <p className="card-text">
                     <span className="link" style={bold}>Link: </span>
-                    <a href={event.url || event.link}>Check Out The Event</a>
+                    <a href={event.url || event.link} style={{ color: 'white' }}>Check Out The Event</a>
                   </p>
                   <button onClick={this.dislike}>
                     <span><img className="like-button" style={{ height: 50, width: 50}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>

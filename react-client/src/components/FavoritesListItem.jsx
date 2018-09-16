@@ -35,7 +35,7 @@ export default class FavoriteListItem extends React.Component {
             >Delete Event
             </button>
           </span>
-          <img className="event-img" style={{ width: 350, height: 340, paddingBottom: 20, paddingLeft: 20 }} src={favorite.logo ? favorite.logo : favorite.featured_photo ? favorite.featured_photo.highres_link : 'http://tiny.cc/vaikyy'} />
+          <img className="event-img" style={{ width: 350, height: 340, paddingBottom: 20, paddingLeft: 20 }} src={favorite.logo || 'http://tiny.cc/vaikyy'} />
           <p className="card-title" style={{ color: 'white' }}><a href={favorite.url}>{favorite.name}</a></p>
           <p className="card-text" style={{ color: 'white' }}><span><b style={{ color: '#343a40' }}>Time: </b>{time}</span></p>
           <p className="card-text" style={{ color: 'white' }}><span><b style={{ color: '#343a40' }}>Address: </b>{address}</span></p>
