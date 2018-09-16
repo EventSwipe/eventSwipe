@@ -34,7 +34,11 @@
     "react-big-calendar": "^0.19.2",
     "react-date-range": "^0.9.4",
     "react-dom": "^15.4.2",
+    "react-swipeable": "^4.3.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.0"
+  },
+  "engines": {
+    "node": "8.11.2"
   }
 }

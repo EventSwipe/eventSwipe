@@ -188,6 +188,11 @@ body {
   border: 1px solid #777;
 }
 
+#logout {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
 /* .main-div button, .loggedin-div button {
   background: #5d8ffc;
   color: #fff;
