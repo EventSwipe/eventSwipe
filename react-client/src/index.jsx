@@ -4,6 +4,7 @@ import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import Footer from './components/Footer.jsx';
 import axios from 'axios';
+import Alert from 'react-s-alert';
 
 class App extends React.Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class App extends React.Component {
             <Footer />
           </div>
         </div>
+        <Alert stack={{limit: 3}}/>
       </container>
     ) : (
       <div/>
