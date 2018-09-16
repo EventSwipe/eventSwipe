@@ -7,14 +7,20 @@ import moment from 'moment';
 export default class Favorites extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { favorites: [], events: [] };
+    this.state = { favorites: [], events: [], show: false, showDisplay: false };
     this.loadMyFaves = this.loadMyFaves.bind(this);
     this.removeFave = this.removeFave.bind(this);
     this.getCalendarFaves = this.getCalendarFaves.bind(this);
+    this.showFavorites = this.showFavorites.bind(this);
   }
 
   componentDidMount() {
     this.loadMyFaves();
+  }
+
+
+  showFavorites() {
+    this.setState({ show: !this.state.show, showDisplay: !this.state.showDisplay });
   }
 
   // loads all the favorites saved in database
@@ -60,14 +66,25 @@ export default class Favorites extends React.Component {
 
   // renders a new endpoint with the calendar and list
   render() {
-    const { favorites, events } = this.state;
+    const { favorites, events, show, showDisplay } = this.state;
     return (
       <div>
+        <button className="btn btn-dark" onClick={this.showFavorites} style={{ position: 'absolute', top: 5, right: '50%'}}>{showDisplay ? 'Display Calendar' : 'Display Events'}</button>
         <span>
-          <FavoritesList user={this.props.user} favorites={favorites} removeFave={this.removeFave} getFaves={this.loadMyFaves} getCalendarFaves={this.getCalendarFaves}/>
-          <FavoritesCalendar favorites={events} getFaves={this.getCalendarFaves}/> 
+          {show 
+            ? 
+            <FavoritesList 
+              user={this.props.user} 
+              favorites={favorites} 
+              removeFave={this.removeFave} 
+              getFaves={this.loadMyFaves} 
+              getCalendarFaves={this.getCalendarFaves}
+              show={this.state.show}
+            /> 
+            :
+            <FavoritesCalendar favorites={events} getFaves={this.getCalendarFaves} /> 
+          }
         </span>
-
       </div>
     );
   }

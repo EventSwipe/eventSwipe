@@ -20,7 +20,7 @@ export default class FavoriteListItem extends React.Component {
     const styleForImage = { width: 350, height: 340, paddingBottom: 20, paddingLeft: 20 };
     const styleTextBlack = { color: '#343a40' };
     const styleTextWhite = { color: 'white' };
-    const time = favorite && favorite.time ? favorite.time : 'Time Not Given';
+    const time = favorite && favorite.time ? favorite.time : 'Time not given';
     const address = favorite && favorite.location ? favorite.location : 'check out link for event address';
     const description = favorite && favorite.description && (favorite.description.length >= 300) ? <span><b style={{ color: '#343a40'}}>Description: </b>{favorite.description.substring(0, 300)}</span> : <span><b style={{ color: '#343a40'}}>Description: </b>{favorite.description ? favorite.description.substring(0, favorite.description.length) : favorite.name}</span>;
     return (
@@ -36,16 +36,16 @@ export default class FavoriteListItem extends React.Component {
                 getFaves();
                 getCalendarFaves();
               }}
-            >Delete Event
+            >Remove Event
             </button>
           </span>
           <img className="event-img" style={styleForImage} src={favorite.logo || 'http://tiny.cc/vaikyy'} />
           <p className="card-title" style={styleTextWhite}><a href={favorite.url}>{favorite.name}</a></p>
           <p className="card-text" style={styleTextWhite}><span><b style={styleTextBlack}>Time: </b>{time}</span></p>
-          <p className="card-text" style={styleTextWhite}><span><b style={styleTextBlack}>Address: </b>{address}</span></p>
-          <p className="card-text" style={styleTextWhite}>{description}</p>
           <p className="card-text" style={styleTextWhite}><span><b style={styleTextBlack}>Date: </b>{favorite.date.substr(0, 10)}</span></p>
+          <p className="card-text" style={styleTextWhite}><span><b style={styleTextBlack}>Address: </b>{address}</span></p>
           <p className="card-text" style={styleForPrice}><span><b style={styleTextBlack}>Price: </b>{favorite.free ? favorite.free.replace('USD', '$') : 'N/A'}</span></p>
+          <p className="card-text" style={styleTextWhite}>{description}</p>
         </div>
       </div>
     );

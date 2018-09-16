@@ -36,7 +36,7 @@ class Event extends React.Component {
           beep: false,
           timeout: 3000,
           offset: 100
-      });
+        });
       })
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
   }
@@ -55,21 +55,18 @@ class Event extends React.Component {
   }
   _onMouseMove(e) {
     e.preventDefault();
-    // e.stopPropagation();
     this.setState({ x: e.screenX, y: e.screenY }, () => {
-      // console.log('333', x);
       if (this.state.x > 1100) {
         this.like();
       } else {
         this.dislike();
       }
-      // console.log(this.state.x, this.state.y)
     });
   }
 
   render() {
     const { events } = this.props;
-    let event = events ? events[this.state.count] : events;
+    const event = events ? events[this.state.count] : events;
     const date = event && event.start ? new Date(moment(event.start.local)).toString().substring(0, 15) : event && event.local_date ? new Date(moment(event.local_date)).toString().substring(0, 15) : 'TBD';
     const time = event && event.local_time ? event.local_time : event && event.start ? event.start.local.substring(11) : 'Time Not Given';
     const description = event && event.plain_text_description ? event.plain_text_description : event && event.description && event.description.text ? event.description.text.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : event && event.description ? event.description.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '').replace(/<a[^>]*>/g, '').replace(/<\/a>/g, '').replace(/<br[^>]*>/g, '').replace(/<\/br>/g, '').replace(/<img[^>]*>/g, '').replace(/<\/img>/g, '') : 'Click Link Below For Info';
@@ -77,6 +74,8 @@ class Event extends React.Component {
     const image = event && event.logo ? event.logo.url : event && event.featured_photo ? event.featured_photo.highres_link : event && event.group && event.group.photo ? event.group.photo.highres_link : 'http://tiny.cc/vaikyy'; 
     const price = event && event.is_free ? 'Free :)' : event && event.is_free === false ? 'Not Free' : event && event.fee ? event.fee.currency.replace('USD', '$') + event.fee.amount + ' ' + event.fee.description : 'N/A';
     const bold = { fontWeight: 'bold' };
+    const name = event && event.name && !event.name.text ? event.name : event && event.name && event.name.text ? event.name.text : event && event.group && event.group.name ? event.group.name : 'No Name Given';
+    const mapAddress = event && event.address ? event.address : event && event.venue ? event.venue.name : event && event.group ? event.group.name : 'No Name';
     return (
       <div>
         {event ? (
@@ -96,30 +95,24 @@ class Event extends React.Component {
                     style={{ width: 500, height: 400 }} 
                     src={image} alt="Card image cap"
                   />
-                  <h5 className="card-title" style={{ marginTop: 10 }}>{event.name && !event.name.text ? event.name : event && event.name && event.name.text ? event.name.text : event && event.group && event.group.name ? event.group.name : 'No Name Given'}</h5>
+                  <h5 className="card-title" style={{ marginTop: 10 }}>{name}</h5>
                   <p className="card-text">
-                    <span className="description" style={bold}>Description: </span>
-                    <span>{description}</span>
+                    <span className="Loc"><b>Venue Address: </b> {address}</span>
                   </p>
                   <p className="card-text">
-                    <span className="Loc" style={bold}>Venue Address: </span>
-                    <span>{address}</span>
+                    <span className="date"><b>Date:</b> {date}</span>
                   </p>
                   <p className="card-text">
-                    <span className="date" style={bold}>Date: </span>
-                    <span>{date}</span>
+                    <span className="time"><b>Time:</b> {time}</span>
                   </p>
                   <p className="card-text">
-                    <span className="time" style={bold}>Time: </span>
-                    <span>{time}</span>
+                    <span className="price"><b>Price: </b> {price}</span>
+                  </p>  
+                  <p className="card-text">
+                    <span className="description"><b>Description:</b> {description}</span>
                   </p>
                   <p className="card-text">
-                    <span className="price" style={bold}>Price: </span>
-                    <span>{price}</span>
-                  </p>
-                  <p className="card-text">
-                    <span className="link" style={bold}>Link: </span>
-                    <a href={event.url || event.link} style={{ color: 'white' }}>Check Out The Event</a>
+                    <span className="link"><b>Link:</b><a href={event.url || event.link} style={{ color: 'white' }}> Check Out The Event</a></span>
                   </p>
                 </div>
               </div>
