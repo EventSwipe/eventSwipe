@@ -14,10 +14,10 @@ export default class FavoriteListItem extends React.Component {
     document.getElementById('show').scrollIntoView({ behavior: 'smooth', inline: 'end' });
   }
   render() {
+    const { removeFave, favorite, getFaves, getCalendarFaves } = this.props;
     const style = { backgroundImage: 'linear-gradient(to right, #70c0cc , #56bca7)', width: 435, height: 600, marginBottom: 60, overflow: 'auto' };
-    const { removeFave, favorite, getFaves } = this.props;
-    const time = favorite && favorite.local_time ? favorite.local_time : favorite && favorite.start ? favorite.start.local.substring(11) : 'Time Not Given';
-    const address = favorite && favorite.address ? favorite.address : favorite && favorite.venue && favorite.venue.address ? favorite.venue.address.address_1 + ' ' + favorite.venue.address.city : favorite && favorite.venue && favorite.venue.address_1 ? favorite.venue.address_1 + ' ' + favorite.venue.city || favorite.venue.address.localized_address_display : favorite && favorite.group && favorite.group.localized_location ? favorite.group.localized_location : 'TBD';
+    const time = favorite && favorite.time ? favorite.time : 'Time Not Given';
+    const address = favorite && favorite.location ? favorite.location : 'check out link for event address';
     const description = favorite && favorite.description && (favorite.description.length >= 300) ? <span><b style={{ color: '#343a40'}}>Description: </b>{favorite.description.substring(0, 300)}</span> : <span><b style={{ color: '#343a40'}}>Description: </b>{favorite.description ? favorite.description.substring(0, favorite.description.length) : favorite.name}</span>;
     return (
       
@@ -30,6 +30,7 @@ export default class FavoriteListItem extends React.Component {
               onClick={() => {
                 removeFave(favorite);
                 getFaves();
+                getCalendarFaves();
               }}
             >Delete Event
             </button>
