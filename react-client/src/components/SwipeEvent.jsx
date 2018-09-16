@@ -40,9 +40,9 @@ class SwipeEvent extends React.Component {
     this.setState({ x: e.screenX, y: e.screenY }, () => {
       // console.log('333', x);
       if (this.state.x > 1100) {
-        this.like(e);
+        this.like();
       } else {
-        this.dislike(e)
+        this.dislike();
       }
       // console.log(this.state.x, this.state.y)
     });
