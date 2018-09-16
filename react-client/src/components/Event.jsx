@@ -74,28 +74,23 @@ class Event extends React.Component {
                   />
                   <h5 className="card-title" style={{ marginTop: 10 }}>{event.name && !event.name.text ? event.name : event && event.name && event.name.text ? event.name.text : event && event.group && event.group.name ? event.group.name : 'No Name Given'}</h5>
                   <p className="card-text">
-                    <span className="description" style={bold}>Description: </span>
-                    <span>{description}</span>
+                    <span className="Loc"><b>Venue Address: </b> {address}</span>
                   </p>
                   <p className="card-text">
-                    <span className="Loc" style={bold}>Venue Address: </span>
-                    <span>{address}</span>
+                    <span className="date"><b>Date:</b> {date}</span>
                   </p>
                   <p className="card-text">
-                    <span className="date" style={bold}>Date: </span>
-                    <span>{date}</span>
+                    <span className="time"><b>Time:</b> {time}</span>
                   </p>
                   <p className="card-text">
-                    <span className="time" style={bold}>Time: </span>
-                    <span>{time}</span>
+                    <span className="price"><b>Price: </b> {price}</span>
                   </p>
                   <p className="card-text">
-                    <span className="price" style={bold}>Price: </span>
-                    <span>{price}</span>
+                    <span className="description"><b>Description:</b> {description}</span>
                   </p>
                   <p className="card-text">
-                    <span className="link" style={bold}>Link: </span>
-                    <a href={event.url || event.link} style={{ color: 'white' }}>Check Out The Event</a>
+                    <span className="link"><b>Link:</b><a href={event.url || event.link} style={{ color: 'white' }}>&nbps; Check Out The Event</a></span>
+                    
                   </p>
                   <button onClick={this.dislike}>
                     <span><img className="like-button" style={{ height: 50, width: 50}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>

@@ -79,16 +79,17 @@ app.get('/events', (req, res) => {
           console.error('err in getFromEventBrite:', err);
           res.status(404).send(err);
         } else {
-          if (data2.events.length > 25) {
+          if (data2.events && data2.events.length > 25) {
             data2.events = data2.events.slice(0, 25);
           } 
           data1.body = JSON.parse(data1.body);
           if (data1.body.events && data1.body.events.length > 1 && !data1.body.errors) {
             res.status(200).send([...data1.body.events, ...data2.events]);
-          } else {
+          } else if (data2.events && data2.events.length > 1) {
             res.status(200).send([...data2.events]);
-          }
-          
+          } else {
+            res.status(404).send('error in app.get /events');
+          }   
         }
       });
     }

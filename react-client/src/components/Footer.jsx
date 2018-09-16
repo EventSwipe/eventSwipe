@@ -6,8 +6,10 @@ const Footer = () => (
       <span>© 2018 Team-Fleming Inc. Associated with Hack Reactor. All rights reserved. </span>
       <span>
         Event Information Provided By:
-        <a target="_blank" href="https://www.eventbrite.com/developer/v3/" style={{ fontWeight: 'bold', fontSize: 18 }}>&nbsp; EventBrite</a>
-        <a target="_blank" href="https://www.meetup.com/meetup_api/" style={{ fontWeight: 'bold', fontSize: 18 }}>&nbsp; MeetUp</a>
+        &nbsp; &nbsp;
+        <a target="_blank" href="https://www.eventbrite.com/developer/v3/" style={{ fontWeight: 'bold', fontSize: 19, textDecoration: 'underline' }}>EventBrite</a>
+        &nbsp; &nbsp;
+        <a target="_blank" href="https://www.meetup.com/meetup_api/" style={{ fontWeight: 'bold', fontSize: 19, textDecoration: 'underline' }}>MeetUp</a>
       </span>
     </p>
   </div>
