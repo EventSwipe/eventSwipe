@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Favorites from './components/Favorites.jsx';
 import SearchBar from './components/SearchBar.jsx';
-// import Nav from './components/Nav.jsx';
+import Footer from './components/Footer.jsx';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -55,12 +55,13 @@ class App extends React.Component {
     const showFavesOrEvents = showFaves ? <Favorites user={user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
     return this.state.authenticated ? (
       <container>
-        <div className="d-flex justify-content-center">
+        <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{ position: 'absolute', top: 5, right: 5 }}>
+          {showFaves ? 'Search Events' : 'Show Favorites'}
+        </button>
+        <div className="d-flex justify-content-center" style={{ marginTop: 60 }}>
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
-            <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{marginBottom: '20px', marginTop: '20px'}}>
-              {showFaves ? 'Search Events' : 'Show Favorites'}
-            </button>
             {showFavesOrEvents}
+            <Footer />
           </div>
         </div>
       </container>
