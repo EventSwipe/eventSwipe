@@ -1,0 +1,25 @@
+{
+  "name": "EventSwipe",
+  "description": "An app to search for and save events happening in your area",
+  "repository": "https://github.com/TeamFleming/eventSwipe",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs",
+  "env": {
+    "GOOGLE_TOKEN": {
+      "description": "Google token",
+      "value": "AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE"
+    },
+    "EVENTBRITE_KEY": {
+      "description": "EventBrite api key",
+      "value": "E5PTH3KVZH4MFUMMULAE"
+    },
+    "MEETUP_KEY": {
+      "description": "MeetUp api key",
+      "value": "48416f2b301d68647614267b3651601c"
+    },
+    "ZIPCODE_TOKEN": {
+      "description": "ZipCodeApi api key",
+      "value": "XMKqvcDNDMsCb42QfQTb9aGrKcrdR5TrEmHM41cry91wj2WPDu10Q0p97Jjuk5JM"
+    }
+  }
+}
