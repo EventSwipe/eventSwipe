@@ -54,7 +54,7 @@ export default class SearchBar extends React.Component {
             value={this.state.topic}
             placeholder="Topic"
           />
-          <button className="btn btn-secondary" onClick={this.toggleHidden}>Select Date Range</button>
+          <button className="btn btn-secondary" onClick={this.toggleHidden} type="button">Select Date Range</button>
           <button className="btn" onClick={this.handleSubmit} style={{ backgroundColor: '#015249', color: 'white', marginLeft: 2 }}>Submit</button>
           {this.state.dateHidden && <DateRange onChange={this.handleSelect} />}
         </form>
