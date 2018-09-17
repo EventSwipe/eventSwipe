@@ -22,7 +22,7 @@ class App extends React.Component {
 
   signOutOfGoogle() {
     firebase.auth().signOut();
-    this.setState({ authenticated: false });
+    this.setState({ authenticated: false , events: [], showFaves: false, loading: false});
   }
 
   componentWillMount() {
@@ -31,6 +31,10 @@ class App extends React.Component {
         this.setState({ authenticated: true, user }, () => axios.get(`/loggedin/${this.state.user.uid}`));
       }
     });
+  }
+
+  componentDidMount() {
+    console.log('the state after componenet did mount', this.state)
   }
 
   searchEvents(query) {
