@@ -44,9 +44,9 @@ export default class FavoritesList extends React.Component {
     const { removeFave, show } = this.props;
     const { currentList } = this.state;
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div>
-          {show ? <button className="btn btn-dark" style={{ marginBottom: 5 }} onClick={this.displayNext}>Show More Events</button> : null}
+          {show ? <button className="btn btn-dark" style={{ marginBottom: 10, marginTop: 30, marginRight: 90 }} onClick={this.displayNext}>Show More Events</button> : null}
           <br />
           {show 
             ? 

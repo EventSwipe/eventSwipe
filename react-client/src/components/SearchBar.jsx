@@ -33,14 +33,15 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
+    const style = { backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 };
     return (
-      <div style={{'width': '100%', 'textAlign': 'center'}}>
+      <div style={{ width: '100%', textAlign: 'center' }}>
         <form className="form-inline justify-content-center" role="form" >
           <input 
             className="form-control" 
             type="text" 
             aria-label="Search" 
-            style={{ backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 }}
+            style={style}
             onChange={e => this.setState({ location: e.target.value })} // passed an anonymous function to the onChange so it is associated with it's respective state
             value={this.state.location}
             placeholder="Enter Zip Code"
@@ -49,7 +50,7 @@ export default class SearchBar extends React.Component {
             className="form-control" 
             type="text" 
             aria-label="Search" 
-            style={{ backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 }} 
+            style={style} 
             onChange={e => this.setState({ topic: e.target.value })}
             value={this.state.topic}
             placeholder="Topic"
@@ -58,7 +59,12 @@ export default class SearchBar extends React.Component {
           <button className="btn" onClick={this.handleSubmit} style={{ backgroundColor: '#015249', color: 'white', marginLeft: 2 }}>Submit</button>
           {this.state.dateHidden && <DateRange onChange={this.handleSelect} />}
         </form>
-        <Events events={this.props.events} />
+        {this.props.loading 
+          ? 
+          <div><br/><br/><br/><i className="fa fa-spinner fa-spin" style={{ fontSize: 24 }} /> Loading...</div> 
+          : 
+          <Events events={this.props.events} />
+        }
       </div>
     );
   }
