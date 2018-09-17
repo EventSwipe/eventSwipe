@@ -28,7 +28,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(firebase)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) { // User is signed in.
         this.setState({ authenticated: true, user }, () => axios.get(`/loggedin/${this.state.user.uid}`));
