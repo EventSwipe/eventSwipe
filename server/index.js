@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// DB and API functions
 const { getAllEvents, addFavorite, deleteFavorite, addUser } = require('../database-mongo/index.js');
 const { getFromMeetUp, getFromEventBrite } = require('./apihelper.js');
+// Authentication resources
 const admin = require('firebase-admin');
 const serviceAccount = require('../eventswipe-firebase-adminsdk-s4uqe-a33e5e01b1.json');
-
 
 const app = express();
 
@@ -16,6 +17,7 @@ const firebaseAdmin = admin.initializeApp({
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 
+// User authentication with local database
 app.get('/loggedin/:uid', (req, res) => {
   admin.auth().getUser(req.params.uid)
     .then((userRecord) => {
@@ -26,18 +28,19 @@ app.get('/loggedin/:uid', (req, res) => {
     });
 });
 
+// Get all events for specific user
 app.get('/favorites/:uid', (req, res) => {
   getAllEvents(req.params.uid, (err, data) => {
     if (err) {
       console.error(`err in app.get /favorite: ${err}`);
       res.status(400).send();
     } else {
-      // console.log(`data in app.get /favorites: ${data}`);
       res.status(200).send(data);
     }
   });
 });
 
+// Add favorites for specific user
 app.post('/favorites/:uid', (req, res) => {
   let { favoriteEvent } = req.body.params;
   addFavorite(favoriteEvent, (err) => {
@@ -50,15 +53,14 @@ app.post('/favorites/:uid', (req, res) => {
   });
 });
 
+// Delete favorites based on mongoId (not specifically eventId)
 app.delete('/favorites', (req, res) => {
-  // add username to this once auth is setup
   let { eventId } = req.body;
   deleteFavorite(eventId, (err, data) => {
     if (err) {
       console.error(`err in app.delete /favorites: ${err}`);
       res.status(400).send(err);
     } else {
-      // console.log(`data in app.delete /favorites: ${data}`);
       res.status(202).send(data);
     }
   });
@@ -92,21 +94,6 @@ app.get('/events', (req, res) => {
           }   
         }
       });
-    }
-  });
-});
-
-app.post('/insertEventToDb', (req, res) => {
-  // manipulate req.body to fit query parameters
-  var { query } = req.body;
-  // make db call to change data
-  addFavorite(query, (err, data) => {
-    if (err) {
-      console.error(`err in app.post /insertEventToDb: ${err}`);
-      res.status(400).send(err);
-    } else {
-      // console.log(`data in app.post /insertEventToDb: ${data}`);
-      res.status(200).send(data);
     }
   });
 });
