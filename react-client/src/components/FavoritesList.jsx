@@ -20,15 +20,15 @@ export default class FavoritesList extends React.Component {
 
   displayNext() {
     const { favorites, count } = this.state;
-    this.setState({ count: count + 5 });
-    if ((count + 10) > favorites.length) {
-      if ((count + 5) < favorites.length) {
-        this.setState({ currentList: favorites.slice(count + 5, favorites.length)});
+    this.setState({ count: count + 6 });
+    if ((count + 12) > favorites.length) {
+      if ((count + 6) < favorites.length) {
+        this.setState({ currentList: favorites.slice(count + 6, favorites.length)});
       } else {
-        this.setState({ currentList: favorites.slice(0, 5), count: 0});
+        this.setState({ currentList: favorites.slice(0, 6), count: 0});
       }
     } else {
-      this.setState({ currentList: favorites.slice(count + 5, count + 10) });
+      this.setState({ currentList: favorites.slice(count + 6, count + 12) });
     }
   }
 
@@ -36,7 +36,7 @@ export default class FavoritesList extends React.Component {
     axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
       .then(({ data }) => {
         console.log(data);
-        this.setState({ favorites: data, currentList: data.slice(0, 5) });
+        this.setState({ favorites: data, currentList: data.slice(0, 6) });
       })
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));
   }

@@ -69,7 +69,7 @@ export default class Favorites extends React.Component {
     const { favorites, events, show, showDisplay } = this.state;
     return (
       <div>
-        <button className="btn btn-dark" onClick={this.showFavorites} style={{ position: 'absolute', top: 10, right: 815 }}>{showDisplay ? 'Display Calendar' : 'Display Events'}</button>
+        <button className="btn btn-dark" onClick={this.showFavorites} style={{ position: 'absolute', top: 10, right: '48.5%' }}>{showDisplay ? 'Display Calendar' : 'Display Events'}</button>
         <span>
           {show 
             ? 

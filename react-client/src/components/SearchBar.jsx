@@ -20,7 +20,8 @@ export default class SearchBar extends React.Component {
   handleSubmit(e) {
     const { location, topic, startDate, endDate } = this.state; 
     e.preventDefault();
-    this.props.searchEvents({ params: { location, topic, startDate, endDate } });   // run api request and pass in props
+    this.props.searchEvents({ params: { location, topic, startDate, endDate } }); // run api request and pass in props
+    this.setState({ dateHidden: false })
   }
 
   handleSelect(range) {
@@ -55,7 +56,7 @@ export default class SearchBar extends React.Component {
             value={this.state.topic}
             placeholder="Topic"
           />
-          <button className="btn btn-secondary" onClick={this.toggleHidden} type="button">Select Date Range</button>
+          <button className="btn btn-secondary" onClick={this.toggleHidden} style={{ marginLeft: 1 }} type="button">Select Date Range</button>
           <button className="btn" onClick={this.handleSubmit} style={{ backgroundColor: '#015249', color: 'white', marginLeft: 2 }}>Submit</button>
           {this.state.dateHidden && <DateRange onChange={this.handleSelect} />}
         </form>

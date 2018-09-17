@@ -109,7 +109,7 @@ class Event extends React.Component {
               </button>
             </div>
             <div className="col-3" style={{ textAlign: 'left' }}>
-              <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${mapAddress}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
+              <iframe style={{ width: 450, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${mapAddress}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
             </div>
           </div>
         ) : (
