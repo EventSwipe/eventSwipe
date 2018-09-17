@@ -20,16 +20,19 @@ export default class SearchBar extends React.Component {
   handleSubmit(e) {
     const { location, topic, startDate, endDate } = this.state; 
     e.preventDefault();
+    // search for events (searchEvents coming from index.jsx)
     this.props.searchEvents({ params: { location, topic, startDate, endDate } }); // run api request and pass in props
     this.setState({ dateHidden: false });
   }
 
   handleSelect(range) {
+    // set the state of the date range entered for querying apis
     this.setState({ startDate: range.startDate._d, endDate: range.endDate._d });
   }
 
   toggleHidden(e) {
     e.preventDefault();
+    // toggle whether the calendar for entering date range for querying api is being shown
     this.setState({ dateHidden: !this.state.dateHidden });
   }
 
@@ -60,6 +63,9 @@ export default class SearchBar extends React.Component {
           <button className="btn" onClick={this.handleSubmit} style={{ backgroundColor: '#015249', color: 'white', marginLeft: 2 }}>Submit</button>
           {this.state.dateHidden && <DateRange onChange={this.handleSelect} />}
         </form>
+        {/* check if api requests are currently being called based on loading boolean coming from index.jsx
+          if so, load the spinner icon 
+          otherwise, load Events from API */}
         {this.props.loading 
           ? 
           <div><br/><br/><br/><i className="fa fa-spinner fa-spin" style={{ fontSize: 24 }} /> Loading...</div> 

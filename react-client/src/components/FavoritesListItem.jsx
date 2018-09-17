@@ -32,6 +32,9 @@ export default class FavoriteListItem extends React.Component {
           <span className="card-text">
             <button className="btn btn-dark" style={{ marginBottom: 10, alignItems: 'center' }}
               onClick={() => {
+                // when remove favorite is pressed, pass in favorite to be removed
+                // call getFaves to update the favorite list
+                // call getCalendarFaves to update items on the calendar
                 removeFave(favorite);
                 getFaves();
                 getCalendarFaves();

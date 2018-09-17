@@ -40,6 +40,7 @@ export default class Favorites extends React.Component {
   getCalendarFaves() {
     axios.get(`/favorites/${firebase.auth().currentUser.uid}`)
       .then(({data}) => {
+        // grab favorites and organize them in format for FavoriteCalendar.jsx
         let promise = Promise.all(data.map((event) => {
           let obj = {};
           obj['id'] = event.id;

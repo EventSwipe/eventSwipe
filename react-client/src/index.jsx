@@ -28,7 +28,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(firebase)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) { // User is signed in.
         this.setState({ authenticated: true, user }, () => axios.get(`/loggedin/${this.state.user.uid}`));
@@ -49,7 +48,7 @@ class App extends React.Component {
             .then(events => this.setState({ loading: false, events }))
             .catch(err => console.error('err in searchEvents promise', err));
         })
-        .catch((err) => console.log('front end error', err));
+        .catch((err) => console.error('front end error', err));
     });
   }
 
