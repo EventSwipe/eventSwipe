@@ -33,6 +33,10 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    console.log('the state after componenet did mount', this.state)
+  }
+
   searchEvents(query) {
     axios.get('/events', query) // axios get request from API and then populates the events state with the data
       .then(({ data }) => {
