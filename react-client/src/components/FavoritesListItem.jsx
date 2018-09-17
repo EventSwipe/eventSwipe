@@ -22,7 +22,6 @@ export default class FavoriteListItem extends React.Component {
     const styleTextWhite = { color: 'white' };
     const time = favorite && favorite.time ? favorite.time : 'Event Time Not Provided';
     const address = favorite && favorite.location ? favorite.location : 'Address Not Provided (Click Link For More)';
-    const description = favorite && favorite.description && (favorite.description.length >= 300) ? <span><b style={styleTextBlack}>Description: </b>{favorite.description}</span> : <span><b style={{ color: '#343a40'}}>Description: </b>{favorite.description ? favorite.description.substring(0, favorite.description.length) : favorite.name}</span>;
     return (
       <div id="show" className="card" style={styleForCard}>
         <div className="card-body" style={{ width: 400, color: '#015249' }}>
