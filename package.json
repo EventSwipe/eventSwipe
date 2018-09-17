@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -p && node server/index.js",
+    "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "heroku-postbuild": "webpack -p"
   },
   "repository": {
     "type": "git",
