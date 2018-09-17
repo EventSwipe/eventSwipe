@@ -21,7 +21,7 @@ export default class SearchBar extends React.Component {
     const { location, topic, startDate, endDate } = this.state; 
     e.preventDefault();
     this.props.searchEvents({ params: { location, topic, startDate, endDate } }); // run api request and pass in props
-    this.setState({ dateHidden: false })
+    this.setState({ dateHidden: false });
   }
 
   handleSelect(range) {
