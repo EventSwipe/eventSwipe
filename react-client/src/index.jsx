@@ -22,7 +22,7 @@ class App extends React.Component {
 
   signOutOfGoogle() {
     firebase.auth().signOut();
-    this.setState({ authenticated: false });
+    this.setState({ authenticated: false , events: [], showFaves: false, loading: false});
   }
 
   componentWillMount() {
