@@ -23,108 +23,28 @@
     }
     ::-ms-input-placeholder { /* Microsoft Edge */
         color: white !important;
-    }
-    </style>
-</head>
-<body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
-  <button class="btn btn-dark" onclick="signOutOfGoogle()" id="logout">Logout</button>
-
-  
-<div id="user_div" class="loggedin-div">   
-  <div id="app"></div>
-</div>  
-<div id="login_div" class="main-div">
-  <img class="login-logo" src="https://image.ibb.co/dQsGup/coollogo_com_30844732.png" />
-  <!-- <input type="email" placeholder="Email..." id="email_field" />
-    <input type="password" placeholder="Password..." id="password_field" />
-    <button onclick={signInWithGoogle()}>Login With Google</button>
-  <button onclick={signOutOfGoogle()}>Sign Out</button>  -->
-  <br/>
-  <button class="btn btn-dark login-btn" onclick="signInWithGoogle()">Sign In With Google</button>
-  
-  <!-- <div class="google-btn">
-    <div class="google-icon-wrapper">
-      <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-    </div>
-    <p class="btn-text"><b>Sign in with google</b></p>
-  </div> -->
-</div>
-<!-- <script>
-  function signInWithGoogle() {
-    var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-    firebase.auth().signInWithPopup(googleAuthProvider)
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err))
-  }
-  
-  function signOutOfGoogle() {
-    firebase.auth().signOut();
-    console.log('signed out!');
-  }
-  
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      document.getElementById("user_div").style.display = "block";
-      document.getElementById("login_div").style.display = "none";        
-    } else {
-        // No user is signed in.
-        document.getElementById("user_div").style.display = "none";
-        document.getElementById("login_div").style.display = "block";
-      }
-    });
-    
-  </script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    } 
+  </style>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+</head>
+
+<body class="main" style="background-image: linear-gradient(to right, #77C9D4 , #57BC90); color: white">
+  <div id="user_div" class="loggedin-div">   
+    <div id="app"></div>
+  </div>  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
   <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src='https://www.gstatic.com/firebasejs/5.4.2/firebase.js'></script>
-  <script type="text/javascript" src="/bundle.js"></script>
   <script>
     $('body').bootstrapMaterialDesign();
-    // Initialize Firebase
-    var config = {
-      apiKey: 'AIzaSyBVvm08-ZC3kUIHp9O0tY-ES1g1IDN1NC8',
-      authDomain: 'eventswipe.firebaseapp.com',
-      databaseURL: 'https://eventswipe.firebaseio.com',
-      projectId: 'eventswipe',
-      storageBucket: 'eventswipe.appspot.com',
-      messagingSenderId: '855689724386'
-    };
-    firebase.initializeApp(config);
     </script>
-    <script>
-      function signInWithGoogle() {
-        var googleAuthProvider = new firebase.auth.GoogleAuthProvider
-        
-        firebase.auth().signInWithPopup(googleAuthProvider)
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err))
-      }
-      
-      function signOutOfGoogle() {
-        firebase.auth().signOut();
-        console.log('signed out!')
-      }
-      
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          document.getElementById("user_div").style.display = "block";
-          document.getElementById("login_div").style.display = "none";     
-          document.getElementById("logout").style.display = "block";     
-        } else {
-          // No user is signed in.
-          document.getElementById("user_div").style.display = "none";
-          document.getElementById("login_div").style.display = "block";
-          document.getElementById("logout").style.display = "none"; 
-        }
-      });
-      
-      </script>
+  <script type="text/javascript" src="firebase.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
 </body>
+  
 </html>
