@@ -38,6 +38,7 @@ class Event extends React.Component {
       })
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
   }
+  
   dislike() {
     if (this.props.events.length === 1) { // check if there are any even items
       Alert.error('You have run out of events in your search. Please search again to view more events.', {
