@@ -21,6 +21,8 @@ export default class FavoritesList extends React.Component {
   displayNext() {
     const { favorites, count } = this.state;
     this.setState({ count: count + 6 });
+    // check how many more favorites there are left
+    // depending on how many, slice them out
     if ((count + 12) > favorites.length) {
       if ((count + 6) < favorites.length) {
         this.setState({ currentList: favorites.slice(count + 6, favorites.length)});
@@ -35,7 +37,8 @@ export default class FavoritesList extends React.Component {
   getFavorites() {
     axios.get(`/favorites/${firebase.auth().currentUser.uid}`) //sends the lengths of the favorites array down to db to offset return by
       .then(({ data }) => {
-        console.log(data);
+        // grab favorite events, store all of them in favorites and store 6 in currentList
+        // currentList will always hold 6 or less favorite events at a time to display as a grid
         this.setState({ favorites: data, currentList: data.slice(0, 6) });
       })
       .catch(err => console.error(`err in loadmyfaves in favorites.jsx: ${err}`));

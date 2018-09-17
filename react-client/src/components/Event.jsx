@@ -38,6 +38,7 @@ class Event extends React.Component {
       })
       .catch((err) => console.error(`err in axios.post/favorites: ${err}`));
   }
+  
   dislike() {
     if (this.props.events.length === 1) { // check if there are any even items
       Alert.error('You have run out of events in your search. Please search again to view more events.', {
@@ -78,7 +79,6 @@ class Event extends React.Component {
       <div>
         {event ? (
           <div className="row">
-            {console.log(event)}
             <div className="col-1" style={{ marginTop: '20%' }}>
               <button onClick={this.dislike}>
                 <span><img className="like-button" style={{ height: 50, width: 50 }} src="http://tiny.cc/0ouoyy" alt="Like" /></span>
