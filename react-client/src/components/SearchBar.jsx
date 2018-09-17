@@ -20,7 +20,8 @@ export default class SearchBar extends React.Component {
   handleSubmit(e) {
     const { location, topic, startDate, endDate } = this.state; 
     e.preventDefault();
-    this.props.searchEvents({ params: { location, topic, startDate, endDate } });   // run api request and pass in props
+    this.props.searchEvents({ params: { location, topic, startDate, endDate } }); // run api request and pass in props
+    this.setState({ dateHidden: false })
   }
 
   handleSelect(range) {
@@ -33,14 +34,15 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
+    const style = { backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 };
     return (
-      <div style={{'width': '100%', 'textAlign': 'center'}}>
+      <div style={{ width: '100%', textAlign: 'center' }}>
         <form className="form-inline justify-content-center" role="form" >
           <input 
             className="form-control" 
             type="text" 
             aria-label="Search" 
-            style={{ backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 }}
+            style={style}
             onChange={e => this.setState({ location: e.target.value })} // passed an anonymous function to the onChange so it is associated with it's respective state
             value={this.state.location}
             placeholder="Enter Zip Code"
@@ -49,16 +51,21 @@ export default class SearchBar extends React.Component {
             className="form-control" 
             type="text" 
             aria-label="Search" 
-            style={{ backgroundColor: '#A5A5AF', color: 'white', marginRight: 2 }} 
+            style={style} 
             onChange={e => this.setState({ topic: e.target.value })}
             value={this.state.topic}
             placeholder="Topic"
           />
-          <button className="btn btn-secondary" onClick={this.toggleHidden} type="button">Select Date Range</button>
+          <button className="btn btn-secondary" onClick={this.toggleHidden} style={{ marginLeft: 1 }} type="button">Select Date Range</button>
           <button className="btn" onClick={this.handleSubmit} style={{ backgroundColor: '#015249', color: 'white', marginLeft: 2 }}>Submit</button>
           {this.state.dateHidden && <DateRange onChange={this.handleSelect} />}
         </form>
-        <Events events={this.props.events} />
+        {this.props.loading 
+          ? 
+          <div><br/><br/><br/><i className="fa fa-spinner fa-spin" style={{ fontSize: 24 }} /> Loading...</div> 
+          : 
+          <Events events={this.props.events} />
+        }
       </div>
     );
   }

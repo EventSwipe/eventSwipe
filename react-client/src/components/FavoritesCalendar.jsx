@@ -19,12 +19,12 @@ export default class FavoritesCalendar extends React.Component {
   render() {
     const { favorites } = this.props;
     return (
-      <div className="calendar">
+      <div className="calendar" style={{ marginTop: 25 }}>
         <Calendar
           defaultDate={new Date()}
           defaultView="month"
           events={favorites}
-          style={{ height: '80vh', paddingBottom: 20, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
+          style={{ height: '80vh', marginBottom: 30, paddingTop: 5, paddingLeft: 20, paddingRight: 20 }}
         />
       </div>
     );

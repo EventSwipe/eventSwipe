@@ -8,7 +8,7 @@ export default class Events extends React.Component {
 
   render() {
     return (
-      <div className="container" style={{'marginTop': '50px'}}>
+      <div className="container" style={{ marginTop: 50 }}>
         <div className="row">
           <div className="col-12">
             <Event events={this.props.events} />  
