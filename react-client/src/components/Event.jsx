@@ -4,7 +4,6 @@ import axios from 'axios';
 import HomePageInfo from './HomePageInfo.jsx';
 import Alert from 'react-s-alert';
 
- 
 class Event extends React.Component {
   constructor(props) {
     super(props);
@@ -15,8 +14,7 @@ class Event extends React.Component {
 
   like() {
     if (this.props.events.length === 1) { // check if out of items
-      // TODO: something when you run out of items
-      Alert.error('You have run out of events in your search. Please search again to view more events', {
+      Alert.error('You have run out of events in your search. Please search again to view more events.', {
         position: 'top-right',
         effect: 'scale',
         beep: false,
@@ -30,7 +28,7 @@ class Event extends React.Component {
     axios.post(`/favorites/${query.uid}`, { params: { favoriteEvent: query }})
       .then(() => {
         this.setState({ count: 0 });
-        Alert.info('added to your favorites', {
+        Alert.info('Event has been saved in your favorites.', {
           position: 'top-right',
           effect: 'scale',
           beep: false,
@@ -42,7 +40,7 @@ class Event extends React.Component {
   }
   dislike() {
     if (this.props.events.length === 1) { // check if there are any even items
-      Alert.error('You have run out of events in your search. Please search again to view more events', {
+      Alert.error('You have run out of events in your search. Please search again to view more events.', {
         position: 'top-right',
         effect: 'scale',
         beep: false,
