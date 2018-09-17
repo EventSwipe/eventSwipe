@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import HomePageInfo from './HomePageInfo.jsx';
+import Jumbotron from './Jumbotron.jsx';
 import Alert from 'react-s-alert';
 
 class Event extends React.Component {
@@ -71,7 +71,7 @@ class Event extends React.Component {
     const address = event && event.address ? event.address : event && event.venue && event.venue.address ? event.venue.address.address_1 + ' ' + event.venue.address.city || event.venue.address.localized_address_display : event && event.venue && event.venue.address_1 ? event.venue.address_1 + ' ' + event.venue.city + ` ${event.venue.state || ''}` : 'TBD';
     const image = event && event.logo ? event.logo.url : event && event.featured_photo ? event.featured_photo.highres_link : event && event.group && event.group.photo ? event.group.photo.highres_link : 'http://tiny.cc/vaikyy'; 
     const price = event && event.is_free ? 'Free :)' : event && event.is_free === false ? 'Not Free' : event && event.fee ? event.fee.currency.replace('USD', '$') + event.fee.amount + ' ' + event.fee.description : 'N/A';
-    const bold = { fontWeight: 'bold' };
+    const white = { color: 'white' };
     const name = event && event.name && !event.name.text ? event.name : event && event.name && event.name.text ? event.name.text : event && event.group && event.group.name ? event.group.name : 'No Name Given';
     const mapAddress = event && event.address ? event.address : event && event.venue ? event.venue.name : event && event.group ? event.group.name : 'No Name';
     return (
@@ -79,9 +79,9 @@ class Event extends React.Component {
         {event ? (
           <div className="row">
             {console.log(event)}
-            <div className="col-1" style={{marginTop: '20%'}}>
+            <div className="col-1" style={{ marginTop: '20%' }}>
               <button onClick={this.dislike}>
-                <span><img className="like-button" style={{ height: 50, width: 50}} src="https://pbs.twimg.com/profile_images/534074996562227200/OR7cp94I_400x400.png" alt="Like" /></span>
+                <span><img className="like-button" style={{ height: 50, width: 50 }} src="http://tiny.cc/0ouoyy" alt="Like" /></span>
               </button>
             </div>
             <div className="col-auto">
@@ -94,38 +94,26 @@ class Event extends React.Component {
                     src={image} alt="Card image cap"
                   />
                   <h5 className="card-title" style={{ marginTop: 10 }}>{name}</h5>
-                  <p className="card-text">
-                    <span className="Loc"><b>Venue Address: </b> {address}</span>
-                  </p>
-                  <p className="card-text">
-                    <span className="date"><b>Date:</b> {date}</span>
-                  </p>
-                  <p className="card-text">
-                    <span className="time"><b>Time:</b> {time}</span>
-                  </p>
-                  <p className="card-text">
-                    <span className="price"><b>Price: </b> {price}</span>
-                  </p>  
-                  <p className="card-text">
-                    <span className="description"><b>Description:</b> {description}</span>
-                  </p>
-                  <p className="card-text">
-                    <span className="link"><b>Link:</b><a href={event.url || event.link} style={{ color: 'white' }}> Check Out The Event</a></span>
-                  </p>
+                  <p className="card-text"><span className="Loc"><b>Venue Address: </b> {address}</span></p>
+                  <p className="card-text"><span className="date"><b>Date:</b> {date}</span></p>
+                  <p className="card-text"><span className="time"><b>Time:</b> {time}</span></p>
+                  <p className="card-text"><span className="price"><b>Price: </b> {price}</span></p>  
+                  <p className="card-text"><span className="description"><b>Description:</b> {description.length >= 700 ? description.substring(0, 700) : description}</span></p>
+                  <p className="card-text"><span className="link"><b>Link:</b><a href={event.url || event.link} style={white}> Check Out The Event</a></span></p>
                 </div>
               </div>
             </div>
-            <div className="col-1" style={{marginTop: '20%'}}>
+            <div className="col-1" style={{ marginTop: '20%' }}>
               <button onClick={this.like}>
-                <span><img className="like-button" style={{ height: 50, width: 50}} src="http://web.arjentienkamp.com/codepen/tinder/heart.png" alt="Like" /></span>
+                <span><img className="like-button" style={{ height: 50, width: 50 }} src="http://tiny.cc/6puoyy" alt="Like" /></span>
               </button>
             </div>
-            <div className="col-3" style={{'textAlign': 'left'}}>
-              <iframe style={{ width: 400, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${event.address ? event.address : event.venue ? event.venue.name : event && event.group ? event.group.name : 'No Name'}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
+            <div className="col-3" style={{ textAlign: 'left' }}>
+              <iframe style={{ width: 450, height: 350 }} src={`https://www.google.com/maps/embed/v1/place?q=${mapAddress}&key=AIzaSyBMyF_JNu3kd5H4znq--2xe3WO-GRaC5NE`} allowFullScreen />
             </div>
           </div>
         ) : (
-          <HomePageInfo />
+          <Jumbotron />
         )}
       </div>
     );

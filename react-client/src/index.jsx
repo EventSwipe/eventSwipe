@@ -9,7 +9,7 @@ import Alert from 'react-s-alert';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { events: [], showFaves: false };
+    this.state = { events: [], showFaves: false, loading: false };
     this.searchEvents = this.searchEvents.bind(this);
   }
   signInWithGoogle() {
@@ -38,38 +38,38 @@ class App extends React.Component {
   }
 
   searchEvents(query) {
-    axios.get('/events', query) // axios get request from API and then populates the events state with the data
-      .then(({ data }) => {
-        // console.log('dataaaaaa', data);
-        let promise = Promise.all(data.sort((a, b) => {
-          if (a !== null && b !== null) {
-            return new Date(b.date) - new Date(a.date);
-          }
-        }));
-        promise
-          .then(events => this.setState({ events }))
-          .catch(err => console.error('err in searchEvents promise', err));
-      })
-      .catch((err) => console.log('front end error', err));
+    this.setState({ loading: true}, () => {
+      axios.get('/events', query) // axios get request from API and then populates the events state with the data
+        .then(({ data }) => {
+          let promise = Promise.all(data.sort((a, b) => {
+            if (a !== null && b !== null) {
+              return new Date(b.date) - new Date(a.date);
+            }
+          }));
+          promise
+            .then(events => this.setState({ loading: false, events }))
+            .catch(err => console.error('err in searchEvents promise', err));
+        })
+        .catch((err) => console.log('front end error', err));
+    });
   }
 
   // renders navbar, searchbar, even & likes
   render () {
     const { showFaves, events, user } = this.state;
-
-    const showFavesOrEvents = showFaves ? <Favorites user={user}/> : <SearchBar events={events} searchEvents={this.searchEvents}/>;
+    const showFavesOrEvents = showFaves ? <Favorites user={user}/> : <SearchBar events={events} searchEvents={this.searchEvents} loading={this.state.loading}/>;
     return this.state.authenticated ? (
       <container>
-        <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{ position: 'absolute', top: 5, right: 5 }}>
+        <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{ position: 'absolute', top: 10, left: 8 }}>
           {showFaves ? 'Search Events' : 'Show Favorites'}
         </button>
         <div className="d-flex justify-content-center" style={{ marginTop: 60 }}>
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             {showFavesOrEvents}
-            <Footer />
+            <Footer show={showFaves}/>
           </div>
         </div>
-        <Alert stack={{limit: 3}}/>
+        <Alert stack={{ limit: 3 }}/>
       </container>
     ) : (
       <div/>
