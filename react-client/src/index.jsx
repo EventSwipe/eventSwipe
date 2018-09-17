@@ -9,8 +9,10 @@ import Alert from 'react-s-alert';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { events: [], showFaves: false, loading: false };
+    this.state = { events: [], showFaves: false, loading: false, authenticated: false };
     this.searchEvents = this.searchEvents.bind(this);
+    this.signInWithGoogle = this.signInWithGoogle.bind(this);
+    this.signOutOfGoogle = this.signOutOfGoogle.bind(this);
   }
   signInWithGoogle() {
     var googleAuthProvider = new firebase.auth.GoogleAuthProvider;
@@ -25,16 +27,13 @@ class App extends React.Component {
     this.setState({ authenticated: false , events: [], showFaves: false, loading: false});
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    console.log(firebase)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) { // User is signed in.
         this.setState({ authenticated: true, user }, () => axios.get(`/loggedin/${this.state.user.uid}`));
       }
     });
-  }
-
-  componentDidMount() {
-    console.log('the state after componenet did mount', this.state)
   }
 
   searchEvents(query) {
@@ -63,6 +62,7 @@ class App extends React.Component {
         <button className="btn btn-dark" onClick={() => this.setState({ showFaves: !showFaves })} style={{ position: 'absolute', top: 10, left: 8 }}>
           {showFaves ? 'Search Events' : 'Show Favorites'}
         </button>
+        <button className="btn btn-dark" id="logout" onClick={this.signOutOfGoogle}>Logout</button>
         <div className="d-flex justify-content-center" style={{ marginTop: 60 }}>
           <div className="container" style={{ width: '100%', textAlign: 'center' }}>
             {showFavesOrEvents}
@@ -72,7 +72,11 @@ class App extends React.Component {
         <Alert stack={{ limit: 3 }}/>
       </container>
     ) : (
-      <div/>
+      <div id="login_div" className="main-div">
+        <img className="login-logo" src="https://image.ibb.co/dQsGup/coollogo_com_30844732.png" />
+        <br/>
+        <button className="btn btn-dark login-btn" onClick={this.signInWithGoogle}>Sign In With Google</button>
+      </div>
     );
   }
 }
