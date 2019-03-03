@@ -1,13 +1,11 @@
 (function() {
-    var config = {
-        apiKey: 'AIzaSyBVvm08-ZC3kUIHp9O0tY-ES1g1IDN1NC8',
-        authDomain: 'eventswipe.firebaseapp.com',
-        databaseURL: 'https://eventswipe.firebaseio.com',
-        projectId: 'eventswipe',
-        storageBucket: 'eventswipe.appspot.com',
-        messagingSenderId: '855689724386'
-    };
-
-    firebase.initializeApp(config);
-})()
-
+  var config = {
+    apiKey: 'AIzaSyBM7HvsGnyTLUSEGaVsTYRwCxyfiBNLcwc',
+    authDomain: 'eventswipe-226ff.firebaseapp.com',
+    databaseURL: 'https://eventswipe-226ff.firebaseio.com',
+    projectId: 'eventswipe-226ff',
+    storageBucket: 'eventswipe-226ff.appspot.com',
+    messagingSenderId: '936042365098'
+  };
+  firebase.initializeApp(config);
+})();
