@@ -21,7 +21,6 @@ const getZipCodeBasedOnLonAndLat = (zip, cb) => {
       console.error(`err in getZipCode: ${err}`);
       cb(err, null);
     } else {
-      // console.log('results in getZip', JSON.stringify(results.body.zipcodes));
       cb(null, results);
     }
   });

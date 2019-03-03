@@ -43,7 +43,6 @@ const getAllEvents = (uid, cb) => {
       console.error(`err in selectEventByUsername db/index.js: ${err}`);
       cb(err, null);
     } else {
-      console.log(`events in selectEventByUsername db/index.js: ${events}`);
       cb(null, events);
     }
   });
@@ -70,7 +69,6 @@ const addUser = (userData) => {
         if (err) {
           console.error(`err in newUser.save: ${err}`);
         } else {
-          console.log('The new user has been saved into the database!');
         }
       });
     } else {
@@ -101,7 +99,6 @@ const addFavorite = (favorite, cb) => {
       console.error(`err in newEvent.save: ${err}`);
       cb(err);
     } else {
-      console.log('The new event has been saved into the database!');
       cb();
     }
   });
@@ -114,7 +111,6 @@ const deleteFavorite = (mongoId, cb) => {
       console.error(`err in deleteEvent: ${err}`);
       cb(err);
     } else {
-      console.log('Deleted from DB');
       cb();
     }
   });
